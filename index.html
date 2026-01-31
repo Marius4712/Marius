@@ -3,29 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio – Nature x Urbanisme</title>
+  <title>Portfolio — Nature x Urbanisme</title>
 
   <style>
     :root{
-      --bg0:#06090c;
-      --bg1:#071014;
-      --ink: rgba(255,255,255,.92);
+      --bg: #05070a;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.035);
+      --line: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
 
-      --glass: rgba(255,255,255,.06);
-      --glass2: rgba(255,255,255,.03);
-      --line: rgba(255,255,255,.14);
-
-      --nature:#7A9A92;     /* vert doux */
-      --ocean:#4E6E8E;      /* bleu profond */
-      --sand:#D2C9A2;       /* sable */
-      --sun:#F1C40F;        /* accent */
-      --forest:#2D6A4F;     /* vert */
-      --stone:#6D6A6A;
+      --nature: #7A9A92;
+      --ocean: #4E6E8E;
+      --sand: #D2C9A2;
+      --sun: #F1C40F;
+      --forest:#2D6A4F;
 
       --r: 22px;
       --r2: 18px;
-      --shadow: 0 16px 50px rgba(0,0,0,.55);
+
+      --shadow: 0 22px 65px rgba(0,0,0,.55);
+      --shadow2: 0 12px 30px rgba(0,0,0,.40);
+
+      --max: 1180px;
     }
 
     *{ box-sizing:border-box; }
@@ -33,380 +34,469 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--ink);
+      color: var(--text);
       background:
-        radial-gradient(1200px 700px at 10% 0%, rgba(122,154,146,.22), transparent 60%),
+        radial-gradient(1200px 700px at 8% 0%, rgba(122,154,146,.20), transparent 60%),
         radial-gradient(900px 700px at 95% 5%, rgba(78,110,142,.20), transparent 58%),
-        radial-gradient(900px 650px at 50% 110%, rgba(45,106,79,.18), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(900px 650px at 50% 110%, rgba(45,106,79,.14), transparent 55%),
+        linear-gradient(180deg, #03060a, #071016 55%, #04070b);
+      overflow-x:hidden;
     }
 
-    /* texture + "urban grid" */
+    /* micro-grille (urbanisme) */
     body:before{
       content:"";
       position:fixed; inset:0;
-      background:
-        linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 64px 64px;
-      opacity:.12;
       pointer-events:none;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity:.11;
       mix-blend-mode: overlay;
     }
 
-    /* LAYOUT */
-    .wrap{
-      max-width: 1220px;
+    /* container */
+    .container{
+      width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
-      padding: 18px 16px 90px;
-      display:grid;
-      grid-template-columns: 360px 1fr;
-      gap: 26px;
     }
 
-    /* SIDEBAR */
-    .sidebar{
+    /* TOP NAV (ergonomie) */
+    .topnav{
       position: sticky;
-      top: 16px;
-      align-self:start;
-      border-radius: var(--r);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .sidebar .head{
-      padding: 18px 18px 14px;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.20));
       border-bottom: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(900px 240px at 30% 10%, rgba(122,154,146,.25), transparent 60%),
-        radial-gradient(700px 220px at 90% 0%, rgba(241,196,15,.18), transparent 55%),
-        rgba(0,0,0,.12);
     }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(241,196,15,.28);
-      background: rgba(241,196,15,.10);
-      font-size: 12px;
-    }
-    .title{ margin:10px 0 6px; font-size:22px; letter-spacing:.2px; }
-    .subtitle{ margin:0; color:var(--muted); line-height:1.45; font-size: 13.5px; }
-    .meta{
-      margin-top: 12px;
-      display:flex; flex-wrap:wrap; gap:8px;
-    }
-    .chip{
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-    }
-
-    nav{
-      padding: 14px;
-      display:grid;
-      gap: 10px;
-    }
-    .navlink{
-      text-decoration:none;
-      color: var(--ink);
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 12px 12px;
-      display:flex; justify-content:space-between; align-items:center;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-    .navlink:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.22);
-      background: rgba(255,255,255,.05);
-    }
-    .navlink.active{
-      border-color: rgba(122,154,146,.62);
-      background: linear-gradient(90deg, rgba(122,154,146,.22), rgba(255,255,255,.03));
-    }
-    .pill{
-      font-size:12px;
-      color: rgba(255,255,255,.70);
-      border:1px solid rgba(255,255,255,.14);
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.12);
-    }
-
-    .sidebar .foot{
-      padding: 14px 18px 18px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.5;
-    }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
-      padding: 2px 7px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.78);
-    }
-
-    /* MAIN */
-    main{
-      border-radius: var(--r);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-    }
-
-    /* HERO */
-    .topbar{
-      padding: 18px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.08)),
-        radial-gradient(1100px 320px at 20% 0%, rgba(78,110,142,.25), transparent 60%),
-        radial-gradient(900px 320px at 80% 0%, rgba(122,154,146,.22), transparent 60%);
-    }
-    .hero{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.12)),
-        radial-gradient(900px 320px at 20% 0%, rgba(78,110,142,.28), transparent 60%),
-        radial-gradient(900px 320px at 80% 0%, rgba(122,154,146,.25), transparent 60%);
-      padding: 18px;
-      overflow:hidden;
-    }
-    .hero h2{
-      margin:0 0 6px;
-      font-size: 20px;
-      letter-spacing:.2px;
-    }
-    .hero p{
-      margin:0;
-      color: rgba(255,255,255,.72);
-      line-height:1.5;
-      max-width: 62ch;
-      font-size: 13.5px;
-    }
-    .heroRow{
-      margin-top: 12px;
+    .topnav-inner{
       display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
       align-items:center;
-      justify-content: space-between;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 0;
     }
-    .search{
-      flex: 1;
+    .brand{
       display:flex;
-      gap:10px;
       align-items:center;
+      gap: 10px;
       min-width: 220px;
     }
-    .search input{
-      width:100%;
-      padding: 11px 12px;
-      border-radius: 16px;
+    .logo{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.25);
-      color: var(--ink);
-      outline:none;
-      backdrop-filter: blur(10px);
+      background:
+        radial-gradient(18px 18px at 30% 35%, rgba(241,196,15,.22), transparent 60%),
+        radial-gradient(28px 28px at 70% 70%, rgba(122,154,146,.22), transparent 60%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow2);
+    }
+    .brand strong{ font-size: 14px; letter-spacing:.2px; }
+    .brand span{ display:block; font-size:12px; color: var(--muted); margin-top:2px; }
+
+    .navlinks{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .navlinks a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+    }
+    .navlinks a.active{
+      border-color: rgba(122,154,146,.55);
+      background: linear-gradient(90deg, rgba(122,154,146,.18), rgba(255,255,255,.03));
+    }
+
+    .nav-cta{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      min-width: 220px;
+      justify-content: flex-end;
     }
     .btn{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: var(--ink);
-      padding: 10px 12px;
       cursor:pointer;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.9);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
       white-space: nowrap;
     }
     .btn:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,255,255,.24);
-      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.06);
+    }
+    .btn.primary{
+      border-color: rgba(241,196,15,.32);
+      background: rgba(241,196,15,.10);
     }
 
-    .content{ padding: 18px; display:grid; gap: 18px; }
-
-    /* SECTION */
-    section{
-      border-radius: var(--r);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    /* HERO travel style */
+    .hero-wrap{
+      padding: 22px 0 16px;
+    }
+    .hero{
+      border-radius: 26px;
       overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.15)),
+        radial-gradient(1100px 450px at 20% 15%, rgba(78,110,142,.25), transparent 60%),
+        radial-gradient(900px 420px at 80% 20%, rgba(122,154,146,.24), transparent 60%),
+        url("hero.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    /* si tu n’as pas de hero.jpg, pas grave, le gradient reste joli */
+    .hero-inner{
+      padding: 28px 22px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 3.2vw, 44px);
+      letter-spacing: .2px;
+      line-height: 1.06;
+    }
+    .hero p{
+      margin:0;
+      color: rgba(255,255,255,.72);
+      line-height: 1.6;
+      max-width: 66ch;
+      font-size: 14px;
+    }
+    .hero-meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .chip{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.78);
+    }
+    .chip.nature{ border-color: rgba(122,154,146,.30); }
+    .chip.urban{ border-color: rgba(210,201,162,.24); }
+    .chip.sun{ border-color: rgba(241,196,15,.30); }
+
+    .hero-card{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(14px);
+      padding: 14px;
+      box-shadow: var(--shadow2);
+      align-self: start;
+    }
+    .hero-card h3{
+      margin:0 0 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,.88);
+      letter-spacing: .2px;
+    }
+
+    .search{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .search input{
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.90);
+      outline:none;
+    }
+    .smallnote{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.5;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .stat{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding: 10px;
+    }
+    .stat strong{ display:block; font-size: 16px; letter-spacing: .2px; }
+    .stat span{ font-size: 12px; color: rgba(255,255,255,.66); }
+
+    /* CONTENT */
+    .content{
+      padding: 16px 0 70px;
+      display:grid;
+      gap: 18px;
+    }
+
+    /* SECTION headers like travel sites */
+    section{
+      border-radius: 26px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      box-shadow: var(--shadow2);
     }
     section header{
-      padding: 18px 18px 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.18);
       display:flex;
       justify-content:space-between;
       align-items:baseline;
       gap: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.10);
     }
-    section h2{ margin:0; font-size: 18px; letter-spacing:.2px; }
-    .kicker{ color: var(--muted); font-size: 13px; }
+    section h2{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+    .kicker{
+      color: rgba(255,255,255,.68);
+      font-size: 12.5px;
+    }
 
+    /* GRID CARDS */
     .grid{
       padding: 18px;
       display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
     }
 
-    /* CARD — effet "paysage incrusté" */
+    /* CARD with “incrusté” feel */
     .card{
       position: relative;
-      border-radius: var(--r2);
+      border-radius: 20px;
+      overflow:hidden;
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-      overflow:hidden;
-      padding: 14px;
-      box-shadow: 0 10px 28px rgba(0,0,0,.35);
-      transform: translateZ(0);
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
       transition: transform .14s ease, border-color .14s ease, background .14s ease;
     }
-    .card:before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(700px 220px at 10% 0%, rgba(122,154,146,.20), transparent 55%),
-                  radial-gradient(700px 220px at 90% 0%, rgba(78,110,142,.18), transparent 55%);
-      opacity: .8;
-      pointer-events:none;
-    }
     .card:hover{
-      border-color: rgba(255,255,255,.20);
       transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
       background: rgba(255,255,255,.04);
     }
 
-    /* image placée "brut" dans la card => style auto */
-    .card > img{
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      display:block;
-      margin-bottom: 10px;
-      filter: saturate(1.08) contrast(1.06);
+    .card .media{
+      position: relative;
+      height: 165px;
+      overflow:hidden;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+        radial-gradient(700px 240px at 25% 15%, rgba(78,110,142,.22), transparent 60%),
+        radial-gradient(700px 240px at 75% 20%, rgba(122,154,146,.20), transparent 60%);
     }
-
-    .card h3{ margin:0 0 6px; font-size: 15px; letter-spacing:.15px; position:relative; }
-    .card p{ margin:0; color: var(--muted); line-height: 1.55; font-size: 13px; position:relative; }
-
-    .tags{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 10px; position:relative; }
+    /* si tu mets un <img> direct dans la card, on le rend “paysage incrusté” */
+    .card img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.07) contrast(1.05);
+      transform: scale(1.02);
+    }
+    .card .media:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.65));
+      pointer-events:none;
+    }
+    .card .body{
+      padding: 14px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .card p{
+      margin:0;
+      color: rgba(255,255,255,.68);
+      font-size: 12.8px;
+      line-height: 1.55;
+    }
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
     .tag{
-      font-size: 12px;
+      font-size: 11.5px;
       padding: 4px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-      color: rgba(255,255,255,.78);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.76);
     }
-    .tag.urban{ border-color: rgba(210,201,162,.25); }
-    .tag.nature{ border-color: rgba(122,154,146,.32); }
-    .tag.sun{ border-color: rgba(241,196,15,.34); }
+    .tag.nature{ border-color: rgba(122,154,146,.30); }
+    .tag.urban{ border-color: rgba(210,201,162,.22); }
+    .tag.sun{ border-color: rgba(241,196,15,.30); }
 
-    /* Fallback loading card */
+    /* CTA row inside section */
+    .section-footer{
+      padding: 16px 18px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      background: rgba(0,0,0,.14);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .section-footer .hint{
+      color: rgba(255,255,255,.66);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    /* loading */
     .loading{
       padding: 18px;
-      color: var(--muted);
+      color: rgba(255,255,255,.70);
       font-size: 13px;
     }
 
-    @media (max-width: 980px){
-      .wrap{ grid-template-columns: 1fr; }
-      .sidebar{ position:relative; top:0; }
+    /* responsive */
+    @media (max-width: 1000px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .brand, .nav-cta{ min-width: unset; }
+    }
+    @media (max-width: 660px){
       .grid{ grid-template-columns: 1fr; }
+      .navlinks{ justify-content:flex-start; }
+      .topnav-inner{ flex-wrap: wrap; }
+      .nav-cta{ width: 100%; justify-content:flex-start; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <aside class="sidebar">
-      <div class="head">
-        <div class="badge">🌲 Nature / Voyage <span style="opacity:.75">+ Urbanisme</span></div>
-        <h1 class="title">Prénom Nom</h1>
-        <p class="subtitle">
-          Portfolio modulaire (sections chargées depuis <span class="kbd">/components</span>).
-          Ambiance dark immersive + UI “exploration”.
-        </p>
+  <!-- TOP NAV -->
+  <div class="topnav">
+    <div class="container">
+      <div class="topnav-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <strong>Prénom Nom</strong>
+            <span>Nature / Voyage + Urbanisme</span>
+          </div>
+        </div>
 
-        <div class="meta">
-          <span class="chip">Carto</span>
-          <span class="chip">Terrain</span>
-          <span class="chip">Diagnostic</span>
-          <span class="chip">Aménagement</span>
+        <div class="navlinks" id="nav">
+          <a href="#apropos" data-target="apropos">À propos</a>
+          <a href="#projets" data-target="projets">Projets</a>
+          <a href="#vie-associative" data-target="vie-associative">Vie associative</a>
+          <a href="#contact" data-target="contact">Contact</a>
+        </div>
+
+        <div class="nav-cta">
+          <button class="btn" id="toTop">↑ Haut</button>
+          <a class="btn primary" href="#contact" style="text-decoration:none;">Me contacter</a>
         </div>
       </div>
+    </div>
+  </div>
 
-      <nav id="nav">
-        <a class="navlink" href="#apropos" data-target="apropos">
-          À propos <span class="pill">01</span>
-        </a>
-        <a class="navlink" href="#projets" data-target="projets">
-          Projets <span class="pill">02</span>
-        </a>
-        <a class="navlink" href="#vie-associative" data-target="vie-associative">
-          Vie associative <span class="pill">03</span>
-        </a>
-        <a class="navlink" href="#contact" data-target="contact">
-          Contact <span class="pill">04</span>
-        </a>
-      </nav>
-
-      <div class="foot">
-        <div><strong style="color: var(--ink)">Important :</strong> ouvre avec un serveur local.</div>
-        <div style="margin-top:8px;">
-          <span class="kbd">python -m http.server</span> ou <span class="kbd">Live Server</span>
-        </div>
-        <div style="margin-top:8px;">
-          Sinon le <span class="kbd">fetch()</span> peut être bloqué en <span class="kbd">file://</span>.
-        </div>
-      </div>
-    </aside>
-
-    <main>
-      <div class="topbar">
-        <div class="hero">
-          <h2>Explorer • Territoires • Projets</h2>
+  <!-- HERO -->
+  <div class="container hero-wrap">
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>Explorer les territoires.<br>Raconter des projets.</h1>
           <p>
-            Une DA nature/voyage, avec un twist urbanisme : diagnostic, carto, atelier, récit de territoire.
-            Recherche en live sur les cartes.
+            Un portfolio inspiré des DA “travel” : ambiance sombre, paysages incrustés,
+            et un supplément <strong>urbanisme</strong> (carto, diagnostic, mobilités, atelier terrain).
           </p>
 
-          <div class="heroRow">
-            <div class="search">
-              <input id="search" type="search" placeholder="Recherche (carto, atelier, diagnostic, mobilité…)" />
+          <div class="hero-meta">
+            <span class="chip nature">Paysage</span>
+            <span class="chip urban">Aménagement</span>
+            <span class="chip">Cartographie</span>
+            <span class="chip sun">Terrain</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>Recherche rapide</h3>
+          <div class="search">
+            <input id="search" type="search" placeholder="ex: carto, diagnostic, mobilité, concertation…" />
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong>04</strong><span>Sections</span>
             </div>
-            <button class="btn" id="toTop">↑ Haut</button>
+            <div class="stat">
+              <strong>12+</strong><span>Cards</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong><span>DA “travel”</span>
+            </div>
+          </div>
+          <div class="smallnote">
+            Astuce : lance avec un serveur local (sinon <code>fetch()</code> peut être bloqué en <code>file://</code>).
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="content" id="content">
-        <div class="loading">Chargement des sections…</div>
-      </div>
-    </main>
-
+  <!-- CONTENT injected -->
+  <div class="container">
+    <div class="content" id="content">
+      <div class="loading">Chargement des sections…</div>
+    </div>
   </div>
 
   <script>
-    // Les composants chargés au lancement
+    // Chargement des composants au lancement
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
       { id: "projets", file: "components/projet.html" },
@@ -419,18 +509,17 @@
     const searchEl = document.getElementById("search");
 
     function setActiveNav(sectionId){
-      const links = navEl.querySelectorAll(".navlink");
+      const links = navEl.querySelectorAll("a[data-target]");
       links.forEach(a => a.classList.toggle("active", a.dataset.target === sectionId));
     }
 
     function initNavClicks(){
       navEl.addEventListener("click", (e) => {
-        const a = e.target.closest("a.navlink");
+        const a = e.target.closest("a[data-target]");
         if(!a) return;
 
         const id = a.dataset.target;
         const target = document.getElementById(id);
-
         if(target){
           e.preventDefault();
           target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -446,14 +535,13 @@
         const visible = entries
           .filter(e => e.isIntersecting)
           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible) setActiveNav(visible.target.getAttribute("id"));
-      }, { threshold: [0.25, 0.4, 0.6] });
-
+        if(visible) setActiveNav(visible.target.id);
+      }, { threshold: [0.25, 0.45, 0.65] });
       sections.forEach(s => io.observe(s));
     }
 
     function initSearchFilter(){
+      if(!searchEl) return;
       searchEl.addEventListener("input", () => {
         const q = searchEl.value.trim().toLowerCase();
         const cards = document.querySelectorAll("[data-filter-card]");
@@ -465,7 +553,9 @@
     }
 
     function initToTop(){
-      document.getElementById("toTop").addEventListener("click", () => {
+      const btn = document.getElementById("toTop");
+      if(!btn) return;
+      btn.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
@@ -485,14 +575,21 @@
                   <div class="kicker">Impossible de charger ${c.file}</div>
                 </header>
                 <div class="grid">
-                  <div class="card">
-                    <h3>Détail</h3>
-                    <p>Vérifie que le fichier existe et que tu utilises un serveur local.</p>
-                    <div class="tags">
-                      <span class="tag sun">fetch()</span>
-                      <span class="tag urban">components</span>
+                  <article class="card" data-filter-card data-filter="erreur fetch components serveur">
+                    <div class="body">
+                      <h3>Vérifications</h3>
+                      <p>Assure-toi d’utiliser un serveur local et que le fichier existe dans /components.</p>
+                      <div class="tags">
+                        <span class="tag sun">fetch()</span>
+                        <span class="tag urban">components</span>
+                        <span class="tag">serveur local</span>
+                      </div>
                     </div>
-                  </div>
+                  </article>
+                </div>
+                <div class="section-footer">
+                  <div class="hint">Si tu lances en <code>file://</code>, le navigateur peut bloquer le chargement.</div>
+                  <button class="btn" onclick="location.reload()">Recharger</button>
                 </div>
               </section>
             `;
@@ -503,7 +600,6 @@
       contentEl.innerHTML = htmlParts.join("\n");
     }
 
-    // Boot
     (async function(){
       await loadComponents();
       initNavClicks();
