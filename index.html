@@ -1,1 +1,364 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio – Brouillon</title>
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --card: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --line: rgba(255,255,255,.12);
+      --accent: #7A9A92;
+      --accent2: #F1C40F;
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 15% 10%, rgba(122,154,146,.25), transparent 55%),
+                  radial-gradient(1000px 700px at 90% 0%, rgba(78,110,142,.25), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    /* Layout */
+    .wrap{
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 26px 18px 80px;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position: sticky;
+      top: 18px;
+      align-self: start;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+    .badge{
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(241,196,15,.12);
+      border: 1px solid rgba(241,196,15,.28);
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .title{
+      font-size: 22px;
+      margin: 0 0 6px;
+      letter-spacing: .2px;
+    }
+    .subtitle{
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 14px;
+    }
+    nav{
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .navlink{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-size: 14px;
+    }
+    .navlink:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
+    .navlink.active{
+      border-color: rgba(122,154,146,.6);
+      background: rgba(122,154,146,.15);
+    }
+    .pill{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* Main */
+    main{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+    .topbar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(0,0,0,.12);
+    }
+    .search{
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .search input{
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline: none;
+    }
+    .btn{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform .12s ease, border-color .12s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
+
+    .content{
+      padding: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    /* Sections */
+    section{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    section header{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    section h2{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    .kicker{
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .grid{
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      padding: 14px;
+    }
+    .card h3{ margin: 0 0 6px; font-size: 15px; }
+    .card p{ margin: 0; color: var(--muted); line-height: 1.5; font-size: 13px; }
+    .tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .tag{
+      font-size: 12px;
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .wrap{ grid-template-columns: 1fr; }
+      .sidebar{ position: relative; top: 0; }
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="badge">⚡ vibecode mode <span style="opacity:.75">brouillon</span></div>
+      <h1 class="title">Prénom Nom</h1>
+      <p class="subtitle">
+        Étudiant / Alternant – Urbanisme, aménagement, projets. <br/>
+        Ici : contenu fictif + chargement des sections via composants HTML.
+      </p>
+
+      <nav id="nav">
+        <a class="navlink" href="#apropos" data-target="apropos">
+          À propos <span class="pill">01</span>
+        </a>
+        <a class="navlink" href="#projets" data-target="projets">
+          Projets <span class="pill">02</span>
+        </a>
+        <a class="navlink" href="#vie-associative" data-target="vie-associative">
+          Vie associative <span class="pill">03</span>
+        </a>
+        <a class="navlink" href="#contact" data-target="contact">
+          Contact <span class="pill">04</span>
+        </a>
+      </nav>
+
+      <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.45;">
+        <div><strong style="color: var(--text)">Astuce :</strong> ouvre avec un serveur local (sinon fetch peut être bloqué).</div>
+        <div style="margin-top:8px;">
+          Ex: <span style="opacity:.9">VS Code Live Server</span> ou <span style="opacity:.9">python -m http.server</span>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div class="search">
+          <input id="search" type="search" placeholder="Recherche (filtre les cartes : ex. 'carto', 'atelier', 'sport')…" />
+        </div>
+        <button class="btn" id="toTop">↑ Haut</button>
+      </div>
+
+      <!-- Ici on injecte les sections chargées depuis components/*.html -->
+      <div class="content" id="content">
+        <section class="card">
+          <h2>Chargement…</h2>
+          <p class="kicker">Les sections arrivent depuis /components</p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Liste des composants à charger au lancement
+    const COMPONENTS = [
+      { id: "apropos", file: "components/apropos.html" },
+      { id: "projets", file: "components/projet.html" },
+      { id: "vie-associative", file: "components/vie-associative.html" },
+      { id: "contact", file: "components/contact.html" },
+    ];
+
+    const contentEl = document.getElementById("content");
+    const navEl = document.getElementById("nav");
+    const searchEl = document.getElementById("search");
+
+    function setActiveNav(sectionId){
+      const links = navEl.querySelectorAll(".navlink");
+      links.forEach(a => a.classList.toggle("active", a.dataset.target === sectionId));
+    }
+
+    function initScrollSpy(){
+      const sections = Array.from(document.querySelectorAll("section[data-section]"));
+      const io = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveNav(visible.target.getAttribute("id"));
+      }, { threshold: [0.25, 0.4, 0.6] });
+
+      sections.forEach(s => io.observe(s));
+    }
+
+    function initNavClicks(){
+      navEl.addEventListener("click", (e) => {
+        const a = e.target.closest("a.navlink");
+        if(!a) return;
+        const id = a.dataset.target;
+        const target = document.getElementById(id);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", "#" + id);
+          setActiveNav(id);
+        }
+      });
+    }
+
+    function initSearchFilter(){
+      searchEl.addEventListener("input", () => {
+        const q = searchEl.value.trim().toLowerCase();
+        const cards = document.querySelectorAll("[data-filter-card]");
+        cards.forEach(card => {
+          const hay = (card.getAttribute("data-filter") || "").toLowerCase();
+          card.style.display = (!q || hay.includes(q)) ? "" : "none";
+        });
+      });
+    }
+
+    async function loadComponents(){
+      const htmlParts = await Promise.all(
+        COMPONENTS.map(async (c) => {
+          const res = await fetch(c.file);
+          if(!res.ok) {
+            return `<section class="card" data-section id="${c.id}">
+              <h2>Erreur</h2>
+              <p class="kicker">Impossible de charger ${c.file}</p>
+            </section>`;
+          }
+          // Les fichiers composants contiennent déjà une <section id="...">
+          return await res.text();
+        })
+      );
+
+      contentEl.innerHTML = htmlParts.join("\n");
+    }
+
+    function initToTop(){
+      document.getElementById("toTop").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    // Boot
+    (async function(){
+      await loadComponents();
+      initNavClicks();
+      initScrollSpy();
+      initSearchFilter();
+      initToTop();
+
+      // Si URL contient un hash, on scrolle dessus après chargement
+      const hash = (location.hash || "").replace("#", "");
+      if(hash){
+        const target = document.getElementById(hash);
+        if(target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        setActiveNav(hash);
+      } else {
+        setActiveNav("apropos");
+      }
+    })();
+  </script>
+</body>
+</html>
 
