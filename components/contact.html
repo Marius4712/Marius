@@ -1,59 +1,78 @@
 <section id="contact" data-section>
   <header>
     <h2>Contact</h2>
-    <div class="kicker">formulaire fictif • non envoyé (demo)</div>
+    <div class="kicker">message • coordonnées • disponibilité</div>
   </header>
 
   <div class="grid">
-    <div class="card" data-filter-card data-filter="contact email linkedin">
-      <h3>Coordonnées</h3>
-      <p>
-        Email : prenom.nom@mail.com <br/>
-        LinkedIn : linkedin.com/in/prenomnom <br/>
-        Localisation : Bordeaux / Lot-et-Garonne
-      </p>
-      <div class="tags">
-        <span class="tag">Email</span>
-        <span class="tag">LinkedIn</span>
-        <span class="tag">Réseau</span>
-      </div>
-    </div>
-
-    <div class="card" data-filter-card data-filter="formulaire message demo">
-      <h3>Me laisser un message</h3>
-
-      <form onsubmit="event.preventDefault(); alert('Démo : message non envoyé 🙂');">
-        <div style="display:grid; gap:10px;">
-          <input
-            required
-            placeholder="Ton nom"
-            style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.92);outline:none;"
-          />
-          <input
-            type="email"
-            required
-            placeholder="Ton email"
-            style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.92);outline:none;"
-          />
-          <textarea
-            required
-            rows="4"
-            placeholder="Ton message…"
-            style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.92);outline:none; resize: vertical;"
-          ></textarea>
-          <button
-            type="submit"
-            style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(122,154,146,.18);color:rgba(255,255,255,.92);cursor:pointer;"
-          >
-            Envoyer (démo)
-          </button>
+    <article class="card" data-filter-card data-filter="contact email linkedin localisation">
+      <div class="media"></div>
+      <div class="body">
+        <h3>Coordonnées</h3>
+        <p>
+          Email : prenom.nom@mail.com<br>
+          LinkedIn : linkedin.com/in/prenomnom<br>
+          Zone : Bordeaux / Lot-et-Garonne
+        </p>
+        <div class="tags">
+          <span class="tag">Email</span>
+          <span class="tag">LinkedIn</span>
+          <span class="tag urban">Réseau</span>
         </div>
-      </form>
+      </div>
+    </article>
 
-      <p style="margin-top:10px; color: rgba(255,255,255,.65); font-size: 12px; line-height: 1.5;">
-        (Ici tu pourras brancher un vrai envoi plus tard : Formspree, Netlify Forms, endpoint perso, etc.)
-      </p>
+    <article class="card" data-filter-card data-filter="formulaire message">
+      <div class="body">
+        <h3>Envoyer un message</h3>
+        <p style="margin-bottom:10px;">
+          Démo : le formulaire n’envoie pas encore. (Tu pourras brancher Formspree / Netlify Forms / backend.)
+        </p>
+
+        <form onsubmit="event.preventDefault(); alert('Démo : message non envoyé 🙂');">
+          <div style="display:grid; gap:10px;">
+            <input required placeholder="Ton nom"
+              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;">
+            <input type="email" required placeholder="Ton email"
+              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;">
+            <textarea required rows="4" placeholder="Ton message…"
+              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;resize:vertical;"></textarea>
+
+            <button type="submit" class="btn primary" style="width:fit-content;">
+              Envoyer (démo)
+            </button>
+          </div>
+        </form>
+
+        <div class="tags" style="margin-top:12px;">
+          <span class="tag sun">Rapide</span>
+          <span class="tag urban">Pro</span>
+          <span class="tag">Simple</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-filter-card data-filter="disponibilite stage alternance mission">
+      <div class="media"></div>
+      <div class="body">
+        <h3>Disponibilité</h3>
+        <p>
+          Ouvert aux échanges : missions terrain, diagnostic, carto, appui projet,
+          communication et suivi d’opérations.
+        </p>
+        <div class="tags">
+          <span class="tag urban">Urbanisme</span>
+          <span class="tag">Projet</span>
+          <span class="tag nature">Territoire</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="section-footer">
+    <div class="hint">
+      Si tu veux, je peux aussi te faire une version “une page par section” (sans scroll), toujours sans framework.
     </div>
+    <button class="btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">Retour en haut</button>
   </div>
 </section>
-
