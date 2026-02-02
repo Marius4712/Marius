@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mon Portfolio — Marius Vacqué</title>
 
-  <!-- Police "Pinterest vibe" (modern + clean) -->
+  <!-- Police "Pinterest vibe" -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,6 +23,7 @@
 
       --r: 22px;
       --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 28px rgba(0,0,0,.35);
       --max: 1180px;
     }
 
@@ -168,7 +169,7 @@
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
 
-    /* Amélioration de rendu */
+    /* ✅ PLUS LUMINEUX + plus “pro” */
     .heroVideo{
       position:absolute;
       inset:0;
@@ -177,24 +178,46 @@
       object-fit: cover;
       object-position: center 40%;
 
-      /* rendu + net, moins “lait” */
-      filter: saturate(1.12) contrast(1.10) brightness(0.96);
+      /* rendu plus lumineux / premium */
+      filter:
+        brightness(1.18)
+        contrast(1.10)
+        saturate(1.18);
+
       transform: scale(1.03);
       backface-visibility: hidden;
       will-change: transform;
     }
 
+    /* ✅ OVERLAY moins sombre (mais garde la lisibilité) */
     .heroOverlay{
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.28) 35%, rgba(0,0,0,.72)),
-        radial-gradient(1000px 500px at 20% 0%, rgba(78,110,142,.16), transparent 60%),
-        radial-gradient(1000px 500px at 80% 0%, rgba(122,154,146,.16), transparent 60%);
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.28),
+          rgba(0,0,0,.12) 40%,
+          rgba(0,0,0,.55)
+        ),
+        radial-gradient(1100px 520px at 15% 0%, rgba(122,154,146,.20), transparent 60%),
+        radial-gradient(1100px 520px at 85% 0%, rgba(78,110,142,.20), transparent 60%);
       pointer-events:none;
     }
 
-    /* Titre global */
+    /* ✅ grain ultra léger (Pinterest / Webflow vibe) */
+    .heroHeader:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* =========================
+       Titre global
+       ========================= */
     .mastTitle{
       position: absolute;
       top: 18px;
@@ -205,13 +228,18 @@
       text-align: center;
       pointer-events:none;
     }
+
+    /* ✅ Titre plus impactant / premium */
     .mastTitle h1{
       margin: 0;
-      font-size: clamp(28px, 4vw, 52px);
-      letter-spacing: .2px;
+      font-size: clamp(34px, 4.6vw, 66px);
       font-weight: 800;
-      color: rgba(255,255,255,.95);
-      text-shadow: 0 18px 60px rgba(0,0,0,.65);
+      letter-spacing: .6px;
+      color: #ffffff;
+
+      text-shadow:
+        0 18px 70px rgba(0,0,0,.60),
+        0 2px 12px rgba(0,0,0,.35);
     }
 
     /* =========================
@@ -233,11 +261,12 @@
       width: 100%;
     }
 
+    /* ✅ cards un peu plus “glass” / premium */
     .heroCard{
       border-radius: 26px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.26);
-      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
       padding: 18px;
     }
@@ -247,11 +276,11 @@
       font-size: clamp(18px, 2vw, 24px);
       font-weight: 800;
       letter-spacing:.2px;
-      color: rgba(255,255,255,.94);
+      color: rgba(255,255,255,.96);
     }
     .heroCard p{
       margin:0;
-      color: rgba(255,255,255,.78);
+      color: rgba(255,255,255,.82);
       line-height: 1.75;
       font-size: 14px;
     }
@@ -271,8 +300,8 @@
       width:100%;
       padding: 11px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
       color: rgba(255,255,255,.92);
       outline:none;
     }
@@ -326,7 +355,7 @@
       background: rgba(0,0,0,.18);
       overflow:hidden;
       transition: transform .14s ease, border-color .14s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,.32);
+      box-shadow: var(--shadow2);
     }
     .card:hover{
       transform: translateY(-2px);
@@ -446,7 +475,7 @@
     <div class="heroContent">
       <div class="container">
         <div class="heroGrid">
-          <!-- Bloc de texte remplacé -->
+          <!-- Bloc de texte -->
           <div class="heroCard">
             <h2>Bonjour et bienvenue sur mon portfolio.</h2>
             <p>
@@ -457,7 +486,7 @@
             </p>
           </div>
 
-          <!-- Recherche rapide simplifiée -->
+          <!-- Recherche rapide (on ne retire rien, on garde juste le bloc simple) -->
           <div class="heroCard sideCard">
             <h3>Recherche rapide</h3>
             <div class="search">
