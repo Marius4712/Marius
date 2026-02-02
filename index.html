@@ -56,28 +56,64 @@
       mix-blend-mode: overlay;
     }
 
-    /* container */
     .container{
       width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
     }
 
-    /* TOP NAV (ergonomie) */
+    /* TOP NAV (avec vidéo en fond) */
     .topnav{
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.20));
+      overflow: hidden;
+
+      /* un peu de hauteur visuelle */
+      min-height: 78px;
+
+      /* fallback si vidéo non chargée */
+      background:
+        radial-gradient(900px 240px at 20% 40%, rgba(78,110,142,.22), transparent 60%),
+        radial-gradient(900px 240px at 80% 30%, rgba(122,154,146,.22), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.20));
       border-bottom: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
     }
+
+    .topnavVideo{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: saturate(1.05) contrast(1.04);
+      opacity: .85;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .topnavOverlay{
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.34)),
+        radial-gradient(1200px 400px at 10% 0%, rgba(78,110,142,.18), transparent 60%),
+        radial-gradient(1200px 400px at 90% 0%, rgba(122,154,146,.16), transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .topnav-inner{
+      position: relative;
+      z-index: 2; /* au-dessus vidéo + overlay */
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 14px;
       padding: 14px 0;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -92,11 +128,12 @@
       background:
         radial-gradient(18px 18px at 30% 35%, rgba(241,196,15,.22), transparent 60%),
         radial-gradient(28px 28px at 70% 70%, rgba(122,154,146,.22), transparent 60%),
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.08);
       box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
     }
     .brand strong{ font-size: 14px; letter-spacing:.2px; }
-    .brand span{ display:block; font-size:12px; color: var(--muted); margin-top:2px; }
+    .brand span{ display:block; font-size:12px; color: rgba(255,255,255,.75); margin-top:2px; }
 
     .navlinks{
       display:flex;
@@ -107,22 +144,23 @@
     }
     .navlinks a{
       text-decoration:none;
-      color: rgba(255,255,255,.86);
+      color: rgba(255,255,255,.90);
       font-size: 13px;
       padding: 9px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
     .navlinks a:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,255,255,.22);
-      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.25);
+      background: rgba(0,0,0,.30);
     }
     .navlinks a.active{
       border-color: rgba(122,154,146,.55);
-      background: linear-gradient(90deg, rgba(122,154,146,.18), rgba(255,255,255,.03));
+      background: linear-gradient(90deg, rgba(122,154,146,.22), rgba(0,0,0,.20));
     }
 
     .nav-cta{
@@ -135,25 +173,28 @@
     .btn{
       cursor:pointer;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.9);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.92);
       padding: 10px 12px;
       border-radius: 14px;
       font-size: 13px;
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
       white-space: nowrap;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
     }
     .btn:hover{
       transform: translateY(-1px);
       border-color: rgba(255,255,255,.22);
-      background: rgba(255,255,255,.06);
+      background: rgba(0,0,0,.30);
     }
     .btn.primary{
       border-color: rgba(241,196,15,.32);
-      background: rgba(241,196,15,.10);
+      background: rgba(241,196,15,.12);
+      color: rgba(255,255,255,.95);
     }
 
-    /* HERO travel style */
+    /* HERO (en dessous de la topnav) */
     .hero-wrap{
       padding: 22px 0 16px;
     }
@@ -171,7 +212,6 @@
       background-size: cover;
       background-position: center;
     }
-    /* si tu n’as pas de hero.jpg, pas grave, le gradient reste joli */
     .hero-inner{
       padding: 28px 22px;
       display:grid;
@@ -268,7 +308,6 @@
       gap: 18px;
     }
 
-    /* SECTION headers like travel sites */
     section{
       border-radius: 26px;
       overflow:hidden;
@@ -296,7 +335,6 @@
       font-size: 12.5px;
     }
 
-    /* GRID CARDS */
     .grid{
       padding: 18px;
       display:grid;
@@ -304,7 +342,6 @@
       gap: 12px;
     }
 
-    /* CARD with “incrusté” feel */
     .card{
       position: relative;
       border-radius: 20px;
@@ -330,7 +367,6 @@
         radial-gradient(700px 240px at 25% 15%, rgba(78,110,142,.22), transparent 60%),
         radial-gradient(700px 240px at 75% 20%, rgba(122,154,146,.20), transparent 60%);
     }
-    /* si tu mets un <img> direct dans la card, on le rend “paysage incrusté” */
     .card img{
       width:100%;
       height:100%;
@@ -377,7 +413,6 @@
     .tag.urban{ border-color: rgba(210,201,162,.22); }
     .tag.sun{ border-color: rgba(241,196,15,.30); }
 
-    /* CTA row inside section */
     .section-footer{
       padding: 16px 18px;
       border-top: 1px solid rgba(255,255,255,.09);
@@ -394,14 +429,12 @@
       line-height: 1.5;
     }
 
-    /* loading */
     .loading{
       padding: 18px;
       color: rgba(255,255,255,.70);
       font-size: 13px;
     }
 
-    /* responsive */
     @media (max-width: 1000px){
       .hero-inner{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -418,8 +451,13 @@
 
 <body>
 
-  <!-- TOP NAV -->
+  <!-- TOP NAV avec vidéo en fond -->
   <div class="topnav">
+    <video class="topnavVideo" autoplay muted loop playsinline preload="metadata">
+      <source src="595863_Drone_Landscape_Nature_1280x720.mp4" type="video/mp4">
+    </video>
+    <div class="topnavOverlay" aria-hidden="true"></div>
+
     <div class="container">
       <div class="topnav-inner">
         <div class="brand">
@@ -439,13 +477,13 @@
 
         <div class="nav-cta">
           <button class="btn" id="toTop">↑ Haut</button>
-          <a class="btn primary" href="#contact" style="text-decoration:none;">Me contacter</a>
+          <a class="btn primary" href="#contact">Me contacter</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- HERO (en dessous) -->
   <div class="container hero-wrap">
     <div class="hero">
       <div class="hero-inner">
@@ -496,7 +534,6 @@
   </div>
 
   <script>
-    // Chargement des composants au lancement
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
       { id: "projets", file: "components/projet.html" },
