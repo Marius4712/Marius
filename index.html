@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio — Nature x Urbanisme</title>
+  <title>Mon Portfolio — Marius Vacqué</title>
+
+  <!-- Police "Pinterest vibe" (modern + clean) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #06080b;
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
+      --muted: rgba(255,255,255,.72);
       --line: rgba(255,255,255,.14);
-
-      --glass: rgba(0,0,0,.28);
-      --glass2: rgba(255,255,255,.06);
 
       --nature: #7A9A92;
       --ocean: #4E6E8E;
@@ -29,10 +30,11 @@
     html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: radial-gradient(1200px 600px at 15% 0%, rgba(122,154,146,.18), transparent 55%),
-                  radial-gradient(900px 650px at 85% 0%, rgba(78,110,142,.18), transparent 55%),
-                  linear-gradient(180deg, #04070b, #071015 55%, #04070b);
+      font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 600px at 15% 0%, rgba(122,154,146,.18), transparent 55%),
+        radial-gradient(900px 650px at 85% 0%, rgba(78,110,142,.18), transparent 55%),
+        linear-gradient(180deg, #04070b, #071015 55%, #04070b);
       color: var(--text);
     }
 
@@ -56,38 +58,7 @@
     }
 
     /* =========================
-       HEADER VIDEO (GRAND)
-       ========================= */
-    header.heroHeader{
-      position: relative;
-      height: clamp(420px, 68vh, 720px); /* ICI la taille de ta vidéo */
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-
-    .heroVideo{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      object-position: center 40%;
-      filter: saturate(1.08) contrast(1.05);
-      transform: scale(1.02);
-    }
-
-    .heroOverlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.35) 35%, rgba(0,0,0,.75)),
-        radial-gradient(1000px 500px at 20% 0%, rgba(78,110,142,.18), transparent 60%),
-        radial-gradient(1000px 500px at 80% 0%, rgba(122,154,146,.18), transparent 60%);
-      pointer-events:none;
-    }
-
-    /* =========================
-       NAV (par-dessus la vidéo)
+       NAV (sticky)
        ========================= */
     .topbar{
       position: sticky;
@@ -97,7 +68,6 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
-
     .topbarInner{
       display:flex;
       align-items:center;
@@ -127,7 +97,6 @@
       line-height: 1.15;
     }
     .brandTitle strong{ font-size: 14px; letter-spacing:.2px; }
-    .brandTitle span{ display:block; font-size: 12px; color: rgba(255,255,255,.74); margin-top:2px; }
 
     nav.nav{
       display:flex;
@@ -163,7 +132,6 @@
       min-width: 240px;
       justify-content: flex-end;
     }
-
     .btn{
       cursor:pointer;
       border: 1px solid rgba(255,255,255,.12);
@@ -191,6 +159,62 @@
     }
 
     /* =========================
+       HEADER VIDÉO (GRAND)
+       ========================= */
+    header.heroHeader{
+      position: relative;
+      height: clamp(420px, 68vh, 720px);
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Amélioration de rendu */
+    .heroVideo{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center 40%;
+
+      /* rendu + net, moins “lait” */
+      filter: saturate(1.12) contrast(1.10) brightness(0.96);
+      transform: scale(1.03);
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    .heroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.28) 35%, rgba(0,0,0,.72)),
+        radial-gradient(1000px 500px at 20% 0%, rgba(78,110,142,.16), transparent 60%),
+        radial-gradient(1000px 500px at 80% 0%, rgba(122,154,146,.16), transparent 60%);
+      pointer-events:none;
+    }
+
+    /* Titre global */
+    .mastTitle{
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: min(var(--max), calc(100% - 32px));
+      text-align: center;
+      pointer-events:none;
+    }
+    .mastTitle h1{
+      margin: 0;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: .2px;
+      font-weight: 800;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 18px 60px rgba(0,0,0,.65);
+    }
+
+    /* =========================
        HERO CONTENT (sur la vidéo)
        ========================= */
     .heroContent{
@@ -212,49 +236,31 @@
     .heroCard{
       border-radius: 26px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.26);
       backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
       padding: 18px;
     }
 
-    .heroCard h1{
+    .heroCard h2{
       margin: 0 0 10px;
-      font-size: clamp(28px, 3.2vw, 48px);
-      line-height: 1.03;
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 800;
       letter-spacing:.2px;
+      color: rgba(255,255,255,.94);
     }
     .heroCard p{
       margin:0;
-      color: rgba(255,255,255,.74);
-      line-height: 1.6;
+      color: rgba(255,255,255,.78);
+      line-height: 1.75;
       font-size: 14px;
-      max-width: 70ch;
     }
-
-    .chips{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .chip{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.20);
-      color: rgba(255,255,255,.80);
-    }
-    .chip.nature{ border-color: rgba(122,154,146,.30); }
-    .chip.urban{ border-color: rgba(210,201,162,.22); }
-    .chip.sun{ border-color: rgba(241,196,15,.30); }
 
     .sideCard h3{
       margin:0 0 10px;
       font-size: 14px;
       letter-spacing:.2px;
-      color: rgba(255,255,255,.88);
+      color: rgba(255,255,255,.90);
     }
     .search{
       display:flex;
@@ -270,20 +276,6 @@
       color: rgba(255,255,255,.92);
       outline:none;
     }
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .stat{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      padding: 10px;
-    }
-    .stat strong{ display:block; font-size: 16px; }
-    .stat span{ font-size: 12px; color: rgba(255,255,255,.66); }
 
     /* =========================
        MAIN CONTENT (sections)
@@ -314,6 +306,7 @@
       font-size: 16px;
       letter-spacing: .3px;
       text-transform: uppercase;
+      font-weight: 800;
     }
     .kicker{
       color: rgba(255,255,255,.70);
@@ -363,6 +356,7 @@
       margin:0 0 6px;
       font-size: 14px;
       letter-spacing:.2px;
+      font-weight: 800;
     }
     .body p{
       margin:0;
@@ -398,6 +392,7 @@
       .heroGrid{ grid-template-columns: 1fr; }
       .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
       .brand, .cta{ min-width: unset; }
+      .mastTitle{ top: 12px; }
     }
     @media (max-width: 680px){
       .grid{ grid-template-columns: 1fr; }
@@ -417,8 +412,7 @@
         <div class="brand">
           <div class="logo" aria-hidden="true"></div>
           <div class="brandTitle">
-            <strong>Prénom Nom</strong>
-            <span>Nature / Voyage + Urbanisme</span>
+            <strong>Marius Vacqué</strong>
           </div>
         </div>
 
@@ -444,39 +438,31 @@
     </video>
     <div class="heroOverlay"></div>
 
+    <!-- Grand titre -->
+    <div class="mastTitle">
+      <h1>Mon Portfolio</h1>
+    </div>
+
     <div class="heroContent">
       <div class="container">
         <div class="heroGrid">
+          <!-- Bloc de texte remplacé -->
           <div class="heroCard">
-            <h1>Explorer les territoires.<br>Raconter des projets.</h1>
+            <h2>Bonjour et bienvenue sur mon portfolio.</h2>
             <p>
-              Un portfolio façon “travel UI” : sombre, immersif, paysages incrustés.
-              Avec un supplément urbanisme : carto, diagnostic, mobilités, terrain.
+              Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
+              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière
+              d’aborder les territoires et leurs enjeux.<br><br>
+              <strong>Bonne visite !</strong>
             </p>
-
-            <div class="chips">
-              <span class="chip nature">Paysage</span>
-              <span class="chip urban">Aménagement</span>
-              <span class="chip">Cartographie</span>
-              <span class="chip sun">Terrain</span>
-            </div>
           </div>
 
+          <!-- Recherche rapide simplifiée -->
           <div class="heroCard sideCard">
             <h3>Recherche rapide</h3>
             <div class="search">
               <input id="search" type="search" placeholder="ex: carto, diagnostic, mobilité, concertation…" />
             </div>
-
-            <div class="stats">
-              <div class="stat"><strong>04</strong><span>Sections</span></div>
-              <div class="stat"><strong>12+</strong><span>Cards</span></div>
-              <div class="stat"><strong>1</strong><span>DA travel</span></div>
-            </div>
-
-            <p style="margin:10px 0 0; color:rgba(255,255,255,.62); font-size:12px; line-height:1.45;">
-              (Si tu vois pas les sections : lance via Live Server / <code>python -m http.server</code>)
-            </p>
           </div>
         </div>
       </div>
@@ -569,10 +555,7 @@
                   <div class="card" data-filter-card data-filter="erreur fetch components">
                     <div class="body">
                       <h3>Fetch bloqué</h3>
-                      <p>
-                        Lance via un serveur local (Live Server / python -m http.server).
-                        Vérifie aussi le nom du fichier dans /components.
-                      </p>
+                      <p>Lance via Live Server / python -m http.server, et vérifie le dossier /components.</p>
                       <div class="tags">
                         <span class="tag sun">fetch()</span>
                         <span class="tag urban">components</span>
