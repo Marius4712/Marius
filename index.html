@@ -2,495 +2,436 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mon Portfolio — Marius Vacqué</title>
 
-  <!-- Police "Pinterest vibe" -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --line: rgba(255,255,255,.14);
-
-      --nature: #7A9A92;
-      --ocean: #4E6E8E;
-      --sun: #F1C40F;
-      --sand: #D2C9A2;
-
-      --r: 22px;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --shadow2: 0 10px 28px rgba(0,0,0,.35);
-      --max: 1180px;
+    :root {
+      --text:        rgba(245,245,245,0.96);
+      --text-mute:   rgba(245,245,245,0.78);
+      --text-sub:    rgba(245,245,245,0.64);
+      --line:        rgba(255,255,255,0.11);
+      --glass:       rgba(18,22,28,0.34);
+      --glass-strong:rgba(12,16,22,0.58);
+      --nature:      #8aa89a;
+      --ocean:       #5a829e;
+      --gold:        #eecf7f;
+      --sand:        #d9c9a8;
+      --radius:      24px;
+      --radius-sm:   16px;
+      --shadow-soft: 0 22px 70px rgba(0,0,0,0.48);
+      --shadow-card: 0 12px 38px rgba(0,0,0,0.36);
+      --max-width:   1240px;
     }
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(1200px 600px at 15% 0%, rgba(122,154,146,.18), transparent 55%),
-        radial-gradient(900px 650px at 85% 0%, rgba(78,110,142,.18), transparent 55%),
-        linear-gradient(180deg, #04070b, #071015 55%, #04070b);
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      background: #05080d;
       color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
+        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
+        linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
     }
 
-    /* micro-grille (urbanisme) */
-    body:before{
-      content:"";
+    /* Micro-grille urbaine discrète */
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
       background:
-        linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 76px 76px;
-      opacity: .10;
+        linear-gradient(to right,  rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 68px 68px;
+      pointer-events: none;
+      opacity: 0.7;
       mix-blend-mode: overlay;
+      z-index: -2;
     }
 
-    .container{
-      width: min(var(--max), calc(100% - 32px));
+    .container {
+      width: min(var(--max-width), 100% - 40px);
       margin: 0 auto;
     }
 
-    /* =========================
-       NAV (sticky)
-       ========================= */
-    .topbar{
+    /* ── Topbar sticky ─────────────────────────────────────── */
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(0,0,0,.30);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      z-index: 100;
+      background: rgba(8,12,18,0.58);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid var(--line);
     }
-    .topbarInner{
-      display:flex;
-      align-items:center;
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
+      padding: 14px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
       gap: 12px;
-      padding: 12px 0;
+      font-weight: 600;
+      letter-spacing: 0.4px;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      min-width: 240px;
+    .brand strong {
+      font-size: 1.1rem;
+      font-family: "Playfair Display", serif;
     }
-    .logo{
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(18px 18px at 30% 35%, rgba(241,196,15,.22), transparent 60%),
-        radial-gradient(28px 28px at 70% 70%, rgba(122,154,146,.22), transparent 60%),
-        rgba(255,255,255,.07);
-      box-shadow: 0 12px 32px rgba(0,0,0,.45);
-    }
-    .brandTitle{
-      line-height: 1.15;
-    }
-    .brandTitle strong{ font-size: 14px; letter-spacing:.2px; }
 
-    nav.nav{
-      display:flex;
-      gap: 10px;
+    nav.nav {
+      display: flex;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
-      align-items:center;
     }
-    nav.nav a{
-      text-decoration:none;
-      color: rgba(255,255,255,.90);
-      font-size: 13px;
-      padding: 9px 12px;
+
+    nav.nav a {
+      color: var(--text-mute);
+      text-decoration: none;
+      font-size: 0.94rem;
+      font-weight: 500;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.22);
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-    nav.nav a:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.22);
-      background: rgba(0,0,0,.30);
-    }
-    nav.nav a.active{
-      border-color: rgba(122,154,146,.55);
-      background: linear-gradient(90deg, rgba(122,154,146,.22), rgba(0,0,0,.20));
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.18s ease;
     }
 
-    .cta{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      min-width: 240px;
-      justify-content: flex-end;
+    nav.nav a:hover,
+    nav.nav a.active {
+      color: white;
+      border-color: var(--nature);
+      background: rgba(138,168,154,0.12);
     }
-    .btn{
-      cursor:pointer;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.22);
-      color: rgba(255,255,255,.92);
-      padding: 10px 12px;
-      border-radius: 14px;
-      font-size: 13px;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+
+    .cta .btn {
+      padding: 10px 18px;
+      border-radius: 16px;
+      font-size: 0.94rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
       white-space: nowrap;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.22);
-      background: rgba(0,0,0,.30);
-    }
-    .btn.primary{
-      border-color: rgba(241,196,15,.32);
-      background: rgba(241,196,15,.12);
     }
 
-    /* =========================
-       HEADER VIDÉO (GRAND)
-       ========================= */
-    header.heroHeader{
+    .btn-outline {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text-mute);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--nature);
+      color: white;
+      background: rgba(138,168,154,0.08);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold) 0%, #d4a45c 100%);
+      color: #111;
+      border: none;
+      font-weight: 600;
+    }
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    header.hero {
       position: relative;
-      height: clamp(420px, 68vh, 720px);
+      height: clamp(480px, 75vh, 780px);
       overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,.10);
     }
 
-    /* ✅ PLUS LUMINEUX + plus “pro” */
-    .heroVideo{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      object-position: center 40%;
-
-      /* rendu plus lumineux / premium */
-      filter:
-        brightness(1.18)
-        contrast(1.10)
-        saturate(1.18);
-
-      transform: scale(1.03);
-      backface-visibility: hidden;
-      will-change: transform;
-    }
-
-    /* ✅ OVERLAY moins sombre (mais garde la lisibilité) */
-    .heroOverlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0,0,0,.28),
-          rgba(0,0,0,.12) 40%,
-          rgba(0,0,0,.55)
-        ),
-        radial-gradient(1100px 520px at 15% 0%, rgba(122,154,146,.20), transparent 60%),
-        radial-gradient(1100px 520px at 85% 0%, rgba(78,110,142,.20), transparent 60%);
-      pointer-events:none;
-    }
-
-    /* ✅ grain ultra léger (Pinterest / Webflow vibe) */
-    .heroHeader:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-    }
-
-    /* =========================
-       Titre global
-       ========================= */
-    .mastTitle{
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      width: min(var(--max), calc(100% - 32px));
-      text-align: center;
-      pointer-events:none;
-    }
-
-    /* ✅ Titre plus impactant / premium */
-    .mastTitle h1{
-      margin: 0;
-      font-size: clamp(34px, 4.6vw, 66px);
-      font-weight: 800;
-      letter-spacing: .6px;
-      color: #ffffff;
-
-      text-shadow:
-        0 18px 70px rgba(0,0,0,.60),
-        0 2px 12px rgba(0,0,0,.35);
-    }
-
-    /* =========================
-       HERO CONTENT (sur la vidéo)
-       ========================= */
-    .heroContent{
+    .hero-video {
       position: absolute;
       inset: 0;
-      z-index: 2;
-      display:flex;
-      align-items:flex-end;
-      padding-bottom: 34px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+      filter: brightness(1.14) contrast(1.08) saturate(1.22);
+      transform: scale(1.015);
     }
 
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.18) 0%,
+        rgba(0,0,0,0.06) 35%,
+        rgba(0,0,0,0.52) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-title {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3.2rem, 7vw, 7.8rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 14px 60px rgba(0,0,0,0.7);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
       width: 100%;
     }
 
-    /* ✅ cards un peu plus “glass” / premium */
-    .heroCard{
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.22);
+    .hero-card {
+      background: var(--glass-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-card p {
+      line-height: 1.68;
+      font-size: 1.03rem;
+      color: var(--text-mute);
+    }
+
+    .search-box {
+      margin-top: 1.4rem;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--nature);
+      box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
+    }
+
+    /* ── Sections ──────────────────────────────────────────── */
+    main {
+      padding: 60px 0 120px;
+    }
+
+    section {
+      margin: 48px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--glass);
       backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
-      padding: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
     }
 
-    .heroCard h2{
-      margin: 0 0 10px;
-      font-size: clamp(18px, 2vw, 24px);
-      font-weight: 800;
-      letter-spacing:.2px;
-      color: rgba(255,255,255,.96);
-    }
-    .heroCard p{
-      margin:0;
-      color: rgba(255,255,255,.82);
-      line-height: 1.75;
-      font-size: 14px;
-    }
-
-    .sideCard h3{
-      margin:0 0 10px;
-      font-size: 14px;
-      letter-spacing:.2px;
-      color: rgba(255,255,255,.90);
-    }
-    .search{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
-    .search input{
-      width:100%;
-      padding: 11px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
-      color: rgba(255,255,255,.92);
-      outline:none;
-    }
-
-    /* =========================
-       MAIN CONTENT (sections)
-       ========================= */
-    main{
-      padding: 18px 0 80px;
-    }
-
-    section{
-      border-radius: 26px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: 0 14px 40px rgba(0,0,0,.40);
-      margin-top: 18px;
-    }
-    section header{
-      padding: 16px 18px;
-      background: rgba(0,0,0,.20);
-      border-bottom: 1px solid rgba(255,255,255,.09);
-      display:flex;
+    section header {
+      padding: 20px 32px;
+      background: rgba(0,0,0,0.22);
+      border-bottom: 1px solid var(--line);
+      display: flex;
       justify-content: space-between;
       align-items: baseline;
-      gap: 12px;
-    }
-    section h2{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .3px;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-    .kicker{
-      color: rgba(255,255,255,.70);
-      font-size: 12.5px;
+      gap: 16px;
     }
 
-    .grid{
-      padding: 18px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+    section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
     }
 
-    .card{
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      overflow:hidden;
-      transition: transform .14s ease, border-color .14s ease;
-      box-shadow: var(--shadow2);
+    .kicker {
+      color: var(--text-sub);
+      font-size: 0.92rem;
+      font-weight: 400;
     }
-    .card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.18);
+
+    .grid {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
     }
-    .media{
-      height: 165px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.65)),
-        radial-gradient(700px 240px at 30% 10%, rgba(78,110,142,.22), transparent 60%),
-        radial-gradient(700px 240px at 70% 10%, rgba(122,154,146,.20), transparent 60%);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+
+    .card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      box-shadow: var(--shadow-card);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(138,168,154,0.38);
+    }
+
+    .media {
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
       position: relative;
     }
-    .media img{
-      width:100%;
-      height:100%;
+
+    .media img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      display:block;
-      filter: saturate(1.06) contrast(1.05);
-      transform: scale(1.02);
+      filter: brightness(0.94) contrast(1.06);
     }
-    .body{
-      padding: 14px;
+
+    .body {
+      padding: 20px 24px;
     }
-    .body h3{
-      margin:0 0 6px;
-      font-size: 14px;
-      letter-spacing:.2px;
-      font-weight: 800;
+
+    .body h3 {
+      font-size: 1.24rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
     }
-    .body p{
-      margin:0;
-      color: rgba(255,255,255,.68);
-      font-size: 12.8px;
-      line-height: 1.55;
+
+    .body p {
+      color: var(--text-mute);
+      line-height: 1.62;
+      font-size: 0.97rem;
     }
-    .tags{
-      display:flex;
+
+    .tags {
+      display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 14px;
     }
-    .tag{
-      font-size: 11.5px;
-      padding: 4px 10px;
+
+    .tag {
+      font-size: 0.82rem;
+      padding: 5px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.78);
-    }
-    .tag.nature{ border-color: rgba(122,154,146,.30); }
-    .tag.urban{ border-color: rgba(210,201,162,.22); }
-    .tag.sun{ border-color: rgba(241,196,15,.30); }
-
-    .loading{
-      padding: 18px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-sub);
     }
 
-    @media (max-width: 1000px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .brand, .cta{ min-width: unset; }
-      .mastTitle{ top: 12px; }
+    .tag.nature { border-color: rgba(138,168,154,0.4); color: #c3e0d4; }
+    .tag.urban  { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
+
+    .section-footer {
+      padding: 0 32px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-sub);
+      font-size: 0.94rem;
     }
-    @media (max-width: 680px){
-      .grid{ grid-template-columns: 1fr; }
-      .topbarInner{ flex-wrap: wrap; }
-      .cta{ width:100%; justify-content:flex-start; }
-      nav.nav{ justify-content:flex-start; }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .topbar-inner { justify-content: center; }
+      nav.nav { order: 3; width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- NAV (sticky) -->
+  <!-- Topbar -->
   <div class="topbar">
     <div class="container">
-      <div class="topbarInner">
+      <div class="topbar-inner">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div class="brandTitle">
-            <strong>Marius Vacqué</strong>
-          </div>
+          <strong>Marius Vacqué</strong>
         </div>
 
         <nav class="nav" id="nav">
-          <a href="#apropos" data-target="apropos">À propos</a>
-          <a href="#projets" data-target="projets">Projets</a>
+          <a href="#apropos"        data-target="apropos">À propos</a>
+          <a href="#projets"        data-target="projets">Projets</a>
           <a href="#vie-associative" data-target="vie-associative">Vie associative</a>
-          <a href="#contact" data-target="contact">Contact</a>
+          <a href="#contact"        data-target="contact">Contact</a>
         </nav>
 
         <div class="cta">
-          <button class="btn" id="toTop">↑ Haut</button>
-          <a class="btn primary" href="#contact">Me contacter</a>
+          <button class="btn btn-outline" id="toTop">↑ Haut</button>
+          <a      class="btn btn-primary" href="#contact">Me contacter</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HEADER VIDÉO (GRAND) -->
-  <header class="heroHeader">
-    <video class="heroVideo" autoplay muted loop playsinline preload="metadata">
+  <!-- Hero vidéo + contenu -->
+  <header class="hero">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="595863_Drone_Landscape_Nature_1280x720.mp4" type="video/mp4">
     </video>
-    <div class="heroOverlay"></div>
+    <div class="hero-overlay"></div>
 
-    <!-- Grand titre -->
-    <div class="mastTitle">
-      <h1>Mon Portfolio</h1>
-    </div>
+    <div class="hero-title">Mon Portfolio</div>
 
-    <div class="heroContent">
+    <div class="hero-content">
       <div class="container">
-        <div class="heroGrid">
-          <!-- Bloc de texte -->
-          <div class="heroCard">
-            <h2>Bonjour et bienvenue sur mon portfolio.</h2>
+        <div class="hero-grid">
+          <div class="hero-card">
+            <h2>Bonjour et bienvenue sur mon portfolio</h2>
             <p>
               Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
-              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière
-              d’aborder les territoires et leurs enjeux.<br><br>
+              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
               <strong>Bonne visite !</strong>
             </p>
           </div>
 
-          <!-- Recherche rapide (on ne retire rien, on garde juste le bloc simple) -->
-          <div class="heroCard sideCard">
-            <h3>Recherche rapide</h3>
-            <div class="search">
-              <input id="search" type="search" placeholder="ex: carto, diagnostic, mobilité, concertation…" />
+          <div class="hero-card">
+            <h3 style="margin-bottom:1.1rem;">Recherche rapide</h3>
+            <div class="search-box">
+              <input id="search" type="search" placeholder="ex: cartographie, diagnostic, QGIS, terrain, concertation…" />
             </div>
           </div>
         </div>
@@ -498,123 +439,102 @@
     </div>
   </header>
 
-  <!-- SECTIONS (chargées depuis components/) -->
+  <!-- Contenu chargé dynamiquement -->
   <main class="container">
     <div id="content">
-      <div class="loading">Chargement des sections…</div>
+      <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
+        Chargement des sections…
+      </p>
     </div>
   </main>
 
   <script>
-    // Components à charger
     const COMPONENTS = [
-      { id: "apropos", file: "components/apropos.html" },
-      { id: "projets", file: "components/projet.html" },
+      { id: "apropos",         file: "components/apropos.html"         },
+      { id: "projets",         file: "components/projet.html"          },
       { id: "vie-associative", file: "components/vie-associative.html" },
-      { id: "contact", file: "components/contact.html" }
+      { id: "contact",         file: "components/contact.html"         }
     ];
 
-    const contentEl = document.getElementById("content");
-    const navEl = document.getElementById("nav");
-    const searchEl = document.getElementById("search");
+    const content   = document.getElementById("content");
+    const nav       = document.getElementById("nav");
+    const search    = document.getElementById("search");
 
-    function setActiveNav(sectionId){
-      const links = navEl.querySelectorAll("a[data-target]");
-      links.forEach(a => a.classList.toggle("active", a.dataset.target === sectionId));
+    function setActiveLink(id) {
+      nav.querySelectorAll("a").forEach(a => {
+        a.classList.toggle("active", a.dataset.target === id);
+      });
     }
 
-    function initNav(){
-      navEl.addEventListener("click", (e) => {
+    function initNavigation() {
+      nav.addEventListener("click", e => {
         const a = e.target.closest("a[data-target]");
-        if(!a) return;
-        const id = a.dataset.target;
-        const target = document.getElementById(id);
-        if(target){
-          e.preventDefault();
+        if (!a) return;
+        e.preventDefault();
+        const target = document.getElementById(a.dataset.target);
+        if (target) {
           target.scrollIntoView({ behavior: "smooth", block: "start" });
-          history.replaceState(null, "", "#" + id);
-          setActiveNav(id);
+          history.replaceState(null, "", "#" + a.dataset.target);
+          setActiveLink(a.dataset.target);
         }
       });
     }
 
-    function initScrollSpy(){
-      const sections = Array.from(document.querySelectorAll("section[data-section]"));
-      const io = new IntersectionObserver((entries) => {
-        const visible = entries.filter(e => e.isIntersecting)
+    function initScrollSpy() {
+      const observer = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if(visible) setActiveNav(visible.target.id);
-      }, { threshold: [0.25, 0.45, 0.65] });
-      sections.forEach(s => io.observe(s));
+        if (visible) setActiveLink(visible.target.id);
+      }, { threshold: [0.2, 0.4, 0.6] });
+
+      document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
 
-    function initSearch(){
-      if(!searchEl) return;
-      searchEl.addEventListener("input", () => {
-        const q = searchEl.value.trim().toLowerCase();
-        const cards = document.querySelectorAll("[data-filter-card]");
-        cards.forEach(card => {
-          const hay = (card.getAttribute("data-filter") || "").toLowerCase();
-          card.style.display = (!q || hay.includes(q)) ? "" : "none";
+    function initSearchFilter() {
+      if (!search) return;
+      search.addEventListener("input", () => {
+        const term = search.value.trim().toLowerCase();
+        document.querySelectorAll("[data-filter-card]").forEach(card => {
+          const keys = (card.dataset.filter || "").toLowerCase();
+          card.style.display = (!term || keys.includes(term)) ? "" : "none";
         });
       });
     }
 
-    function initToTop(){
-      document.getElementById("toTop").addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-
-    async function loadComponents(){
-      const htmlParts = await Promise.all(
-        COMPONENTS.map(async (c) => {
-          try{
-            const res = await fetch(c.file, { cache: "no-store" });
-            if(!res.ok) throw new Error("HTTP " + res.status);
-            return await res.text();
-          } catch(err){
-            return `
-              <section id="${c.id}" data-section>
-                <header>
-                  <h2>Erreur</h2>
-                  <div class="kicker">Impossible de charger ${c.file}</div>
-                </header>
-                <div class="grid">
-                  <div class="card" data-filter-card data-filter="erreur fetch components">
-                    <div class="body">
-                      <h3>Fetch bloqué</h3>
-                      <p>Lance via Live Server / python -m http.server, et vérifie le dossier /components.</p>
-                      <div class="tags">
-                        <span class="tag sun">fetch()</span>
-                        <span class="tag urban">components</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            `;
+    async function loadSections() {
+      const fragments = await Promise.all(
+        COMPONENTS.map(async ({id, file}) => {
+          try {
+            const r = await fetch(file);
+            if (!r.ok) throw r.status;
+            return await r.text();
+          } catch {
+            return `<section id="${id}" data-section><div style="padding:60px;text-align:center;color:#aaa;">Erreur chargement ${file}</div></section>`;
           }
         })
       );
-
-      contentEl.innerHTML = htmlParts.join("\n");
+      content.innerHTML = fragments.join("\n");
     }
 
-    (async function(){
-      await loadComponents();
-      initNav();
-      initScrollSpy();
-      initSearch();
-      initToTop();
+    (async function init() {
+      await loadSections();
 
-      const hash = (location.hash || "").replace("#", "");
-      if(hash){
-        const t = document.getElementById(hash);
-        if(t) t.scrollIntoView({ behavior: "smooth", block: "start" });
-        setActiveNav(hash);
+      initNavigation();
+      initScrollSpy();
+      initSearchFilter();
+
+      document.getElementById("toTop")?.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+      // Hash initial
+      const hash = location.hash.slice(1);
+      if (hash && document.getElementById(hash)) {
+        document.getElementById(hash).scrollIntoView({ behavior: "smooth" });
+        setActiveLink(hash);
       } else {
-        setActiveNav("apropos");
+        setActiveLink("apropos");
       }
     })();
   </script>
