@@ -31,7 +31,16 @@
       font-family: "Manrope", system-ui, sans-serif;
       color: var(--text);
       min-height: 100vh;
-      background: #05080d url("image fond portfolio.jpg") center / cover no-repeat fixed;
+
+      /* Fond image demandé – appliqué ici pour couvrir tout le site */
+      background-color: #05080d; /* couleur de secours sombre */
+      background-image: url("image fond portfolio.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+      /* Les gradients radiaux et linéaires d'origine sont conservés par-dessus */
       background-image:
         url("image fond portfolio.jpg"),
         radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
@@ -53,12 +62,10 @@
       z-index: -2;
     }
 
-    /* Exception : section contact garde le fond noir uni */
+    /* Exception très importante : la section Contact garde son fond noir uni */
     #contact {
       background: #05080d !important;
-    }
-    #contact::before {
-      display: none !important;
+      background-image: none !important;
     }
 
     .container {
