@@ -32,17 +32,17 @@
       color: var(--text);
       min-height: 100vh;
 
-      /* Fond image corrigé avec le nouveau nom de fichier */
+      /* Fond image avec le nouveau nom sans espaces */
       background-color: #05080d;
-      background-image: url("vrai image fond.jpg");
+      background-image: url("vrai-image-fond.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
 
-      /* On conserve les overlays d'origine par-dessus l'image */
+      /* On conserve les overlays radiaux et linéaires d'origine par-dessus */
       background-image:
-        url("vrai image fond.jpg"),
+        url("vrai-image-fond.jpg"),
         radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
         radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
         linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
