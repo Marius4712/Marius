@@ -4,49 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mon Portfolio — Marius Vacqué</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --text:        rgba(245,245,245,0.96);
-      --text-mute:   rgba(245,245,245,0.78);
-      --text-sub:    rgba(245,245,245,0.64);
-      --line:        rgba(255,255,255,0.11);
-      --glass:       rgba(18,22,28,0.34);
+      --text: rgba(245,245,245,0.96);
+      --text-mute: rgba(245,245,245,0.78);
+      --text-sub: rgba(245,245,245,0.64);
+      --line: rgba(255,255,255,0.11);
+      --glass: rgba(18,22,28,0.34);
       --glass-strong:rgba(12,16,22,0.58);
-      --nature:      #8aa89a;
-      --ocean:       #5a829e;
-      --gold:        #eecf7f;
-      --sand:        #d9c9a8;
-      --radius:      24px;
-      --radius-sm:   16px;
+      --nature: #8aa89a;
+      --ocean: #5a829e;
+      --gold: #eecf7f;
+      --sand: #d9c9a8;
+      --radius: 24px;
+      --radius-sm: 16px;
       --shadow-soft: 0 22px 70px rgba(0,0,0,0.48);
       --shadow-card: 0 12px 38px rgba(0,0,0,0.36);
-      --max-width:   1240px;
+      --max-width: 1240px;
     }
-
     * { box-sizing: border-box; margin:0; padding:0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: "Manrope", system-ui, sans-serif;
-      background: #05080d;
       color: var(--text);
       min-height: 100vh;
+      background: #05080d url("image fond portfolio.jpg") center / cover no-repeat fixed;
       background-image:
+        url("image fond portfolio.jpg"),
         radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
         radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
         linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
+      background-blend-mode: overlay, normal, normal;
     }
-
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background:
-        linear-gradient(to right,  rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(to right, rgba(255,255,255,0.028) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
       background-size: 68px 68px;
       pointer-events: none;
@@ -55,11 +53,18 @@
       z-index: -2;
     }
 
+    /* Exception : section contact garde le fond noir uni */
+    #contact {
+      background: #05080d !important;
+    }
+    #contact::before {
+      display: none !important;
+    }
+
     .container {
       width: min(var(--max-width), 100% - 40px);
       margin: 0 auto;
     }
-
     .topbar {
       position: sticky;
       top: 0;
@@ -69,7 +74,6 @@
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid var(--line);
     }
-
     .topbar-inner {
       display: flex;
       align-items: center;
@@ -78,7 +82,6 @@
       flex-wrap: wrap;
       gap: 16px;
     }
-
     .brand {
       display: flex;
       align-items: center;
@@ -86,19 +89,16 @@
       font-weight: 600;
       letter-spacing: 0.4px;
     }
-
     .brand strong {
       font-size: 1.1rem;
       font-family: "Playfair Display", serif;
     }
-
     nav.nav {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
     }
-
     nav.nav a {
       color: var(--text-mute);
       text-decoration: none;
@@ -110,14 +110,12 @@
       background: rgba(255,255,255,0.03);
       transition: all 0.18s ease;
     }
-
     nav.nav a:hover,
     nav.nav a.active {
       color: white;
       border-color: var(--nature);
       background: rgba(138,168,154,0.12);
     }
-
     .cta .btn {
       padding: 10px 18px;
       border-radius: 16px;
@@ -127,32 +125,27 @@
       transition: all 0.18s ease;
       white-space: nowrap;
     }
-
     .btn-outline {
       border: 1px solid var(--line);
       background: transparent;
       color: var(--text-mute);
     }
-
     .btn-outline:hover {
       border-color: var(--nature);
       color: white;
       background: rgba(138,168,154,0.08);
     }
-
     .btn-primary {
       background: linear-gradient(135deg, var(--gold) 0%, #d4a45c 100%);
       color: #111;
       border: none;
       font-weight: 600;
     }
-
     header.hero {
       position: relative;
       height: clamp(480px, 75vh, 780px);
       overflow: hidden;
     }
-
     .hero-video {
       position: absolute;
       inset: 0;
@@ -163,7 +156,6 @@
       filter: brightness(1.14) contrast(1.08) saturate(1.22);
       transform: scale(1.015);
     }
-
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -175,7 +167,6 @@
       );
       pointer-events: none;
     }
-
     .hero-title {
       position: absolute;
       top: 24px;
@@ -189,7 +180,6 @@
       text-shadow: 0 14px 60px rgba(0,0,0,0.7);
       pointer-events: none;
     }
-
     .hero-content {
       position: absolute;
       inset: 0;
@@ -198,14 +188,12 @@
       align-items: flex-end;
       padding-bottom: 48px;
     }
-
     .hero-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 24px;
       width: 100%;
     }
-
     .hero-card {
       background: var(--glass-strong);
       backdrop-filter: blur(20px);
@@ -215,24 +203,20 @@
       padding: 28px 32px;
       box-shadow: var(--shadow-soft);
     }
-
     .hero-card h2 {
       font-family: "Playfair Display", serif;
       font-size: clamp(1.8rem, 3.2vw, 2.8rem);
       margin-bottom: 1rem;
       font-weight: 600;
     }
-
     .hero-card p {
       line-height: 1.68;
       font-size: 1.03rem;
       color: var(--text-mute);
     }
-
     .search-box {
       margin-top: 1.4rem;
     }
-
     .search-box input {
       width: 100%;
       padding: 14px 18px;
@@ -244,16 +228,13 @@
       outline: none;
       transition: all 0.2s;
     }
-
     .search-box input:focus {
       border-color: var(--nature);
       box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
-
     main {
       padding: 60px 0 120px;
     }
-
     section {
       margin: 48px 0;
       border-radius: var(--radius);
@@ -263,7 +244,6 @@
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
-
     section header {
       padding: 20px 32px;
       background: rgba(0,0,0,0.22);
@@ -273,27 +253,23 @@
       align-items: baseline;
       gap: 16px;
     }
-
     section h2 {
       font-family: "Playfair Display", serif;
       font-size: 1.9rem;
       font-weight: 700;
       letter-spacing: -0.4px;
     }
-
     .kicker {
       color: var(--text-sub);
       font-size: 0.92rem;
       font-weight: 400;
     }
-
     .grid {
       padding: 28px 32px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 24px;
     }
-
     .card {
       border-radius: var(--radius);
       overflow: hidden;
@@ -302,49 +278,41 @@
       transition: transform 0.22s ease, border-color 0.22s ease;
       box-shadow: var(--shadow-card);
     }
-
     .card:hover {
       transform: translateY(-8px);
       border-color: rgba(138,168,154,0.38);
     }
-
     .media {
       height: 180px;
       background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
       position: relative;
     }
-
     .media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       filter: brightness(0.94) contrast(1.06);
     }
-
     .body {
       padding: 20px 24px;
     }
-
     .body h3 {
       font-size: 1.24rem;
       margin-bottom: 0.8rem;
       font-weight: 600;
       letter-spacing: -0.2px;
     }
-
     .body p {
       color: var(--text-mute);
       line-height: 1.62;
       font-size: 0.97rem;
     }
-
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 14px;
     }
-
     .tag {
       font-size: 0.82rem;
       padding: 5px 12px;
@@ -353,10 +321,8 @@
       background: rgba(255,255,255,0.04);
       color: var(--text-sub);
     }
-
     .tag.nature { border-color: rgba(138,168,154,0.4); color: #c3e0d4; }
-    .tag.urban  { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
-
+    .tag.urban { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
     .section-footer {
       padding: 0 32px 32px;
       display: flex;
@@ -365,13 +331,11 @@
       color: var(--text-sub);
       font-size: 0.94rem;
     }
-
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .topbar-inner { justify-content: center; }
       nav.nav { order: 3; width: 100%; justify-content: center; }
     }
-
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
@@ -379,21 +343,18 @@
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
         <div class="brand">
           <strong>Marius Vacqué</strong>
         </div>
-
         <nav class="nav" id="nav">
           <a href="#apropos" data-target="apropos">À propos</a>
           <a href="#projets" data-target="projets">Projets</a>
           <a href="#vie-associative" data-target="vie-associative">Vie associative</a>
           <a href="#contact" data-target="contact">Contact</a>
         </nav>
-
         <div class="cta">
           <button class="btn btn-outline" id="toTop">↑ Haut</button>
           <a class="btn btn-primary" href="#contact">Me contacter</a>
@@ -401,15 +362,12 @@
       </div>
     </div>
   </div>
-
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="vidéo de fond.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
-
-    <div class="hero-title">Mon Portfolio</div>
-
+    <div class="hero-title">Marius Vacqué</div>
     <div class="hero-content">
       <div class="container">
         <div class="hero-grid">
@@ -421,7 +379,6 @@
               <strong>Bonne visite !</strong>
             </p>
           </div>
-
           <div class="hero-card">
             <h3 style="margin-bottom:1.1rem;">Recherche rapide</h3>
             <div class="search-box">
@@ -432,7 +389,6 @@
       </div>
     </div>
   </header>
-
   <main class="container">
     <div id="content">
       <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
@@ -440,25 +396,21 @@
       </p>
     </div>
   </main>
-
   <script>
     const COMPONENTS = [
-      { id: "apropos",         file: "components/apropos.html"         },
-      { id: "projets",         file: "components/projet.html"          },
+      { id: "apropos", file: "components/apropos.html" },
+      { id: "projets", file: "components/projet.html" },
       { id: "vie-associative", file: "components/vie-associative.html" },
-      { id: "contact",         file: "components/contact.html"         }
+      { id: "contact", file: "components/contact.html" }
     ];
-
-    const content   = document.getElementById("content");
-    const nav       = document.getElementById("nav");
-    const search    = document.getElementById("search");
-
+    const content = document.getElementById("content");
+    const nav = document.getElementById("nav");
+    const search = document.getElementById("search");
     function setActiveLink(id) {
       nav.querySelectorAll("a").forEach(a => {
         a.classList.toggle("active", a.dataset.target === id);
       });
     }
-
     function initNavigation() {
       nav.addEventListener("click", e => {
         const a = e.target.closest("a[data-target]");
@@ -472,7 +424,6 @@
         }
       });
     }
-
     function initScrollSpy() {
       const observer = new IntersectionObserver(entries => {
         const visible = entries
@@ -480,10 +431,8 @@
           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActiveLink(visible.target.id);
       }, { threshold: [0.2, 0.4, 0.6] });
-
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
-
     function initSearchFilter() {
       if (!search) return;
       search.addEventListener("input", () => {
@@ -494,7 +443,6 @@
         });
       });
     }
-
     async function loadSections() {
       const fragments = await Promise.all(
         COMPONENTS.map(async ({id, file}) => {
@@ -509,18 +457,14 @@
       );
       content.innerHTML = fragments.join("\n");
     }
-
     (async function init() {
       await loadSections();
-
       initNavigation();
       initScrollSpy();
       initSearchFilter();
-
       document.getElementById("toTop")?.addEventListener("click", () =>
         window.scrollTo({ top: 0, behavior: "smooth" })
       );
-
       const hash = location.hash.slice(1);
       if (hash && document.getElementById(hash)) {
         document.getElementById(hash).scrollIntoView({ behavior: "smooth" });
