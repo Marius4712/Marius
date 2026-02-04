@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mon Portfolio — Marius Vacqué</title>
+  <title>Marius Vacqué — Portfolio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,10 +13,10 @@
     :root {
       --text:        rgba(245,245,245,0.96);
       --text-mute:   rgba(245,245,245,0.78);
-      --text-sub:    rgba(245,245,245,0.64);
+      --text-sub:    rgba(245,245,245,0.65);
       --line:        rgba(255,255,255,0.11);
-      --glass:       rgba(18,22,28,0.34);
-      --glass-strong:rgba(12,16,22,0.58);
+      --glass:       rgba(18,22,28,0.38);
+      --glass-strong:rgba(12,16,22,0.62);
       --nature:      #8aa89a;
       --ocean:       #5a829e;
       --gold:        #eecf7f;
@@ -58,13 +58,16 @@
     .container {
       width: min(var(--max-width), 100% - 40px);
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
+    /* Topbar */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(8,12,18,0.58);
+      background: rgba(8,12,18,0.72);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid var(--line);
@@ -79,17 +82,10 @@
       gap: 16px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-    }
-
     .brand strong {
-      font-size: 1.1rem;
       font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.4px;
     }
 
     nav.nav {
@@ -118,7 +114,7 @@
       background: rgba(138,168,154,0.12);
     }
 
-    .cta .btn {
+    .btn {
       padding: 10px 18px;
       border-radius: 16px;
       font-size: 0.94rem;
@@ -147,6 +143,7 @@
       font-weight: 600;
     }
 
+    /* Hero */
     header.hero {
       position: relative;
       height: clamp(480px, 75vh, 780px);
@@ -176,17 +173,19 @@
       pointer-events: none;
     }
 
-    .hero-title {
+    .hero-name {
       position: absolute;
-      top: 24px;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       z-index: 3;
       font-family: "Playfair Display", serif;
-      font-size: clamp(3.2rem, 7vw, 7.8rem);
+      font-size: clamp(4.5rem, 9.5vw, 10.5rem);
       font-weight: 700;
-      letter-spacing: -1px;
-      text-shadow: 0 14px 60px rgba(0,0,0,0.7);
+      letter-spacing: -1.2px;
+      text-align: center;
+      color: white;
+      text-shadow: 0 16px 70px rgba(0,0,0,0.72);
       pointer-events: none;
     }
 
@@ -250,8 +249,23 @@
       box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
 
+    /* Fond flou sur toute la partie après la hero */
+    main::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("image fond portfolio.jpg") center/cover no-repeat;
+      background-attachment: fixed;
+      filter: blur(8px) brightness(0.55);
+      z-index: -1;
+      pointer-events: none;
+    }
+
     main {
+      position: relative;
       padding: 60px 0 120px;
+      background: rgba(5,8,13,0.65);   /* léger assombrissement pour lisibilité */
+      min-height: 100vh;
     }
 
     section {
@@ -262,11 +276,13 @@
       backdrop-filter: blur(16px);
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
+      position: relative;
+      z-index: 2;
     }
 
     section header {
       padding: 20px 32px;
-      background: rgba(0,0,0,0.22);
+      background: rgba(0,0,0,0.28);
       border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
@@ -374,7 +390,7 @@
 
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
+      .hero-name { font-size: clamp(3.8rem, 10vw, 7rem); }
     }
   </style>
 </head>
@@ -408,7 +424,7 @@
     </video>
     <div class="hero-overlay"></div>
 
-    <div class="hero-title">Mon Portfolio</div>
+    <div class="hero-name">Marius Vacqué</div>
 
     <div class="hero-content">
       <div class="container">
