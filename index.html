@@ -3,67 +3,70 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marius Vacqué — Portfolio</title>
+  <title>Mon Portfolio — Marius Vacqué</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --text:        rgba(245,245,245,0.96);
-      --text-soft:   rgba(245,245,245,0.80);
-      --text-mute:   rgba(245,245,245,0.65);
-      --line:        rgba(255,255,255,0.09);
-      --glass:       rgba(20,28,38,0.38);
-      --glass-deep:  rgba(12,18,26,0.62);
-      --nature:      #92b5a3;
-      --gold:        #e8d5a0;
-      --radius-lg:   32px;
+      --text-mute:   rgba(245,245,245,0.78);
+      --text-sub:    rgba(245,245,245,0.64);
+      --line:        rgba(255,255,255,0.11);
+      --glass:       rgba(18,22,28,0.34);
+      --glass-strong:rgba(12,16,22,0.58);
+      --nature:      #8aa89a;
+      --ocean:       #5a829e;
+      --gold:        #eecf7f;
+      --sand:        #d9c9a8;
       --radius:      24px;
-      --shadow-hero: 0 30px 90px rgba(0,0,0,0.65);
-      --shadow-card: 0 16px 48px rgba(0,0,0,0.44);
-      --max:         1280px;
+      --radius-sm:   16px;
+      --shadow-soft: 0 22px 70px rgba(0,0,0,0.48);
+      --shadow-card: 0 12px 38px rgba(0,0,0,0.36);
+      --max-width:   1240px;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * { box-sizing: border-box; margin:0; padding:0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: "Manrope", system-ui, sans-serif;
-      background: #040b12;
+      background: #05080d;
       color: var(--text);
+      min-height: 100vh;
       background-image:
-        radial-gradient(ellipse at 10% 15%, rgba(146,181,163,0.09) 0%, transparent 65%),
-        radial-gradient(ellipse at 90% 20%, rgba(232,213,160,0.06) 0%, transparent 70%),
-        linear-gradient(180deg, #040b12 0%, #0b1a28 50%, #040b12 100%);
+        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
+        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
+        linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
     }
 
     body::before {
-      content:"";
-      position:fixed;
-      inset:0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background:
-        linear-gradient(to right,  rgba(255,255,255,0.022) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.014) 1px, transparent 1px);
-      background-size: 72px 72px;
-      pointer-events:none;
-      opacity:0.6;
+        linear-gradient(to right,  rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 68px 68px;
+      pointer-events: none;
+      opacity: 0.7;
       mix-blend-mode: overlay;
-      z-index:-2;
+      z-index: -2;
     }
 
     .container {
-      width: min(var(--max), 100% - 40px);
+      width: min(var(--max-width), 100% - 40px);
       margin: 0 auto;
     }
 
-    /* Topbar */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10,16,24,0.72);
-      backdrop-filter: blur(20px) saturate(160%);
+      background: rgba(8,12,18,0.58);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
       border-bottom: 1px solid var(--line);
     }
 
@@ -71,76 +74,82 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 0;
+      padding: 14px 0;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
     }
 
     .brand strong {
+      font-size: 1.1rem;
       font-family: "Playfair Display", serif;
-      font-size: 1.28rem;
-      letter-spacing: 0.5px;
     }
 
     nav.nav {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     nav.nav a {
-      color: var(--text-soft);
+      color: var(--text-mute);
       text-decoration: none;
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       font-weight: 500;
-      padding: 10px 18px;
+      padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.18s ease;
     }
 
     nav.nav a:hover,
     nav.nav a.active {
       color: white;
       border-color: var(--nature);
-      background: rgba(146,181,163,0.14);
+      background: rgba(138,168,154,0.12);
     }
 
-    .btn {
-      padding: 11px 20px;
-      border-radius: 20px;
-      font-size: 0.96rem;
-      font-weight: 550;
+    .cta .btn {
+      padding: 10px 18px;
+      border-radius: 16px;
+      font-size: 0.94rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.18s ease;
       white-space: nowrap;
     }
 
     .btn-outline {
       border: 1px solid var(--line);
       background: transparent;
-      color: var(--text-soft);
+      color: var(--text-mute);
     }
 
     .btn-outline:hover {
       border-color: var(--nature);
       color: white;
-      background: rgba(146,181,163,0.1);
+      background: rgba(138,168,154,0.08);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--gold) 0%, #d9c08a 100%);
-      color: #0f1a22;
+      background: linear-gradient(135deg, var(--gold) 0%, #d4a45c 100%);
+      color: #111;
       border: none;
       font-weight: 600;
     }
 
-    /* Hero */
     header.hero {
       position: relative;
-      height: clamp(520px, 80vh, 860px);
+      height: clamp(480px, 75vh, 780px);
       overflow: hidden;
     }
 
@@ -150,9 +159,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 40%;
-      filter: brightness(1.12) contrast(1.09) saturate(1.25);
-      transform: scale(1.02);
+      object-position: center 38%;
+      filter: brightness(1.14) contrast(1.08) saturate(1.22);
+      transform: scale(1.015);
     }
 
     .hero-overlay {
@@ -160,129 +169,212 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.14) 0%,
-        rgba(0,0,0,0.04) 40%,
-        rgba(0,0,0,0.58) 100%
+        rgba(0,0,0,0.18) 0%,
+        rgba(0,0,0,0.06) 35%,
+        rgba(0,0,0,0.52) 100%
       );
       pointer-events: none;
     }
 
-    .hero-name {
+    .hero-title {
       position: absolute;
-      top: 50%;
+      top: 24px;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       z-index: 3;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4.8rem, 10vw, 11rem);
+      font-size: clamp(3.2rem, 7vw, 7.8rem);
       font-weight: 700;
-      letter-spacing: -1.5px;
-      text-align: center;
-      color: white;
-      text-shadow: 0 20px 80px rgba(0,0,0,0.75);
+      letter-spacing: -1px;
+      text-shadow: 0 14px 60px rgba(0,0,0,0.7);
       pointer-events: none;
-      line-height: 0.92;
     }
 
     .hero-content {
       position: absolute;
       inset: 0;
-      z-index: 4;
+      z-index: 3;
       display: flex;
       align-items: flex-end;
-      padding-bottom: 60px;
+      padding-bottom: 48px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 28px;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
       width: 100%;
     }
 
-    .intro-card, .search-card {
-      background: var(--glass-deep);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-lg);
-      padding: 32px 36px;
-      box-shadow: var(--shadow-hero);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .hero-card {
+      background: var(--glass-strong);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-soft);
     }
 
-    .intro-card:hover, .search-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.52);
-    }
-
-    .intro-card h2 {
+    .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      margin-bottom: 1rem;
       font-weight: 600;
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.6px;
-      line-height: 1.15;
     }
 
-    .intro-card p {
-      font-size: 1.05rem;
-      line-height: 1.72;
+    .hero-card p {
+      line-height: 1.68;
+      font-size: 1.03rem;
       color: var(--text-mute);
-      margin-bottom: 1.4rem;
     }
 
-    .intro-card strong {
-      color: var(--text-soft);
-      font-weight: 600;
-    }
-
-    .search-card h3 {
-      font-size: 1.38rem;
-      margin-bottom: 1.3rem;
-      font-weight: 600;
+    .search-box {
+      margin-top: 1.4rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 16px 20px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.09);
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
       background: rgba(255,255,255,0.04);
       color: white;
-      font-size: 1.02rem;
+      font-size: 1rem;
       outline: none;
-      transition: all 0.25s ease;
+      transition: all 0.2s;
     }
 
     .search-box input:focus {
       border-color: var(--nature);
-      box-shadow: 0 0 0 4px rgba(146,181,163,0.22);
+      box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
 
-    /* Sections (inchangées pour l'instant) */
-    main { padding: 80px 0 140px; }
+    main {
+      padding: 60px 0 120px;
+    }
 
     section {
-      margin: 60px 0;
+      margin: 48px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    section header {
+      padding: 20px 32px;
+      background: rgba(0,0,0,0.22);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    .kicker {
+      color: var(--text-sub);
+      font-size: 0.92rem;
+      font-weight: 400;
+    }
+
+    .grid {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
       border-radius: var(--radius);
       overflow: hidden;
       background: var(--glass);
       border: 1px solid var(--line);
+      transition: transform 0.22s ease, border-color 0.22s ease;
       box-shadow: var(--shadow-card);
     }
 
-    /* ... le reste du style des sections reste identique à la version précédente ... */
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(138,168,154,0.38);
+    }
 
-    @media (max-width: 980px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-      .hero-name { font-size: clamp(4rem, 12vw, 8rem); }
+    .media {
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+      position: relative;
+    }
+
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.94) contrast(1.06);
+    }
+
+    .body {
+      padding: 20px 24px;
+    }
+
+    .body h3 {
+      font-size: 1.24rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .body p {
+      color: var(--text-mute);
+      line-height: 1.62;
+      font-size: 0.97rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      font-size: 0.82rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-sub);
+    }
+
+    .tag.nature { border-color: rgba(138,168,154,0.4); color: #c3e0d4; }
+    .tag.urban  { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
+
+    .section-footer {
+      padding: 0 32px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-sub);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .topbar-inner { justify-content: center; }
+      nav.nav { order: 3; width: 100%; justify-content: center; }
     }
 
     @media (max-width: 680px) {
-      .topbar-inner { flex-direction: column; gap: 16px; }
-      nav.nav { width: 100%; justify-content: center; }
-      .hero-name { top: 42%; }
+      .grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
     }
   </style>
 </head>
@@ -316,20 +408,22 @@
     </video>
     <div class="hero-overlay"></div>
 
-    <div class="hero-name">Marius Vacqué</div>
+    <div class="hero-title">Mon Portfolio</div>
 
     <div class="hero-content">
       <div class="container">
         <div class="hero-grid">
-          <div class="intro-card">
-            <h2>Bonjour et bienvenue</h2>
-            <p>Je vous invite à parcourir ce portfolio avec plaisir pour découvrir mes projets, mon regard sur les territoires et ma façon d’aborder les enjeux d’aménagement et de paysage.</p>
-            <p>À travers ces réalisations, vous pourrez mieux saisir mon parcours, mes centres d’intérêt et mon attachement aux lieux qui racontent une histoire.</p>
-            <p><strong>Bonne exploration !</strong></p>
+          <div class="hero-card">
+            <h2>Bonjour et bienvenue sur mon portfolio</h2>
+            <p>
+              Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
+              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
+              <strong>Bonne visite !</strong>
+            </p>
           </div>
 
-          <div class="search-card">
-            <h3>Recherche rapide</h3>
+          <div class="hero-card">
+            <h3 style="margin-bottom:1.1rem;">Recherche rapide</h3>
             <div class="search-box">
               <input id="search" type="search" placeholder="ex: cartographie, diagnostic, QGIS, terrain, concertation…" />
             </div>
@@ -341,14 +435,13 @@
 
   <main class="container">
     <div id="content">
-      <p style="text-align:center; padding:100px 20px; color:var(--text-mute);">
+      <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
         Chargement des sections…
       </p>
     </div>
   </main>
 
   <script>
-    // Le script reste identique à la version précédente
     const COMPONENTS = [
       { id: "apropos",         file: "components/apropos.html"         },
       { id: "projets",         file: "components/projet.html"          },
@@ -356,12 +449,14 @@
       { id: "contact",         file: "components/contact.html"         }
     ];
 
-    const content = document.getElementById("content");
-    const nav     = document.getElementById("nav");
-    const search  = document.getElementById("search");
+    const content   = document.getElementById("content");
+    const nav       = document.getElementById("nav");
+    const search    = document.getElementById("search");
 
     function setActiveLink(id) {
-      nav.querySelectorAll("a").forEach(a => a.classList.toggle("active", a.dataset.target === id));
+      nav.querySelectorAll("a").forEach(a => {
+        a.classList.toggle("active", a.dataset.target === id);
+      });
     }
 
     function initNavigation() {
@@ -380,10 +475,11 @@
 
     function initScrollSpy() {
       const observer = new IntersectionObserver(entries => {
-        const visible = entries.filter(e => e.isIntersecting)
+        const visible = entries
+          .filter(e => e.isIntersecting)
           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActiveLink(visible.target.id);
-      }, { threshold: [0.2, 0.45, 0.65] });
+      }, { threshold: [0.2, 0.4, 0.6] });
 
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
@@ -407,7 +503,7 @@
             if (!r.ok) throw r.status;
             return await r.text();
           } catch {
-            return `<section id="${id}" data-section><div style="padding:80px;text-align:center;color:#888;">Erreur chargement ${file}</div></section>`;
+            return `<section id="${id}" data-section><div style="padding:60px;text-align:center;color:#aaa;">Erreur chargement ${file}</div></section>`;
           }
         })
       );
@@ -416,6 +512,7 @@
 
     (async function init() {
       await loadSections();
+
       initNavigation();
       initScrollSpy();
       initSearchFilter();
