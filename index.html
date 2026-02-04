@@ -41,7 +41,6 @@
         linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
     }
 
-    /* Micro-grille urbaine discrète */
     body::before {
       content: "";
       position: fixed;
@@ -61,7 +60,6 @@
       margin: 0 auto;
     }
 
-    /* ── Topbar sticky ─────────────────────────────────────── */
     .topbar {
       position: sticky;
       top: 0;
@@ -149,7 +147,6 @@
       font-weight: 600;
     }
 
-    /* ── Hero ──────────────────────────────────────────────── */
     header.hero {
       position: relative;
       height: clamp(480px, 75vh, 780px);
@@ -253,7 +250,6 @@
       box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
 
-    /* ── Sections ──────────────────────────────────────────── */
     main {
       padding: 60px 0 120px;
     }
@@ -384,7 +380,6 @@
 </head>
 <body>
 
-  <!-- Topbar -->
   <div class="topbar">
     <div class="container">
       <div class="topbar-inner">
@@ -393,24 +388,23 @@
         </div>
 
         <nav class="nav" id="nav">
-          <a href="#apropos"        data-target="apropos">À propos</a>
-          <a href="#projets"        data-target="projets">Projets</a>
+          <a href="#apropos" data-target="apropos">À propos</a>
+          <a href="#projets" data-target="projets">Projets</a>
           <a href="#vie-associative" data-target="vie-associative">Vie associative</a>
-          <a href="#contact"        data-target="contact">Contact</a>
+          <a href="#contact" data-target="contact">Contact</a>
         </nav>
 
         <div class="cta">
           <button class="btn btn-outline" id="toTop">↑ Haut</button>
-          <a      class="btn btn-primary" href="#contact">Me contacter</a>
+          <a class="btn btn-primary" href="#contact">Me contacter</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Hero vidéo + contenu -->
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-      <source src="595863_Drone_Landscape_Nature_1280x720.mp4" type="video/mp4">
+      <source src="vidéo de fond.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
@@ -439,7 +433,6 @@
     </div>
   </header>
 
-  <!-- Contenu chargé dynamiquement -->
   <main class="container">
     <div id="content">
       <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
@@ -528,7 +521,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" })
       );
 
-      // Hash initial
       const hash = location.hash.slice(1);
       if (hash && document.getElementById(hash)) {
         document.getElementById(hash).scrollIntoView({ behavior: "smooth" });
