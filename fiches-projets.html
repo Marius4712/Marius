@@ -9,60 +9,67 @@
     body {
       margin: 0;
       font-family: "Manrope", sans-serif;
-      background: #05080d;
+      background: #05080d; /* fond noir demandé */
       color: #f5f5f5;
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
     h1 {
       font-family: "Playfair Display", serif;
-      font-size: 2.8rem;
-      margin-bottom: 12px;
+      font-size: 3rem;
+      margin: 0 0 16px 0;
+      color: #f5f5f5; /* titre blanc sur fond noir */
     }
     .back {
       color: #8aa89a;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+      transition: color 0.2s;
     }
-    .back:hover { text-decoration: underline; }
+    .back:hover {
+      color: #c3e0d4;
+      text-decoration: underline;
+    }
     .fiches-grid {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      gap: 32px;
     }
     .fiche-preview {
       background: rgba(255,255,255,0.04);
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(138,168,154,0.2);
-      transition: all 0.25s;
+      border: 1px solid rgba(138,168,154,0.25);
+      transition: all 0.25s ease;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
     .fiche-preview:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-      border-color: rgba(138,168,154,0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+      border-color: #8aa89a;
     }
     .fiche-preview img {
       width: 100%;
-      height: 220px;
+      height: 380px; /* hauteur fixe pour avoir des carrés parfaits */
       object-fit: cover;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: block;
     }
     .fiche-preview h3 {
-      padding: 16px;
+      padding: 16px 12px;
       margin: 0;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       text-align: center;
       font-weight: 500;
+      background: rgba(0,0,0,0.3);
     }
   </style>
 </head>
@@ -74,9 +81,9 @@
   </header>
 
   <div class="fiches-grid">
-    <!-- Une seule prévisualisation pour l’instant -->
+    <!-- Une seule fiche pour l'instant – prévisualisation carrée -->
     <a href="îlot-AUDEVARD.pdf" class="fiche-preview" target="_blank">
-      <img src="couverture-ilot-audervard.jpg" alt="Îlot AUDEVARD"> <!-- Mets ici une image de couverture si tu en as une, sinon laisse vide ou mets une placeholder -->
+      <img src="îlot-AUDEVARD.pdf" alt="Îlot AUDEVARD">
       <h3>Îlot AUDEVARD</h3>
     </a>
   </div>
