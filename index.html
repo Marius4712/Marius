@@ -32,7 +32,7 @@
       color: var(--text);
       min-height: 100vh;
 
-      /* Fond image avec le nouveau nom sans espaces */
+      /* Fond image – vrai nom de fichier sans espaces */
       background-color: #05080d;
       background-image: url("vrai-image-fond.jpg");
       background-size: cover;
@@ -40,7 +40,7 @@
       background-repeat: no-repeat;
       background-attachment: fixed;
 
-      /* On conserve les overlays radiaux et linéaires d'origine par-dessus */
+      /* Les overlays d’origine sont conservés par-dessus l’image */
       background-image:
         url("vrai-image-fond.jpg"),
         radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
@@ -62,7 +62,7 @@
       z-index: -2;
     }
 
-    /* Exception stricte : section Contact reste fond noir uni, sans image */
+    /* EXCEPTION OBLIGATOIRE : section Contact reste fond noir uni */
     #contact {
       background: #05080d !important;
       background-image: none !important;
