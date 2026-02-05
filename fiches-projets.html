@@ -9,8 +9,8 @@
     body {
       margin: 0;
       font-family: "Manrope", sans-serif;
-      background: #ffffff; /* fond blanc demandé */
-      color: #000000;
+      background: #ffffff; /* fond blanc */
+      color: #111111;
       min-height: 100vh;
       padding: 60px 20px;
     }
@@ -22,7 +22,7 @@
       font-family: "Playfair Display", serif;
       font-size: 3rem;
       margin: 0 0 16px 0;
-      color: #000000; /* titre en noir sur fond blanc */
+      color: #000000; /* titre en noir */
     }
     .back {
       color: #8aa89a;
@@ -31,7 +31,7 @@
       transition: color 0.2s;
     }
     .back:hover {
-      color: #c3e0d4;
+      color: #5a7a6a;
       text-decoration: underline;
     }
     .fiches-grid {
@@ -42,21 +42,21 @@
       gap: 32px;
     }
     .fiche-preview {
-      background: rgba(0,0,0,0.04);
+      background: #f8f8f8;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.15);
+      border: 1px solid #e0e0e0;
       transition: all 0.25s ease;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-      aspect-ratio: 1 / 1.35; /* ratio proche du carré avec un peu de hauteur */
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      aspect-ratio: 1 / 1.35;
     }
     .fiche-preview:hover {
       transform: translateY(-8px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
-      border-color: #000000;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+      border-color: #8aa89a;
     }
     .fiche-preview img {
       width: 100%;
@@ -70,8 +70,8 @@
       font-size: 1.15rem;
       text-align: center;
       font-weight: 500;
-      background: rgba(0,0,0,0.08);
-      color: #000000;
+      background: rgba(0,0,0,0.03);
+      color: #111;
     }
   </style>
 </head>
@@ -83,10 +83,16 @@
   </header>
 
   <div class="fiches-grid">
-    <!-- La vignette carrée avec ton image de preview -->
+    <!-- Fiche 1 -->
     <a href="îlot-AUDEVARD.pdf" class="fiche-preview" target="_blank">
       <img src="ilot-audervard-preview.jpg.png" alt="Îlot AUDEVARD">
       <h3>Îlot AUDEVARD</h3>
+    </a>
+
+    <!-- Fiche 2 – ajoutée maintenant -->
+    <a href="friche-Pimtou.pdf" class="fiche-preview" target="_blank">
+      <img src="friche-Pimtou-preview.png" alt="Friche Pimtou">
+      <h3>Friche Pimtou</h3>
     </a>
   </div>
 
