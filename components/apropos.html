@@ -1,87 +1,265 @@
 <section id="apropos" data-section>
   <header>
     <h2>À propos</h2>
-    <div class="kicker">profil • méthode • récit de territoire</div>
   </header>
 
-  <div class="grid">
-    <article class="card" data-filter-card data-filter="profil urbanisme amenagement territoire but vtd">
-      <div class="body">
+  <div class="apropos-container">
+    <!-- Vignette cliquable -->
+    <div class="apropos-vignette" onclick="toggleApropos()">
+      <img src="apropos-photo.jpg" alt="Photo portrait" class="vignette-img"> <!-- Remplace par ta photo plus tard -->
+      <div class="vignette-overlay">
+        <span>Cliquez pour lire</span>
+      </div>
+    </div>
+
+    <!-- Contenu qui s’affiche au clic -->
+    <div id="apropos-content" class="apropos-content hidden">
+      <!-- Mini bio -->
+      <div class="apropos-block">
         <h3>Mini bio</h3>
-        <p>Je m’intéresse à la manière dont un lieu raconte une histoire : paysages, usages, mobilités, ambiances… et comment l’aménagement peut renforcer la cohésion et la qualité de vie.</p>
-        <div class="tags">
-          <span class="tag urban">Aménagement</span>
-          <span class="tag">Analyse</span>
-          <span class="tag nature">Paysage</span>
-        </div>
+        <p>
+          Étudiant en BUT Villes et Territoires Durables, je construis un parcours volontairement professionnalisant, tourné vers l’action publique locale, l’aménagement du territoire et les dynamiques de terrain. Mon objectif est de comprendre concrètement comment se pensent, se construisent et se mettent en œuvre les projets territoriaux.
+        </p>
+        <p>
+          Au fil de ma formation, j’ai multiplié les expériences en collectivités et structures publiques. Je suis passé par la Mairie de Miramont-de-Guyenne, au sein du service développement territorial, puis par la Direction Départementale des Territoires du Lot-et-Garonne, au service Urbanisme et Habitat. Ces expériences m’ont permis d’aborder des missions variées, allant de la cartographie de projets territoriaux à la communication institutionnelle, en passant par l’analyse de dispositifs et l’organisation des services.
+        </p>
+        <p>
+          Je suis actuellement en alternance à la SEM 47, où je poursuis cette immersion dans des projets opérationnels, au croisement entre aménagement, développement local et mise en œuvre concrète des politiques territoriales. Ce parcours progressif m’a permis de développer une vision transversale de l’action publique, en comprenant les rôles complémentaires des communes, de l’État et des structures parapubliques.
+        </p>
+        <p>
+          En parallèle, mes projets universitaires portent sur les territoires de loisirs, la durabilité, la sensibilisation environnementale et l’observation des usages, avec une attention particulière portée au vécu des habitants et aux pratiques quotidiennes.
+        </p>
+        <p>
+          Enfin, le rugby, que je pratique dans mon club de toujours, occupe une place centrale dans mon parcours. Il façonne ma manière de travailler : esprit collectif, engagement, ancrage territorial et valeurs humaines. Ces dimensions nourrissent aujourd’hui ma réflexion académique et professionnelle, notamment autour des liens entre sport, cohésion sociale et attractivité territoriale.
+        </p>
       </div>
-    </article>
 
-    <article class="card" data-filter-card data-filter="competences cartographie qgis diagnostic observation terrain">
-      <div class="body">
-        <h3>Ce que je sais faire</h3>
-        <p>Diagnostic (terrain + synthèse), cartographie (bases), fiches projets, suivi Excel, restitution claire pour élus / habitants.</p>
-        <div class="tags">
-          <span class="tag urban">Diagnostic</span>
-          <span class="tag">QGIS</span>
-          <span class="tag sun">Terrain</span>
-        </div>
+      <!-- Inspirations -->
+      <div class="apropos-block">
+        <h3>Mes inspirations</h3>
+        <p>
+          Mes inspirations viennent avant tout du terrain : observer les usages, les ambiances et les pratiques quotidiennes reste, pour moi, le point de départ de toute réflexion territoriale. Les lieux vécus, appropriés et parfois détournés sont souvent plus révélateurs que les modèles théoriques.
+        </p>
+        <p>
+          Certaines lectures ont également structuré ma manière de penser l’espace et la ville.
+        </p>
+        <p>
+          Les travaux de Jane Jacobs, notamment <em>The Death and Life of Great American Cities</em>, m’ont sensibilisé à l’importance des usages, de la diversité et de la vie quotidienne dans la réussite des espaces urbains.
+        </p>
+        <p>
+          Les réflexions de Henri Lefebvre, à travers <em>La production de l’espace</em>, nourrissent mon regard critique sur la manière dont les espaces sont conçus, produits et vécus.
+        </p>
+        <p>
+          Enfin, <em>The Image of the City</em> de Kevin Lynch a renforcé mon intérêt pour la lisibilité, les perceptions et les représentations mentales des territoires.
+        </p>
+        <p>
+          Je trouve aussi une source d’inspiration dans certaines formes artistiques et paysagères, notamment le Land Art et le travail d’Andy Goldsworthy, qui interrogent le rapport entre nature, paysage, temporalité et intervention humaine. Ces démarches m’aident à penser des projets plus sensibles, sobres et respectueux de leur environnement.
+        </p>
+        <p>
+          Enfin, l’histoire de l’aménagement constitue un repère essentiel. Les grandes transformations urbaines, comme celles menées par Georges-Eugène Haussmann à Paris, illustrent l’impact durable des choix d’aménagement sur les usages, les mobilités et les formes urbaines, tout en rappelant l’importance de mesurer leurs conséquences sociales.
+        </p>
+        <p>
+          À ces références s’ajoute le sport, et particulièrement le rugby, qui influence profondément ma vision du territoire : esprit collectif, ancrage local, transmission et cohésion sociale. Autant de valeurs que je cherche à retrouver et à faire vivre dans les projets d’aménagement.
+        </p>
       </div>
-    </article>
 
-    <!-- Les 4 autres cartes inchangées dans le contenu, juste style hérité de index -->
-
-    <article class="card" data-filter-card data-filter="approche methodes concertation atelier transect">
-      <div class="body">
+      <!-- Approche -->
+      <div class="apropos-block">
         <h3>Approche</h3>
-        <p>J’aime les formats “exploration” : parcours, points d’intérêt, photos, cartes, et conclusions actionnables.</p>
-        <div class="tags">
-          <span class="tag">Parcours</span>
-          <span class="tag urban">Atelier</span>
-          <span class="tag">Restitution</span>
-        </div>
+        <p>
+          Mon approche repose sur une compréhension fine des territoires, construite à partir de l’observation de terrain, de l’analyse des usages et de l’écoute des acteurs locaux. Avant de proposer, je cherche à comprendre : le contexte, les contraintes, les dynamiques et les attentes.
+        </p>
+        <p>
+          Je privilégie une méthode de travail progressive et structurée, allant du diagnostic à la proposition, en croisant données techniques, réglementaires et sensibles. L’aménagement est pour moi un équilibre entre rigueur analytique et prise en compte du vécu.
+        </p>
+        <p>
+          Attaché au travail collectif, j’accorde une importance particulière aux échanges, à la confrontation des points de vue et à la co-construction des projets. Les meilleures solutions sont, selon moi, celles qui émergent du dialogue entre techniciens, élus, habitants et usagers.
+        </p>
+        <p>
+          Enfin, je défends une approche pragmatique et engagée, orientée vers des projets réalisables, utiles et durables, capables de répondre aux enjeux actuels tout en respectant l’identité des territoires.
+        </p>
       </div>
-    </article>
 
-    <article class="card" data-filter-card data-filter="valeurs collectif sport engagement">
-      <div class="body">
+      <!-- Ce que je recherche -->
+      <div class="apropos-block">
+        <h3>Ce que je recherche</h3>
+        <p>
+          Je recherche des expériences professionnelles qui me permettent de comprendre les territoires en profondeur et de contribuer à des projets concrets, utiles et ancrés localement.
+        </p>
+        <p>
+          Je souhaite m’investir dans des missions liées à :
+        </p>
+        <ul>
+          <li>l’aménagement du territoire et l’urbanisme opérationnel,</li>
+          <li>la transition écologique et la prise en compte des enjeux environnementaux,</li>
+          <li>l’attractivité territoriale, les équipements et les usages,</li>
+          <li>la cohésion sociale, notamment à travers le sport, la vie associative et les espaces publics.</li>
+        </ul>
+        <p>
+          Je recherche des structures (collectivités, établissements publics, bureaux d’études) où le travail de terrain, l’échange avec les acteurs locaux et la réflexion collective occupent une place centrale.
+        </p>
+        <p>
+          À court terme, je souhaite poursuivre mon parcours de formation et multiplier les expériences professionnalisantes. À plus long terme, mon objectif est de m’orienter vers des missions où je peux faire le lien entre analyse, projet et impact social, en restant proche du terrain et des réalités locales.
+        </p>
+      </div>
+
+      <!-- Ce que je sais faire -->
+      <div class="apropos-block">
+        <h3>Ce que je sais faire</h3>
+        <p><strong>Analyser un territoire</strong></p>
+        <ul>
+          <li>Lecture et analyse de documents de planification (PLU, PLUi, OAP, ORT)</li>
+          <li>Diagnostic territorial : enjeux, contraintes, acteurs et dynamiques locales</li>
+          <li>Observation de terrain, enquêtes, analyse des usages et des ambiances</li>
+        </ul>
+        <p><strong>Concevoir et structurer des projets d’aménagement</strong></p>
+        <ul>
+          <li>Élaboration de scénarios d’aménagement à différentes échelles</li>
+          <li>Intégration des enjeux environnementaux, sociaux et paysagers</li>
+          <li>Réflexion sur l’attractivité territoriale, les équipements et les mobilités</li>
+        </ul>
+        <p><strong>Cartographier et spatialiser l’information</strong></p>
+        <ul>
+          <li>Réalisation de cartes thématiques et de supports de lecture territoriale</li>
+          <li>Synthèse visuelle de données spatiales pour l’aide à la décision</li>
+          <li>Utilisation d’outils SIG et de représentation graphique</li>
+        </ul>
+        <p><strong>Communiquer et valoriser un projet</strong></p>
+        <ul>
+          <li>Création de supports clairs et pédagogiques (fiches projets, présentations, panneaux)</li>
+          <li>Adaptation du discours selon les publics (élus, techniciens, habitants, étudiants)</li>
+          <li>Présentations orales structurées et contextualisées</li>
+        </ul>
+        <p><strong>Travailler en collectivité et en équipe</strong></p>
+        <ul>
+          <li>Compréhension du fonctionnement des services et des acteurs institutionnels</li>
+          <li>Travail en équipe pluridisciplinaire</li>
+          <li>Autonomie, fiabilité et sens des responsabilités</li>
+        </ul>
+        <p><strong>Mener un travail de recherche appliquée</strong></p>
+        <ul>
+          <li>Conduite d’entretiens et enquêtes qualitatives</li>
+          <li>Analyse de données territoriales et sociales</li>
+          <li>Mise en lien entre théorie, terrain et expérience personnelle</li>
+        </ul>
+      </div>
+
+      <!-- Valeurs -->
+      <div class="apropos-block">
         <h3>Valeurs</h3>
-        <p>Collectif, régularité, simplicité : je préfère des projets concrets, où la mise en œuvre compte autant que l’idée.</p>
-        <div class="tags">
-          <span class="tag">Collectif</span>
-          <span class="tag urban">Impact</span>
-          <span class="tag nature">Local</span>
-        </div>
+        <p><strong>Ancrage territorial</strong></p>
+        <p>
+          Je crois à des projets pensés avec et pour les territoires. Comprendre les usages, l’histoire locale et les acteurs est, selon moi, une condition essentielle pour concevoir des aménagements pertinents et durables.
+        </p>
+        <p><strong>Engagement collectif</strong></p>
+        <p>
+          Issu du monde du rugby, j’accorde une place centrale au travail d’équipe, à la solidarité et à la responsabilité collective. Ces valeurs guident autant mon investissement personnel que ma manière d’aborder les projets professionnels.
+        </p>
+        <p><strong>Sens et utilité sociale</strong></p>
+        <p>
+          Je m’intéresse aux actions qui ont un impact concret sur la vie quotidienne : cohésion sociale, inclusion, attractivité locale, accès aux équipements et qualité du cadre de vie.
+        </p>
+        <p><strong>Rigueur et esprit critique</strong></p>
+        <p>
+          Analyse, observation de terrain et mise en perspective sont au cœur de ma méthode de travail. J’attache une importance particulière à la compréhension des enjeux avant toute proposition d’aménagement.
+        </p>
+        <p><strong>Sensibilité et écoute</strong></p>
+        <p>
+          Les territoires sont vécus avant d’être aménagés. Être à l’écoute des habitants, des pratiques et des ambiances permet de concevoir des projets plus justes, plus humains et mieux appropriés.
+        </p>
+        <p><strong>Durabilité</strong></p>
+        <p>
+          Intégrer les enjeux environnementaux, paysagers et sociaux dans chaque réflexion est une évidence. La durabilité n’est pas une option, mais un fil conducteur.
+        </p>
       </div>
-    </article>
-
-    <article class="card" data-filter-card data-filter="objectif stage alternance mission urbanisme habitat mobilites">
-      <div class="body">
-        <h3>Ce que je cherche</h3>
-        <p>Une mission qui mélange terrain + analyse + production : carto, appui à la décision, suivi d’opérations, communication projet.</p>
-        <div class="tags">
-          <span class="tag urban">Opérations</span>
-          <span class="tag">Suivi</span>
-          <span class="tag sun">Rendu</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" data-filter-card data-filter="urbanisme nature voyage inspiration">
-      <div class="body">
-        <h3>DA du portfolio</h3>
-        <p>Inspiration “travel UI” : dark, immersif, images incrustées. Le petit plus : une grille et une lecture “territoire”.</p>
-        <div class="tags">
-          <span class="tag nature">Travel</span>
-          <span class="tag urban">Territoire</span>
-          <span class="tag">UI</span>
-        </div>
-      </div>
-    </article>
+    </div>
   </div>
 
-  <div class="section-footer">
-    <div>Utilise la recherche ci-dessus pour filtrer (ex: diagnostic, QGIS, terrain…)</div>
-    <a class="btn btn-primary" href="#projets" style="text-decoration:none;">Voir les projets →</a>
-  </div>
+  <script>
+    function toggleApropos() {
+      const content = document.getElementById('apropos-content');
+      content.classList.toggle('hidden');
+    }
+  </script>
+
+  <style>
+    .apropos-container {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .apropos-vignette {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .apropos-vignette:hover {
+      transform: scale(1.04);
+    }
+    .vignette-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .vignette-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .apropos-vignette:hover .vignette-overlay {
+      opacity: 1;
+    }
+    .apropos-content {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid rgba(138,168,154,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .apropos-content.hidden {
+      display: none;
+    }
+    .apropos-block {
+      margin-bottom: 40px;
+    }
+    .apropos-block h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: #8aa89a;
+    }
+    .apropos-block p {
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .apropos-block ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .apropos-block ul li {
+      margin-bottom: 8px;
+      padding-left: 24px;
+      position: relative;
+    }
+    .apropos-block ul li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #8aa89a;
+    }
+  </style>
 </section>
