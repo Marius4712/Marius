@@ -343,17 +343,17 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS – version robuste */
+    /* ACCORDÉON À PROPOS – version robuste + anti-rognage droite */
     #apropos .acc-container {
       width: min(1400px, 94vw);
       margin: 0 auto 100px;
-      padding: 0 20px;
+      padding: 0 16px;
     }
     #apropos .acc-item {
       width: 100%;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       border-radius: 16px;
-      overflow: hidden;
+      overflow: visible;
       border: 1px solid var(--line);
       background: var(--glass);
       backdrop-filter: blur(16px);
@@ -361,7 +361,7 @@
     }
     #apropos .acc-btn {
       width: 100%;
-      padding: 20px 28px;
+      padding: 20px 24px;
       background: transparent;
       border: none;
       display: flex;
@@ -380,30 +380,33 @@
     #apropos .acc-chevron {
       font-size: 1.5rem;
       transition: transform 0.36s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-origin: center;
     }
     #apropos .acc-panel {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.48s cubic-bezier(0.23, 1, 0.32, 1), padding 0.48s ease;
-      padding: 0 28px;
+      padding: 0 32px;
       background: rgba(255,255,255,0.025);
       color: var(--text-mute);
       line-height: 1.78;
       font-size: 1.03rem;
+      hyphens: auto;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     #apropos .acc-item.open .acc-panel {
-      padding: 32px 28px 64px 28px;
+      padding: 32px 32px 80px 32px;
       max-height: none;
     }
     #apropos .acc-item.open .acc-chevron {
       transform: rotate(180deg);
     }
     #apropos .acc-panel p {
-      margin: 0 0 1.4em 0;
+      margin: 0 0 1.5em 0;
+      text-align: justify;
     }
     #apropos .acc-panel p:last-child {
-      margin-bottom: 0.4em;
+      margin-bottom: 0.6em;
     }
     #apropos .acc-panel strong {
       color: var(--text);
@@ -415,11 +418,12 @@
     }
     #apropos .acc-panel ul,
     #apropos .acc-panel ol {
-      margin: 1.1em 0 1.1em 1.6em;
+      margin: 1.2em 0 1.2em 1.8em;
       padding-left: 0;
     }
     #apropos .acc-panel li {
-      margin-bottom: 0.7em;
+      margin-bottom: 0.8em;
+      padding-left: 0.4em;
     }
 
     @media (max-width: 960px) {
@@ -430,6 +434,8 @@
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
+      #apropos .acc-panel { padding: 0 24px; }
+      #apropos .acc-item.open .acc-panel { padding: 24px 24px 80px 24px; }
     }
   </style>
 </head>
@@ -497,7 +503,6 @@
       const panel = btn.nextElementSibling;
       const isOpen = item.classList.contains('open');
 
-      // Ferme tout
       document.querySelectorAll('#apropos .acc-item').forEach(it => {
         it.classList.remove('open');
         it.querySelector('.acc-chevron').textContent = '▼';
@@ -505,7 +510,6 @@
         p.style.maxHeight = '0px';
       });
 
-      // Ouvre celui cliqué (sauf si déjà ouvert → reste fermé)
       if (!isOpen) {
         item.classList.add('open');
         btn.querySelector('.acc-chevron').textContent = '▲';
@@ -587,7 +591,6 @@
       );
       content.innerHTML = fragments.join("\n");
 
-      // Ré-attache les écouteurs après chargement dynamique
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
       });
