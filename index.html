@@ -343,10 +343,16 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS – TRÈS LARGE + HAUTEUR AUTO */
+    /* ACCORDÉON À PROPOS – TRÈS LARGE + TEXTE EN ENTIER */
+    #apropos {
+      width: 100%;
+      max-width: none;
+      padding: 0;
+      margin: 48px 0;
+    }
     #apropos .acc-full-width {
       width: min(1800px, 98vw);
-      margin: 0 auto 60px;
+      margin: 0 auto;
       padding: 0 16px;
     }
     #apropos .acc-item {
@@ -391,7 +397,7 @@
       line-height: 1.8;
     }
     #apropos .acc-item.open .acc-panel {
-      max-height: none; /* hauteur automatique complète */
+      max-height: none; /* hauteur complète, pas de limite */
       padding: 32px;
     }
     #apropos .acc-item.open .acc-chevron {
