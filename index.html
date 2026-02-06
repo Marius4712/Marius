@@ -343,15 +343,15 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS – TEXTE EN ENTIER + MARGE EN BAS */
+    /* ACCORDÉON À PROPOS – version robuste */
     #apropos .acc-container {
       width: min(1400px, 94vw);
-      margin: 0 auto 60px;
-      padding: 0 24px;
+      margin: 0 auto 100px;
+      padding: 0 20px;
     }
     #apropos .acc-item {
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -361,71 +361,65 @@
     }
     #apropos .acc-btn {
       width: 100%;
-      padding: 20px 32px;
+      padding: 20px 28px;
       background: transparent;
       border: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 1.28rem;
       font-weight: 600;
       color: var(--text);
-      transition: all 0.2s;
+      transition: all 0.22s ease;
     }
     #apropos .acc-btn:hover {
       color: var(--nature);
-      background: rgba(138,168,154,0.08);
+      background: rgba(138,168,154,0.07);
     }
     #apropos .acc-chevron {
       font-size: 1.5rem;
-      transition: transform 0.3s ease;
+      transition: transform 0.36s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-origin: center;
     }
     #apropos .acc-panel {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s ease-out, padding 0.4s ease-out;
-      padding: 0 32px;
-      background: rgba(255,255,255,0.03);
+      transition: max-height 0.48s cubic-bezier(0.23, 1, 0.32, 1), padding 0.48s ease;
+      padding: 0 28px;
+      background: rgba(255,255,255,0.025);
       color: var(--text-mute);
-      line-height: 1.8;
+      line-height: 1.78;
+      font-size: 1.03rem;
     }
     #apropos .acc-item.open .acc-panel {
-      max-height: none; /* permet au texte de s'afficher en entier */
-      padding: 32px 32px 64px 32px; /* +64px de marge en bas */
+      padding: 32px 28px 64px 28px;
+      max-height: none;
     }
     #apropos .acc-item.open .acc-chevron {
       transform: rotate(180deg);
     }
     #apropos .acc-panel p {
-      margin-bottom: 1.2em; /* espace entre paragraphes */
+      margin: 0 0 1.4em 0;
     }
-    #apropos .acc-panel ul {
-      margin: 1em 0 1.5em 1.5em;
-      list-style: disc;
-    }
-    #apropos .acc-panel ul li {
-      margin-bottom: 0.6em;
+    #apropos .acc-panel p:last-child {
+      margin-bottom: 0.4em;
     }
     #apropos .acc-panel strong {
       color: var(--text);
       font-weight: 600;
     }
-
-    @media (max-width: 768px) {
-      #apropos .acc-container {
-        padding: 0 16px;
-      }
-      #apropos .acc-btn {
-        padding: 16px 24px;
-        font-size: 1.15rem;
-      }
-      #apropos .acc-panel {
-        padding: 0 24px;
-      }
-      #apropos .acc-item.open .acc-panel {
-        padding: 24px 24px 48px 24px; /* marge bas réduite mais présente */
-      }
+    #apropos .acc-panel em {
+      color: rgba(220,220,240,0.92);
+      font-style: italic;
+    }
+    #apropos .acc-panel ul,
+    #apropos .acc-panel ol {
+      margin: 1.1em 0 1.1em 1.6em;
+      padding-left: 0;
+    }
+    #apropos .acc-panel li {
+      margin-bottom: 0.7em;
     }
 
     @media (max-width: 960px) {
@@ -459,6 +453,7 @@
       </div>
     </div>
   </div>
+
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="vidéo de fond.mp4" type="video/mp4">
@@ -486,6 +481,7 @@
       </div>
     </div>
   </header>
+
   <main class="container">
     <div id="content">
       <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
@@ -501,22 +497,22 @@
       const panel = btn.nextElementSibling;
       const isOpen = item.classList.contains('open');
 
-      // Ferme tous les autres accordéons
+      // Ferme tout
       document.querySelectorAll('#apropos .acc-item').forEach(it => {
         it.classList.remove('open');
         it.querySelector('.acc-chevron').textContent = '▼';
-        it.querySelector('.acc-panel').style.maxHeight = '0px';
+        const p = it.querySelector('.acc-panel');
+        p.style.maxHeight = '0px';
       });
 
-      // Ouvre celui cliqué s'il était fermé
+      // Ouvre celui cliqué (sauf si déjà ouvert → reste fermé)
       if (!isOpen) {
         item.classList.add('open');
         btn.querySelector('.acc-chevron').textContent = '▲';
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.maxHeight = 'none';
       }
     }
 
-    // Attache les écouteurs après chargement dynamique
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
@@ -531,14 +527,17 @@
       { id: "vie-associative", file: "components/vie-associative.html" },
       { id: "contact", file: "components/contact.html" }
     ];
+
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
     const search = document.getElementById("search");
+
     function setActiveLink(id) {
       nav.querySelectorAll("a").forEach(a => {
         a.classList.toggle("active", a.dataset.target === id);
       });
     }
+
     function initNavigation() {
       nav.addEventListener("click", e => {
         const a = e.target.closest("a[data-target]");
@@ -552,6 +551,7 @@
         }
       });
     }
+
     function initScrollSpy() {
       const observer = new IntersectionObserver(entries => {
         const visible = entries
@@ -561,6 +561,7 @@
       }, { threshold: [0.2, 0.4, 0.6] });
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
+
     function initSearchFilter() {
       if (!search) return;
       search.addEventListener("input", () => {
@@ -571,6 +572,7 @@
         });
       });
     }
+
     async function loadSections() {
       const fragments = await Promise.all(
         COMPONENTS.map(async ({id, file}) => {
@@ -590,6 +592,7 @@
         btn.addEventListener('click', () => toggleAccordion(btn));
       });
     }
+
     (async function init() {
       await loadSections();
       initNavigation();
