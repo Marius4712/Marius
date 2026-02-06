@@ -343,11 +343,11 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS – LARGEUR MAXIMALE POUR ÉVITER LE TEXTE COUPÉ */
-    #apropos .acc-container {
-      width: min(1800px, 98vw);     /* très large, presque plein écran */
+    /* ACCORDÉON À PROPOS – VERSION TRÈS LARGE */
+    #apropos .acc-full-width {
+      width: min(1800px, 98vw);
       margin: 0 auto 60px;
-      padding: 0 20px;              /* petite marge confortable aux bords */
+      padding: 0 20px;
     }
     #apropos .acc-item {
       width: 100%;
@@ -399,7 +399,7 @@
     }
 
     @media (max-width: 768px) {
-      #apropos .acc-container {
+      #apropos .acc-full-width {
         padding: 0 16px;
       }
       #apropos .acc-btn {
@@ -502,7 +502,7 @@
       }
     }
 
-    // Attache les écouteurs après chargement
+    // Attache les écouteurs après chargement dynamique
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
