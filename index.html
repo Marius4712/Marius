@@ -343,22 +343,15 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS – TRÈS LARGE + TEXTE EN ENTIER */
-    #apropos {
-      width: 100%;
-      max-width: none;
-      padding: 0;
-      margin: 48px 0;
-    }
-    #apropos .acc-full-width {
-      width: calc(100% - 32px); /* presque plein écran, marge 16px de chaque côté */
-      max-width: none;
-      margin: 0 auto;
-      padding: 0 16px;
+    /* ACCORDÉON À PROPOS – TEXTE EN ENTIER + MARGE EN BAS */
+    #apropos .acc-container {
+      width: min(1400px, 94vw);
+      margin: 0 auto 60px;
+      padding: 0 24px;
     }
     #apropos .acc-item {
       width: 100%;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -398,17 +391,30 @@
       line-height: 1.8;
     }
     #apropos .acc-item.open .acc-panel {
-      max-height: none; /* hauteur complète */
-      padding: 32px;
+      max-height: none; /* permet au texte de s'afficher en entier */
+      padding: 32px 32px 64px 32px; /* +64px de marge en bas */
     }
     #apropos .acc-item.open .acc-chevron {
       transform: rotate(180deg);
     }
+    #apropos .acc-panel p {
+      margin-bottom: 1.2em; /* espace entre paragraphes */
+    }
+    #apropos .acc-panel ul {
+      margin: 1em 0 1.5em 1.5em;
+      list-style: disc;
+    }
+    #apropos .acc-panel ul li {
+      margin-bottom: 0.6em;
+    }
+    #apropos .acc-panel strong {
+      color: var(--text);
+      font-weight: 600;
+    }
 
     @media (max-width: 768px) {
-      #apropos .acc-full-width {
-        width: calc(100% - 16px);
-        padding: 0 8px;
+      #apropos .acc-container {
+        padding: 0 16px;
       }
       #apropos .acc-btn {
         padding: 16px 24px;
@@ -418,7 +424,7 @@
         padding: 0 24px;
       }
       #apropos .acc-item.open .acc-panel {
-        padding: 24px;
+        padding: 24px 24px 48px 24px; /* marge bas réduite mais présente */
       }
     }
 
