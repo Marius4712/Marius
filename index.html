@@ -318,6 +318,25 @@
     }
     .tag.nature { border-color: rgba(138,168,154,0.4); color: #c3e0d4; }
     .tag.urban { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
+
+    /* Style pour le bouton "Voir les fiches projets" */
+    .card-link {
+      display: block;
+      margin: 16px 24px 20px;
+      text-align: center;
+      padding: 10px 18px;
+      background: rgba(138,168,154,0.22);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .card-link:hover {
+      background: rgba(138,168,154,0.4);
+      transform: translateY(-2px);
+    }
+
     .section-footer {
       padding: 0 32px 32px;
       display: flex;
@@ -326,63 +345,6 @@
       color: var(--text-sub);
       font-size: 0.94rem;
     }
-
-    /* ────────────────────────────────────────
-       ACCORDÉON À PROPOS – CORRIGÉ + LARGEUR
-    ──────────────────────────────────────── */
-    #apropos .accordion-container {
-      width: min(1400px, 94vw);
-      margin: 0 auto 60px;
-      padding: 0 24px;
-    }
-    #apropos .acc-item {
-      width: 100%;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow-card);
-    }
-    #apropos .acc-btn {
-      width: 100%;
-      padding: 18px 24px;
-      background: transparent;
-      border: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-    #apropos .acc-btn:hover {
-      color: var(--nature);
-      background: rgba(138,168,154,0.08);
-    }
-    #apropos .acc-chevron {
-      font-size: 1.4rem;
-      transition: transform 0.3s ease;
-    }
-    #apropos .acc-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out, padding 0.3s ease-out;
-      padding: 0 24px;
-      background: rgba(255,255,255,0.03);
-      color: var(--text-mute);
-      line-height: 1.7;
-    }
-    #apropos .acc-item.open .acc-panel {
-      padding: 24px;
-    }
-    #apropos .acc-item.open .acc-chevron {
-      transform: rotate(180deg);
-    }
-
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .topbar-inner { justify-content: center; }
@@ -448,30 +410,6 @@
       </p>
     </div>
   </main>
-
-  <!-- SCRIPT ACCORDÉON (placé ici pour qu’il charge après le contenu) -->
-  <script>
-    function toggleAccordion(btn) {
-      const item = btn.parentElement;
-      const panel = btn.nextElementSibling;
-      const isOpen = item.classList.contains('open');
-
-      // Ferme tous les autres
-      document.querySelectorAll('#apropos .acc-item').forEach(it => {
-        it.classList.remove('open');
-        it.querySelector('.acc-chevron').textContent = '▼';
-        it.querySelector('.acc-panel').style.maxHeight = '0px';
-      });
-
-      // Ouvre celui cliqué s'il était fermé
-      if (!isOpen) {
-        item.classList.add('open');
-        btn.querySelector('.acc-chevron').textContent = '▲';
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-      }
-    }
-  </script>
-
   <script>
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
