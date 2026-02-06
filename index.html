@@ -343,12 +343,11 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS - LARGEUR AUGMENTÉE POUR ÉVITER LE TEXTE COUPÉ */
+    /* ACCORDÉON À PROPOS – LARGEUR MAXIMALE POUR ÉVITER LE TEXTE COUPÉ */
     #apropos .acc-container {
-      width: min(1600px, 96vw);
-      max-width: 1600px;
+      width: min(1800px, 98vw);     /* très large, presque plein écran */
       margin: 0 auto 60px;
-      padding: 0 32px;
+      padding: 0 20px;              /* petite marge confortable aux bords */
     }
     #apropos .acc-item {
       width: 100%;
@@ -481,14 +480,14 @@
     </div>
   </main>
 
-  <!-- SCRIPT ACCORDÉON – VERSION QUI MARCHE -->
+  <!-- SCRIPT ACCORDÉON -->
   <script>
     function toggleAccordion(btn) {
       const item = btn.parentElement;
       const panel = btn.nextElementSibling;
       const isOpen = item.classList.contains('open');
 
-      // Ferme tous les autres accordéons
+      // Ferme tous les autres
       document.querySelectorAll('#apropos .acc-item').forEach(it => {
         it.classList.remove('open');
         it.querySelector('.acc-chevron').textContent = '▼';
@@ -503,7 +502,7 @@
       }
     }
 
-    // Attache les écouteurs une fois les sections chargées
+    // Attache les écouteurs après chargement
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
@@ -572,7 +571,7 @@
       );
       content.innerHTML = fragments.join("\n");
 
-      // Ré-attache les écouteurs après chargement dynamique
+      // Ré-attache les écouteurs après chargement
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
       });
