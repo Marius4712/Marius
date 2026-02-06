@@ -343,7 +343,7 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS - VERSION CORRIGÉE */
+    /* ACCORDÉON À PROPOS - VERSION QUI MARCHE */
     #apropos .acc-container {
       width: min(1400px, 94vw);
       margin: 0 auto 60px;
@@ -471,7 +471,7 @@
       const panel = btn.nextElementSibling;
       const isOpen = item.classList.contains('open');
 
-      // Ferme tous les autres
+      // Ferme tous les autres accordéons
       document.querySelectorAll('#apropos .acc-item').forEach(it => {
         it.classList.remove('open');
         it.querySelector('.acc-chevron').textContent = '▼';
@@ -485,6 +485,13 @@
         panel.style.maxHeight = panel.scrollHeight + 'px';
       }
     }
+
+    // Attache les écouteurs une fois que les sections sont chargées
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
+        btn.addEventListener('click', () => toggleAccordion(btn));
+      });
+    });
   </script>
 
   <script>
@@ -547,6 +554,11 @@
         })
       );
       content.innerHTML = fragments.join("\n");
+
+      // Ré-attache les écouteurs après chargement dynamique
+      document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
+        btn.addEventListener('click', () => toggleAccordion(btn));
+      });
     }
     (async function init() {
       await loadSections();
