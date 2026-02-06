@@ -343,16 +343,17 @@
       font-size: 0.94rem;
     }
 
-    /* ACCORDÉON À PROPOS - VERSION QUI MARCHE */
+    /* ACCORDÉON À PROPOS - LARGEUR AUGMENTÉE POUR ÉVITER LE TEXTE COUPÉ */
     #apropos .acc-container {
-      width: min(1400px, 94vw);
+      width: min(1600px, 96vw);
+      max-width: 1600px;
       margin: 0 auto 60px;
-      padding: 0 24px;
+      padding: 0 32px;
     }
     #apropos .acc-item {
       width: 100%;
-      margin-bottom: 12px;
-      border-radius: 12px;
+      margin-bottom: 16px;
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--line);
       background: var(--glass);
@@ -361,14 +362,14 @@
     }
     #apropos .acc-btn {
       width: 100%;
-      padding: 18px 24px;
+      padding: 20px 32px;
       background: transparent;
       border: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--text);
       transition: all 0.2s;
@@ -378,24 +379,40 @@
       background: rgba(138,168,154,0.08);
     }
     #apropos .acc-chevron {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       transition: transform 0.3s ease;
     }
     #apropos .acc-panel {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out, padding 0.3s ease-out;
-      padding: 0 24px;
+      transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+      padding: 0 32px;
       background: rgba(255,255,255,0.03);
       color: var(--text-mute);
-      line-height: 1.7;
+      line-height: 1.8;
     }
     #apropos .acc-item.open .acc-panel {
-      padding: 24px;
+      padding: 32px;
       max-height: none;
     }
     #apropos .acc-item.open .acc-chevron {
       transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+      #apropos .acc-container {
+        padding: 0 16px;
+      }
+      #apropos .acc-btn {
+        padding: 16px 24px;
+        font-size: 1.15rem;
+      }
+      #apropos .acc-panel {
+        padding: 0 24px;
+      }
+      #apropos .acc-item.open .acc-panel {
+        padding: 24px;
+      }
     }
 
     @media (max-width: 960px) {
@@ -464,7 +481,7 @@
     </div>
   </main>
 
-  <!-- SCRIPT ACCORDÉON - VERSION QUI MARCHE -->
+  <!-- SCRIPT ACCORDÉON – VERSION QUI MARCHE -->
   <script>
     function toggleAccordion(btn) {
       const item = btn.parentElement;
@@ -486,7 +503,7 @@
       }
     }
 
-    // Attache les écouteurs une fois que les sections sont chargées
+    // Attache les écouteurs une fois les sections chargées
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
