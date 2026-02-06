@@ -4,42 +4,42 @@
   </header>
 
   <div class="apropos-grid">
-    <!-- Vignette 1 : Mini bio -->
+    <!-- Vignette 1 -->
     <div class="apropos-vignette" onclick="toggleBlock('mini-bio')">
-      <img src="apropos-mini-bio.jpg" alt="Mini bio" class="vignette-img"> <!-- Remplace par ton image plus tard -->
+      <img src="apropos-mini-bio.jpg" alt="Mini bio" class="vignette-img"> <!-- remplace par ta photo plus tard -->
       <div class="vignette-title">Mini bio</div>
       <div class="vignette-overlay">Cliquez pour lire</div>
     </div>
 
-    <!-- Vignette 2 : Mes inspirations -->
+    <!-- Vignette 2 -->
     <div class="apropos-vignette" onclick="toggleBlock('inspirations')">
       <img src="apropos-inspirations.jpg" alt="Mes inspirations" class="vignette-img">
       <div class="vignette-title">Mes inspirations</div>
       <div class="vignette-overlay">Cliquez pour lire</div>
     </div>
 
-    <!-- Vignette 3 : Approche -->
+    <!-- Vignette 3 -->
     <div class="apropos-vignette" onclick="toggleBlock('approche')">
       <img src="apropos-approche.jpg" alt="Approche" class="vignette-img">
       <div class="vignette-title">Approche</div>
       <div class="vignette-overlay">Cliquez pour lire</div>
     </div>
 
-    <!-- Vignette 4 : Ce que je recherche -->
+    <!-- Vignette 4 -->
     <div class="apropos-vignette" onclick="toggleBlock('recherche')">
       <img src="apropos-recherche.jpg" alt="Ce que je recherche" class="vignette-img">
       <div class="vignette-title">Ce que je recherche</div>
       <div class="vignette-overlay">Cliquez pour lire</div>
     </div>
 
-    <!-- Vignette 5 : Ce que je sais faire -->
+    <!-- Vignette 5 -->
     <div class="apropos-vignette" onclick="toggleBlock('savoir-faire')">
       <img src="apropos-savoir-faire.jpg" alt="Ce que je sais faire" class="vignette-img">
       <div class="vignette-title">Ce que je sais faire</div>
       <div class="vignette-overlay">Cliquez pour lire</div>
     </div>
 
-    <!-- Vignette 6 : Valeurs -->
+    <!-- Vignette 6 -->
     <div class="apropos-vignette" onclick="toggleBlock('valeurs')">
       <img src="apropos-valeurs.jpg" alt="Valeurs" class="vignette-img">
       <div class="vignette-title">Valeurs</div>
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <!-- Blocs de texte qui s’affichent au clic -->
+  <!-- Les blocs de texte (cachés au départ) -->
   <div id="mini-bio" class="apropos-block hidden">
     <h3>Mini bio</h3>
     <p>
@@ -76,13 +76,13 @@
       Certaines lectures ont également structuré ma manière de penser l’espace et la ville.
     </p>
     <p>
-      Les travaux de Jane Jacobs, notamment <em>The Death and Life of Great American Cities</em>, m’ont sensibilisé à l’importance des usages, de la diversité et de la vie quotidienne dans la réussite des espaces urbains.
+      Les travaux de Jane Jacobs, notamment The Death and Life of Great American Cities, m’ont sensibilisé à l’importance des usages, de la diversité et de la vie quotidienne dans la réussite des espaces urbains.
     </p>
     <p>
-      Les réflexions de Henri Lefebvre, à travers <em>La production de l’espace</em>, nourrissent mon regard critique sur la manière dont les espaces sont conçus, produits et vécus.
+      Les réflexions de Henri Lefebvre, à travers La production de l’espace, nourrissent mon regard critique sur la manière dont les espaces sont conçus, produits et vécus.
     </p>
     <p>
-      Enfin, <em>The Image of the City</em> de Kevin Lynch a renforcé mon intérêt pour la lisibilité, les perceptions et les représentations mentales des territoires.
+      Enfin, The Image of the City de Kevin Lynch a renforcé mon intérêt pour la lisibilité, les perceptions et les représentations mentales des territoires.
     </p>
     <p>
       Je trouve aussi une source d’inspiration dans certaines formes artistiques et paysagères, notamment le Land Art et le travail d’Andy Goldsworthy, qui interrogent le rapport entre nature, paysage, temporalité et intervention humaine. Ces démarches m’aident à penser des projets plus sensibles, sobres et respectueux de leur environnement.
@@ -204,12 +204,17 @@
   <script>
     function toggleBlock(id) {
       const block = document.getElementById(id);
-      // Referme tous les autres blocs
+      const isHidden = block.classList.contains('hidden');
+
+      // Referme tous les blocs
       document.querySelectorAll('.apropos-block').forEach(b => {
-        if (b.id !== id) b.classList.add('hidden');
+        b.classList.add('hidden');
       });
-      // Toggle le bloc cliqué
-      block.classList.toggle('hidden');
+
+      // Ouvre seulement le bloc cliqué si il était fermé
+      if (isHidden) {
+        block.classList.remove('hidden');
+      }
     }
   </script>
 
