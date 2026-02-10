@@ -138,7 +138,7 @@
     }
     header.hero {
       position: relative;
-      height: clamp(480px, 75vh, 780px);
+      height: clamp(520px, 80vh, 820px); /* augmenté pour plus d'espace visible */
       overflow: hidden;
     }
     .hero-video {
@@ -150,30 +150,33 @@
       object-position: center 38%;
       filter: brightness(1.14) contrast(1.08) saturate(1.22);
       transform: scale(1.015);
+      z-index: 1;
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.18) 0%,
-        rgba(0,0,0,0.06) 35%,
-        rgba(0,0,0,0.52) 100%
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.58) 100%
       );
+      z-index: 2;
       pointer-events: none;
     }
     .hero-title {
       position: absolute;
-      top: 24px;
+      top: 15%; /* remonté pour mieux se voir */
       left: 50%;
       transform: translateX(-50%);
-      z-index: 3;
+      z-index: 4;
       font-family: "Playfair Display", serif;
-      font-size: clamp(3.2rem, 7vw, 7.8rem);
-      font-weight: 700;
-      letter-spacing: -1px;
-      text-shadow: 0 14px 60px rgba(0,0,0,0.7);
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      text-shadow: 0 20px 80px rgba(0,0,0,0.8);
       pointer-events: none;
+      text-align: center;
     }
     .hero-content {
       position: absolute;
@@ -181,11 +184,11 @@
       z-index: 3;
       display: flex;
       align-items: flex-end;
-      padding-bottom: 48px;
+      padding-bottom: 80px; /* augmenté l'espace en bas */
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr; /* une seule colonne maintenant */
       gap: 24px;
       width: 100%;
     }
@@ -195,37 +198,21 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 28px 32px;
+      padding: 32px 40px;
       box-shadow: var(--shadow-soft);
+      max-width: 800px;
+      margin: 0 auto; /* centrée */
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
     }
     .hero-card p {
-      line-height: 1.68;
-      font-size: 1.03rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
       color: var(--text-mute);
-    }
-    .search-box {
-      margin-top: 1.4rem;
-    }
-    .search-box input {
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: white;
-      font-size: 1rem;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .search-box input:focus {
-      border-color: var(--nature);
-      box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
     main {
       padding: 60px 0 120px;
@@ -342,7 +329,6 @@
       color: var(--text-sub);
       font-size: 0.94rem;
     }
-
     /* ACCORDÉON À PROPOS – V4 anti-rognage encore plus fort */
     #apropos .acc-container {
       width: min(1300px, 90vw);
@@ -430,7 +416,6 @@
       margin-bottom: 1em;
       padding-left: 0.8em;
     }
-
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
       .topbar-inner { justify-content: center; }
@@ -439,7 +424,6 @@
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
     }
-
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
@@ -468,7 +452,6 @@
       </div>
     </div>
   </div>
-
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="vidéo de fond.mp4" type="video/mp4">
@@ -477,26 +460,17 @@
     <div class="hero-title">Marius Vacqué</div>
     <div class="hero-content">
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <h2>Bonjour et bienvenue sur mon portfolio</h2>
-            <p>
-              Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
-              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
-              <strong>Bonne visite !</strong>
-            </p>
-          </div>
-          <div class="hero-card">
-            <h3 style="margin-bottom:1.1rem;">Recherche rapide</h3>
-            <div class="search-box">
-              <input id="search" type="search" placeholder="ex: cartographie, diagnostic, QGIS, terrain, concertation…" />
-            </div>
-          </div>
+        <div class="hero-card">
+          <h2>Bonjour et bienvenue sur mon portfolio</h2>
+          <p>
+            Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
+            À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
+            <strong>Bonne visite !</strong>
+          </p>
         </div>
       </div>
     </div>
   </header>
-
   <main class="container">
     <div id="content">
       <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
@@ -504,35 +478,30 @@
       </p>
     </div>
   </main>
-
   <!-- SCRIPT ACCORDÉON -->
   <script>
     function toggleAccordion(btn) {
       const item = btn.parentElement;
       const panel = btn.nextElementSibling;
       const isOpen = item.classList.contains('open');
-
       document.querySelectorAll('#apropos .acc-item').forEach(it => {
         it.classList.remove('open');
         it.querySelector('.acc-chevron').textContent = '▼';
         const p = it.querySelector('.acc-panel');
         p.style.maxHeight = '0px';
       });
-
       if (!isOpen) {
         item.classList.add('open');
         btn.querySelector('.acc-chevron').textContent = '▲';
         panel.style.maxHeight = 'none';
       }
     }
-
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
       });
     });
   </script>
-
   <script>
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
@@ -540,17 +509,13 @@
       { id: "vie-associative", file: "components/vie-associative.html" },
       { id: "contact", file: "components/contact.html" }
     ];
-
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
-    const search = document.getElementById("search");
-
     function setActiveLink(id) {
       nav.querySelectorAll("a").forEach(a => {
         a.classList.toggle("active", a.dataset.target === id);
       });
     }
-
     function initNavigation() {
       nav.addEventListener("click", e => {
         const a = e.target.closest("a[data-target]");
@@ -564,7 +529,6 @@
         }
       });
     }
-
     function initScrollSpy() {
       const observer = new IntersectionObserver(entries => {
         const visible = entries
@@ -574,18 +538,6 @@
       }, { threshold: [0.2, 0.4, 0.6] });
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
-
-    function initSearchFilter() {
-      if (!search) return;
-      search.addEventListener("input", () => {
-        const term = search.value.trim().toLowerCase();
-        document.querySelectorAll("[data-filter-card]").forEach(card => {
-          const keys = (card.dataset.filter || "").toLowerCase();
-          card.style.display = (!term || keys.includes(term)) ? "" : "none";
-        });
-      });
-    }
-
     async function loadSections() {
       const fragments = await Promise.all(
         COMPONENTS.map(async ({id, file}) => {
@@ -599,17 +551,14 @@
         })
       );
       content.innerHTML = fragments.join("\n");
-
       document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
         btn.addEventListener('click', () => toggleAccordion(btn));
       });
     }
-
     (async function init() {
       await loadSections();
       initNavigation();
       initScrollSpy();
-      initSearchFilter();
       document.getElementById("toTop")?.addEventListener("click", () =>
         window.scrollTo({ top: 0, behavior: "smooth" })
       );
