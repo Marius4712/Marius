@@ -138,7 +138,7 @@
     }
     header.hero {
       position: relative;
-      height: clamp(520px, 80vh, 820px); /* augmenté pour plus d'espace visible */
+      height: clamp(580px, 85vh, 850px); /* plus haut pour bien séparer les deux éléments */
       overflow: hidden;
     }
     .hero-video {
@@ -157,40 +157,40 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.15) 0%,
-        rgba(0,0,0,0.05) 40%,
-        rgba(0,0,0,0.58) 100%
+        rgba(0,0,0,0.10) 0%,
+        rgba(0,0,0,0.04) 45%,
+        rgba(0,0,0,0.60) 100%
       );
       z-index: 2;
       pointer-events: none;
     }
     .hero-title {
       position: absolute;
-      top: 15%; /* remonté pour mieux se voir */
+      top: 18%; /* placé haut avec de l'espace autour */
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4rem, 10vw, 9rem);
+      font-size: clamp(4.5rem, 11vw, 10rem);
       font-weight: 800;
       letter-spacing: -2px;
-      text-shadow: 0 20px 80px rgba(0,0,0,0.8);
+      text-shadow: 0 20px 80px rgba(0,0,0,0.85);
       pointer-events: none;
       text-align: center;
+      white-space: nowrap;
     }
     .hero-content {
       position: absolute;
-      inset: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 3;
-      display: flex;
-      align-items: flex-end;
-      padding-bottom: 80px; /* augmenté l'espace en bas */
+      padding: 0 0 60px 0; /* espace en bas pour que la carte respire */
     }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr; /* une seule colonne maintenant */
-      gap: 24px;
-      width: 100%;
+    .hero-card-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
     .hero-card {
       background: var(--glass-strong);
@@ -198,20 +198,18 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 32px 40px;
+      padding: 36px 44px;
       box-shadow: var(--shadow-soft);
-      max-width: 800px;
-      margin: 0 auto; /* centrée */
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      margin-bottom: 1.4rem;
       font-weight: 700;
     }
     .hero-card p {
-      line-height: 1.7;
-      font-size: 1.05rem;
+      line-height: 1.72;
+      font-size: 1.08rem;
       color: var(--text-mute);
     }
     main {
@@ -417,16 +415,18 @@
       padding-left: 0.8em;
     }
     @media (max-width: 960px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .topbar-inner { justify-content: center; }
-      nav.nav { order: 3; width: 100%; justify-content: center; }
+      .hero-title { top: 15%; font-size: clamp(3.8rem, 12vw, 7rem); }
+      .hero-content { padding-bottom: 50px; }
+      .hero-card { padding: 28px 32px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
     }
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
+      .hero { height: clamp(500px, 75vh, 700px); }
+      .hero-title { top: 12%; font-size: clamp(3rem, 10vw, 5.5rem); }
+      .hero-content { padding-bottom: 40px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
     }
@@ -452,6 +452,7 @@
       </div>
     </div>
   </div>
+
   <header class="hero">
     <video class="hero-video" autoplay muted loop playsinline preload="metadata">
       <source src="vidéo de fond.mp4" type="video/mp4">
@@ -459,7 +460,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-title">Marius Vacqué</div>
     <div class="hero-content">
-      <div class="container">
+      <div class="hero-card-wrapper">
         <div class="hero-card">
           <h2>Bonjour et bienvenue sur mon portfolio</h2>
           <p>
@@ -471,6 +472,7 @@
       </div>
     </div>
   </header>
+
   <main class="container">
     <div id="content">
       <p style="text-align:center; padding:80px 20px; color:var(--text-sub);">
@@ -478,6 +480,7 @@
       </p>
     </div>
   </main>
+
   <!-- SCRIPT ACCORDÉON -->
   <script>
     function toggleAccordion(btn) {
@@ -502,6 +505,7 @@
       });
     });
   </script>
+
   <script>
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
