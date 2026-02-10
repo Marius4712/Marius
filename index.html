@@ -138,7 +138,7 @@
     }
     header.hero {
       position: relative;
-      height: clamp(580px, 85vh, 850px); /* plus haut pour bien séparer les deux éléments */
+      height: clamp(620px, 90vh, 900px); /* hauteur augmentée pour bien séparer */
       overflow: hidden;
     }
     .hero-video {
@@ -148,7 +148,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center 38%;
-      filter: brightness(1.14) contrast(1.08) saturate(1.22);
+      filter: brightness(1.12) contrast(1.06) saturate(1.18);
       transform: scale(1.015);
       z-index: 1;
     }
@@ -157,24 +157,24 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.10) 0%,
-        rgba(0,0,0,0.04) 45%,
-        rgba(0,0,0,0.60) 100%
+        rgba(0,0,0,0.08) 0%,
+        rgba(0,0,0,0.03) 50%,
+        rgba(0,0,0,0.62) 100%
       );
       z-index: 2;
       pointer-events: none;
     }
     .hero-title {
       position: absolute;
-      top: 18%; /* placé haut avec de l'espace autour */
+      top: 12%; /* placé haut avec beaucoup d'espace */
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4.5rem, 11vw, 10rem);
-      font-weight: 800;
-      letter-spacing: -2px;
-      text-shadow: 0 20px 80px rgba(0,0,0,0.85);
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      text-shadow: 0 25px 90px rgba(0,0,0,0.9);
       pointer-events: none;
       text-align: center;
       white-space: nowrap;
@@ -185,31 +185,31 @@
       left: 0;
       right: 0;
       z-index: 3;
-      padding: 0 0 60px 0; /* espace en bas pour que la carte respire */
+      padding-bottom: 80px; /* gros espace en bas */
     }
     .hero-card-wrapper {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 0 20px;
     }
     .hero-card {
       background: var(--glass-strong);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 36px 44px;
+      padding: 40px 48px;
       box-shadow: var(--shadow-soft);
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      margin-bottom: 1.4rem;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      margin-bottom: 1.5rem;
       font-weight: 700;
     }
     .hero-card p {
-      line-height: 1.72;
-      font-size: 1.08rem;
+      line-height: 1.75;
+      font-size: 1.1rem;
       color: var(--text-mute);
     }
     main {
@@ -327,7 +327,7 @@
       color: var(--text-sub);
       font-size: 0.94rem;
     }
-    /* ACCORDÉON À PROPOS – V4 anti-rognage encore plus fort */
+    /* ACCORDÉON (je garde ta dernière version qui marchait pour le bas) */
     #apropos .acc-container {
       width: min(1300px, 90vw);
       margin: 0 auto 120px;
@@ -415,18 +415,18 @@
       padding-left: 0.8em;
     }
     @media (max-width: 960px) {
-      .hero-title { top: 15%; font-size: clamp(3.8rem, 12vw, 7rem); }
-      .hero-content { padding-bottom: 50px; }
-      .hero-card { padding: 28px 32px; }
+      .hero-title { top: 10%; font-size: clamp(4rem, 13vw, 8rem); }
+      .hero-content { padding-bottom: 60px; }
+      .hero-card { padding: 32px 36px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
     }
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
-      .hero { height: clamp(500px, 75vh, 700px); }
-      .hero-title { top: 12%; font-size: clamp(3rem, 10vw, 5.5rem); }
-      .hero-content { padding-bottom: 40px; }
+      .hero { height: clamp(520px, 80vh, 750px); }
+      .hero-title { top: 8%; font-size: clamp(3.2rem, 11vw, 6rem); }
+      .hero-content { padding-bottom: 50px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
     }
