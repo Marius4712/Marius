@@ -34,21 +34,22 @@
       background: #05080d url("image fond portfolio.jpg") center / cover no-repeat fixed;
       background-image:
         url("image fond portfolio.jpg"),
-        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.04) 0%, transparent 65%),
+        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.08) 0%, transparent 60%),   /* un peu plus clair que 0.11 */
+        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.07) 0%, transparent 65%),   /* un peu plus clair que 0.09 */
         linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
       background-blend-mode: overlay, normal, normal;
+      filter: brightness(1.12);  /* ← le petit coup de boost lumineux que tu voulais */
     }
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background:
-        linear-gradient(to right, rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),   /* grille très très légère */
+        linear-gradient(to bottom, rgba(255,255,255,0.012) 1px, transparent 1px);
       background-size: 68px 68px;
       pointer-events: none;
-      opacity: 0.4;  /* ← réduit pour que l'image soit plus claire */
+      opacity: 0.45;  /* un peu moins opaque que 0.7 pour laisser respirer l'image */
       mix-blend-mode: overlay;
       z-index: -2;
     }
