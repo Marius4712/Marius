@@ -138,7 +138,8 @@
     }
     header.hero {
       position: relative;
-      height: clamp(620px, 95vh, 950px); /* hauteur suffisante pour séparer les deux */
+      height: clamp(680px, 100vh, 1100px); /* très haut pour forcer l'espace */
+      min-height: 680px;
       overflow: hidden;
     }
     .hero-video {
@@ -166,31 +167,26 @@
     }
     .hero-title {
       position: absolute;
-      top: 10vh; /* toujours haut, adapté à la hauteur d'écran */
+      top: 5vh; /* très haut, fixe en vh → toujours en haut de l'écran */
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4.5rem, 11vw, 10rem);
-      font-weight: 800;
-      letter-spacing: -2px;
-      text-shadow: 0 20px 80px rgba(0,0,0,0.85);
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      text-shadow: 0 25px 90px rgba(0,0,0,0.9);
       pointer-events: none;
       text-align: center;
       white-space: nowrap;
       max-width: 95vw;
     }
     .hero-content {
-      position: relative; /* plus en absolute → suit le flux après le titre */
+      position: relative; /* flux normal, poussé en bas */
       z-index: 3;
-      padding-top: 30vh; /* gros espace pour pousser la carte en bas */
+      padding-top: 45vh; /* énorme espace pour que la bulle reste très bas */
       padding-bottom: 8vh;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr; /* une seule carte centrée */
-      gap: 24px;
-      width: 100%;
+      text-align: center;
     }
     .hero-card {
       background: var(--glass-strong);
@@ -417,8 +413,8 @@
       padding-left: 0.8em;
     }
     @media (max-width: 960px) {
-      .hero-title { top: 8vh; font-size: clamp(4rem, 13vw, 8rem); }
-      .hero-content { padding-top: 25vh; padding-bottom: 6vh; }
+      .hero-title { top: 6vh; font-size: clamp(4rem, 13vw, 8rem); }
+      .hero-content { padding-top: 35vh; padding-bottom: 6vh; }
       .hero-card { padding: 32px 36px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
@@ -426,8 +422,8 @@
     }
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
-      .hero-title { top: 6vh; font-size: clamp(3.2rem, 11vw, 6rem); }
-      .hero-content { padding-top: 22vh; padding-bottom: 5vh; }
+      .hero-title { top: 4vh; font-size: clamp(3.2rem, 11vw, 6rem); }
+      .hero-content { padding-top: 32vh; padding-bottom: 5vh; }
       .hero-card { padding: 28px 28px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
