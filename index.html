@@ -181,7 +181,7 @@
       z-index: 3;
       display: flex;
       align-items: flex-end;
-      padding-bottom: 90px; /* ← ajusté ici pour descendre légèrement la bulle sans toucher le titre ni le noir */
+      padding-bottom: 70px; /* ← descend la bulle un poil pour ne plus toucher le titre */
     }
     .hero-grid {
       display: grid;
@@ -197,7 +197,7 @@
       border-radius: var(--radius);
       padding: 28px 32px;
       box-shadow: var(--shadow-soft);
-      margin-bottom: 20px; /* ← petite marge pour qu'elle ne touche pas le noir */
+      margin-bottom: 15px; /* ← petit espace pour que la bulle ne touche pas le noir */
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
@@ -434,6 +434,8 @@
       .hero-grid { grid-template-columns: 1fr; }
       .topbar-inner { justify-content: center; }
       nav.nav { order: 3; width: 100%; justify-content: center; }
+      .hero-content { padding-bottom: 70px; }
+      .hero-card { margin-bottom: 10px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
@@ -441,6 +443,8 @@
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
+      .hero-content { padding-bottom: 60px; }
+      .hero-card { margin-bottom: 10px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
     }
@@ -546,62 +550,4 @@
         if (target) {
           target.scrollIntoView({ behavior: "smooth", block: "start" });
           history.replaceState(null, "", "#" + a.dataset.target);
-          setActiveLink(a.dataset.target);
-        }
-      });
-    }
-    function initScrollSpy() {
-      const observer = new IntersectionObserver(entries => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveLink(visible.target.id);
-      }, { threshold: [0.2, 0.4, 0.6] });
-      document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
-    }
-    function initSearchFilter() {
-      if (!search) return;
-      search.addEventListener("input", () => {
-        const term = search.value.trim().toLowerCase();
-        document.querySelectorAll("[data-filter-card]").forEach(card => {
-          const keys = (card.dataset.filter || "").toLowerCase();
-          card.style.display = (!term || keys.includes(term)) ? "" : "none";
-        });
-      });
-    }
-    async function loadSections() {
-      const fragments = await Promise.all(
-        COMPONENTS.map(async ({id, file}) => {
-          try {
-            const r = await fetch(file);
-            if (!r.ok) throw r.status;
-            return await r.text();
-          } catch {
-            return `<section id="${id}" data-section><div style="padding:60px;text-align:center;color:#aaa;">Erreur chargement ${file}</div></section>`;
-          }
-        })
-      );
-      content.innerHTML = fragments.join("\n");
-      document.querySelectorAll('#apropos .acc-btn').forEach(btn => {
-        btn.addEventListener('click', () => toggleAccordion(btn));
-      });
-    }
-    (async function init() {
-      await loadSections();
-      initNavigation();
-      initScrollSpy();
-      initSearchFilter();
-      document.getElementById("toTop")?.addEventListener("click", () =>
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      );
-      const hash = location.hash.slice(1);
-      if (hash && document.getElementById(hash)) {
-        document.getElementById(hash).scrollIntoView({ behavior: "smooth" });
-        setActiveLink(hash);
-      } else {
-        setActiveLink("apropos");
-      }
-    })();
-  </script>
-</body>
-</html>
+          setActiveLink(a.dataset.target
