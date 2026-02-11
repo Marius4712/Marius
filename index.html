@@ -138,8 +138,7 @@
     }
     header.hero {
       position: relative;
-      height: clamp(600px, 95vh, 1000px); /* flexible, plus haut sur grand écran */
-      min-height: 580px;
+      height: clamp(620px, 95vh, 950px); /* hauteur suffisante pour séparer les deux */
       overflow: hidden;
     }
     .hero-video {
@@ -158,64 +157,66 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.08) 0%,
-        rgba(0,0,0,0.03) 50%,
-        rgba(0,0,0,0.62) 100%
+        rgba(0,0,0,0.12) 0%,
+        rgba(0,0,0,0.04) 45%,
+        rgba(0,0,0,0.60) 100%
       );
       z-index: 2;
       pointer-events: none;
     }
     .hero-title {
       position: absolute;
-      top: 8vh; /* fixe en vh → toujours haut, adapté à la hauteur écran */
+      top: 10vh; /* toujours haut, adapté à la hauteur d'écran */
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4.8rem, 12vw, 12rem);
-      font-weight: 900;
-      letter-spacing: -3px;
-      text-shadow: 0 25px 90px rgba(0,0,0,0.9);
+      font-size: clamp(4.5rem, 11vw, 10rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      text-shadow: 0 20px 80px rgba(0,0,0,0.85);
       pointer-events: none;
       text-align: center;
       white-space: nowrap;
       max-width: 95vw;
     }
     .hero-content {
-      position: relative; /* plus absolute → suit le flux après le titre */
+      position: relative; /* plus en absolute → suit le flux après le titre */
       z-index: 3;
-      padding: 20vh 0 10vh 0; /* espace énorme après le titre */
-      background: transparent;
+      padding-top: 30vh; /* gros espace pour pousser la carte en bas */
+      padding-bottom: 8vh;
     }
-    .hero-card-wrapper {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 20px;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr; /* une seule carte centrée */
+      gap: 24px;
+      width: 100%;
     }
     .hero-card {
       background: var(--glass-strong);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 40px 48px;
+      padding: 36px 44px;
       box-shadow: var(--shadow-soft);
+      max-width: 920px;
+      margin: 0 auto;
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      margin-bottom: 1.4rem;
       font-weight: 700;
     }
     .hero-card p {
-      line-height: 1.75;
-      font-size: 1.1rem;
+      line-height: 1.72;
+      font-size: 1.08rem;
       color: var(--text-mute);
     }
     main {
       padding: 60px 0 120px;
     }
-    /* Le reste de ton CSS (sections, grid, accordéon) reste exactement comme avant */
     section {
       margin: 48px 0;
       border-radius: var(--radius);
@@ -225,7 +226,109 @@
       border: 1px solid var(--line);
       box-shadow: var(--shadow-soft);
     }
-    /* ... colle ici tout ton CSS pour accordéon, grid, cards, etc. que tu avais ... */
+    section header {
+      padding: 20px 32px;
+      background: rgba(0,0,0,0.22);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    section h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+    .kicker {
+      color: var(--text-sub);
+      font-size: 0.92rem;
+      font-weight: 400;
+    }
+    .grid {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      box-shadow: var(--shadow-card);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(138,168,154,0.38);
+    }
+    .media {
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+      position: relative;
+    }
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.94) contrast(1.06);
+    }
+    .body {
+      padding: 20px 24px;
+    }
+    .body h3 {
+      font-size: 1.24rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+    .body p {
+      color: var(--text-mute);
+      line-height: 1.62;
+      font-size: 0.97rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .tag {
+      font-size: 0.82rem;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-sub);
+    }
+    .tag.nature { border-color: rgba(138,168,154,0.4); color: #c3e0d4; }
+    .tag.urban { border-color: rgba(217,201,168,0.3); color: #e8e0c8; }
+    .card-link {
+      display: block;
+      margin: 16px 24px 20px;
+      text-align: center;
+      padding: 10px 18px;
+      background: rgba(138,168,154,0.22);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .card-link:hover {
+      background: rgba(138,168,154,0.4);
+      transform: translateY(-2px);
+    }
+    .section-footer {
+      padding: 0 32px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-sub);
+      font-size: 0.94rem;
+    }
     /* ACCORDÉON À PROPOS – V4 anti-rognage encore plus fort */
     #apropos .acc-container {
       width: min(1300px, 90vw);
@@ -314,17 +417,17 @@
       padding-left: 0.8em;
     }
     @media (max-width: 960px) {
-      .hero-title { top: 6vh; font-size: clamp(4rem, 13vw, 8rem); }
-      .hero-content { padding: 18vh 0 8vh 0; }
+      .hero-title { top: 8vh; font-size: clamp(4rem, 13vw, 8rem); }
+      .hero-content { padding-top: 25vh; padding-bottom: 6vh; }
       .hero-card { padding: 32px 36px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
     }
     @media (max-width: 680px) {
-      .hero { min-height: 520px; }
-      .hero-title { top: 5vh; font-size: clamp(3.2rem, 11vw, 6rem); }
-      .hero-content { padding: 16vh 0 6vh 0; }
+      .grid { grid-template-columns: 1fr; }
+      .hero-title { top: 6vh; font-size: clamp(3.2rem, 11vw, 6rem); }
+      .hero-content { padding-top: 22vh; padding-bottom: 5vh; }
       .hero-card { padding: 28px 28px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
@@ -360,14 +463,16 @@
     <div class="hero-title">Marius Vacqué</div>
 
     <div class="hero-content">
-      <div class="hero-card-wrapper">
-        <div class="hero-card">
-          <h2>Bonjour et bienvenue sur mon portfolio</h2>
-          <p>
-            Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
-            À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
-            <strong>Bonne visite !</strong>
-          </p>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <h2>Bonjour et bienvenue sur mon portfolio</h2>
+            <p>
+              Je vous invite à le parcourir avec plaisir afin de découvrir mes projets, mes expériences et mon univers.<br><br>
+              À travers ces réalisations, vous pourrez mieux comprendre mon parcours, mes centres d’intérêt et ma manière d’aborder les territoires et leurs enjeux.<br><br>
+              <strong>Bonne visite !</strong>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -415,6 +520,7 @@
     ];
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
+    const search = document.getElementById("search");
     function setActiveLink(id) {
       nav.querySelectorAll("a").forEach(a => {
         a.classList.toggle("active", a.dataset.target === id);
@@ -442,6 +548,16 @@
       }, { threshold: [0.2, 0.4, 0.6] });
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
+    function initSearchFilter() {
+      if (!search) return;
+      search.addEventListener("input", () => {
+        const term = search.value.trim().toLowerCase();
+        document.querySelectorAll("[data-filter-card]").forEach(card => {
+          const keys = (card.dataset.filter || "").toLowerCase();
+          card.style.display = (!term || keys.includes(term)) ? "" : "none";
+        });
+      });
+    }
     async function loadSections() {
       const fragments = await Promise.all(
         COMPONENTS.map(async ({id, file}) => {
@@ -463,6 +579,7 @@
       await loadSections();
       initNavigation();
       initScrollSpy();
+      initSearchFilter();
       document.getElementById("toTop")?.addEventListener("click", () =>
         window.scrollTo({ top: 0, behavior: "smooth" })
       );
