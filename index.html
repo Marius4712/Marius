@@ -138,7 +138,7 @@
     }
     header.hero {
       position: relative;
-      height: clamp(680px, 100vh, 1100px); /* plus haut pour garantir l'espace */
+      height: clamp(520px, 85vh, 850px);
       overflow: hidden;
     }
     .hero-video {
@@ -164,18 +164,16 @@
     }
     .hero-title {
       position: absolute;
-      top: 10vh; /* toujours en haut, adapté */
+      top: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
       font-family: "Playfair Display", serif;
-      font-size: clamp(4.5rem, 11vw, 10rem);
-      font-weight: 800;
-      letter-spacing: -2px;
-      text-shadow: 0 20px 80px rgba(0,0,0,0.7);
+      font-size: clamp(3.2rem, 7vw, 7.8rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 14px 60px rgba(0,0,0,0.7);
       pointer-events: none;
-      text-align: center;
-      white-space: nowrap;
     }
     .hero-content {
       position: absolute;
@@ -183,11 +181,11 @@
       z-index: 3;
       display: flex;
       align-items: flex-end;
-      padding-bottom: 120px; /* gros espace en bas pour que la bulle ne touche pas le noir */
+      padding-bottom: 100px; /* ← ICI : espace augmenté pour que la bulle s'arrête avant le noir */
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr; /* une seule colonne maintenant */
+      grid-template-columns: 2fr 1fr;
       gap: 24px;
       width: 100%;
     }
@@ -197,20 +195,38 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 36px 44px;
+      padding: 28px 32px;
       box-shadow: var(--shadow-soft);
-      margin-bottom: 40px; /* remonte un peu la carte pour qu'elle s'arrête avant le bas */
+      margin-bottom: 20px; /* ← petite marge en bas pour qu'elle ne touche pas le noir */
     }
     .hero-card h2 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 1.2rem;
-      font-weight: 700;
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
     .hero-card p {
-      line-height: 1.7;
-      font-size: 1.05rem;
+      line-height: 1.68;
+      font-size: 1.03rem;
       color: var(--text-mute);
+    }
+    .search-box {
+      margin-top: 1.4rem;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--nature);
+      box-shadow: 0 0 0 3px rgba(138,168,154,0.18);
     }
     main {
       padding: 60px 0 120px;
@@ -418,6 +434,8 @@
       .hero-grid { grid-template-columns: 1fr; }
       .topbar-inner { justify-content: center; }
       nav.nav { order: 3; width: 100%; justify-content: center; }
+      .hero-content { padding-bottom: 90px; }
+      .hero-card { margin-bottom: 20px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
       #apropos .acc-item.open .acc-panel { padding: 36px 36px 110px 36px !important; }
@@ -425,6 +443,8 @@
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { font-size: clamp(2.8rem, 9vw, 5rem); }
+      .hero-content { padding-bottom: 80px; }
+      .hero-card { margin-bottom: 20px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
     }
