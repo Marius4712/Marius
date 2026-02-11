@@ -31,26 +31,7 @@
       font-family: "Manrope", system-ui, sans-serif;
       color: var(--text);
       min-height: 100vh;
-      background: #05080d url("vrai-image-fond.jpg") center / cover no-repeat fixed;
-      background-image:
-        url("vrai-image-fond.jpg"),
-        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
-        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
-        linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
-      background-blend-mode: overlay, normal, normal;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(to right, rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 68px 68px;
-      pointer-events: none;
-      opacity: 0.7;
-      mix-blend-mode: overlay;
-      z-index: -2;
+      background: url("image fond portfolio.jpg") center / cover no-repeat fixed;
     }
     #contact {
       background: #05080d !important;
@@ -167,7 +148,7 @@
     }
     .hero-title {
       position: absolute;
-      top: 6vh; /* un poil plus haut pour garantir l'espace sur tous les écrans */
+      top: 6vh;
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -184,8 +165,8 @@
     .hero-content {
       position: relative;
       z-index: 3;
-      padding-top: 40vh; /* descend la bulle un tout petit peu pour ne plus toucher le titre */
-      padding-bottom: 12vh; /* espace suffisant pour voir un léger bout de vidéo avant le noir */
+      padding-top: 40vh;
+      padding-bottom: 12vh;
       text-align: center;
     }
     .hero-card {
@@ -414,7 +395,7 @@
     }
     @media (max-width: 960px) {
       .hero-title { top: 6vh; font-size: clamp(4rem, 13vw, 8rem); }
-      .hero-content { padding-top: 35vh; padding-bottom: 10vh; } /* ajusté pour portable */
+      .hero-content { padding-top: 35vh; padding-bottom: 10vh; }
       .hero-card { padding: 32px 36px; }
       #apropos .acc-container { padding: 0 16px; margin-bottom: 100px; }
       #apropos .acc-panel { padding: 0 36px; }
@@ -423,7 +404,7 @@
     @media (max-width: 680px) {
       .grid { grid-template-columns: 1fr; }
       .hero-title { top: 4vh; font-size: clamp(3.2rem, 11vw, 6rem); }
-      .hero-content { padding-top: 32vh; padding-bottom: 12vh; } /* petit espace vidéo visible en bas */
+      .hero-content { padding-top: 32vh; padding-bottom: 12vh; }
       .hero-card { padding: 28px 28px; }
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
