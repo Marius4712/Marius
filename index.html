@@ -34,22 +34,21 @@
       background: #05080d url("image fond portfolio.jpg") center / cover no-repeat fixed;
       background-image:
         url("image fond portfolio.jpg"),
-        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.08) 0%, transparent 60%),   /* un peu plus clair que 0.11 */
-        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.07) 0%, transparent 65%),   /* un peu plus clair que 0.09 */
+        radial-gradient(ellipse at 12% 8%, rgba(138,168,154,0.11) 0%, transparent 60%),
+        radial-gradient(ellipse at 88% 12%, rgba(90,130,158,0.09) 0%, transparent 65%),
         linear-gradient(180deg, #05080d 0%, #0a131c 50%, #05080d 100%);
       background-blend-mode: overlay, normal, normal;
-      filter: brightness(1.12);  /* ← le petit coup de boost lumineux que tu voulais */
     }
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background:
-        linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px),   /* grille très très légère */
-        linear-gradient(to bottom, rgba(255,255,255,0.012) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.018) 1px, transparent 1px);
       background-size: 68px 68px;
       pointer-events: none;
-      opacity: 0.45;  /* un peu moins opaque que 0.7 pour laisser respirer l'image */
+      opacity: 0.7;
       mix-blend-mode: overlay;
       z-index: -2;
     }
@@ -326,7 +325,7 @@
       color: var(--text-sub);
       font-size: 0.94rem;
     }
-    /* ACCORDÉON À PROPOS – V4 anti-rognage encore plus fort */
+    /* ACCORDÉON À PROPOS */
     #apropos .acc-container {
       width: min(1300px, 90vw);
       margin: 0 auto 120px;
@@ -512,7 +511,8 @@
       { id: "apropos", file: "components/apropos.html" },
       { id: "projets", file: "components/projet.html" },
       { id: "vie-associative", file: "components/vie-associative.html" },
-      { id: "contact", file: "components/contact.html" }
+      { id: "contact", file: "components/contact.html" },
+      { id: "videos", file: "components/videos.html" }   // ← AJOUTÉ ICI
     ];
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
