@@ -54,31 +54,35 @@
       height: 300px; /* hauteur fixe pour uniformité */
       overflow: hidden;
       cursor: pointer;
+      background: #111; /* fond sombre si l'image ne remplit pas */
     }
     .media img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* ← FORCE l'image à remplir toute la zone (plus de noir) */
+      object-fit: contain; /* ← garde toute l'image visible sans rognage */
+      background-size: cover; /* ← remplit le fond si besoin */
+      background-position: center;
       transition: transform 0.3s ease, filter 0.3s ease;
+      display: block;
     }
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.5);
       opacity: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: opacity 0.3s ease;
       color: white;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 600;
       text-shadow: 0 2px 8px rgba(0,0,0,0.8);
       pointer-events: none;
     }
     .media:hover img {
-      transform: scale(1.08);
-      filter: brightness(0.85) blur(1px);
+      transform: scale(1.05);
+      filter: brightness(0.9) blur(1px);
     }
     .media:hover .overlay {
       opacity: 1;
@@ -89,6 +93,7 @@
       font-weight: 600;
       margin: 0;
       text-align: center;
+      background: rgba(0,0,0,0.6);
     }
     .back {
       text-align: center;
