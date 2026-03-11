@@ -10,8 +10,8 @@
   <style>
     body {
       font-family: "Manrope", system-ui, sans-serif;
-      color: rgba(245,245,245,0.96);
-      background: #05080d url("image fond portfolio.jpg") center / cover no-repeat fixed;
+      color: #111;
+      background: #ffffff; /* blanc pur */
       min-height: 100vh;
       margin: 0;
       padding: 0;
@@ -24,15 +24,15 @@
     header {
       text-align: center;
       padding: 60px 0 40px;
-      background: rgba(0,0,0,0.5);
     }
     h1 {
       font-family: "Playfair Display", serif;
       font-size: 3rem;
       margin: 0 0 10px;
+      color: #111;
     }
     .kicker {
-      color: rgba(245,245,245,0.7);
+      color: #666;
       font-size: 1.2rem;
     }
     .grid {
@@ -42,35 +42,43 @@
       margin-top: 40px;
     }
     .video-card {
-      background: rgba(18,22,28,0.7);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.11);
+      background: #ffffff;
+      border: 1px solid #eee;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 12px 38px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transition: transform 0.25s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-6px);
     }
     .video-title {
       padding: 20px 24px 12px;
       font-size: 1.5rem;
       font-weight: 600;
       margin: 0;
+      text-align: center;
+      color: #111;
     }
     .video-description {
       padding: 0 24px 20px;
       font-size: 1rem;
-      color: rgba(245,245,245,0.78);
+      color: #555;
       margin: 0;
+      text-align: center;
     }
     .tags {
       padding: 0 24px 20px;
       display: flex;
       gap: 10px;
+      justify-content: center;
     }
     .tag {
       padding: 6px 14px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(74,140,107,0.1);
       border-radius: 999px;
       font-size: 0.9rem;
+      color: #2e6b4a;
     }
     iframe {
       width: 100%;
@@ -85,15 +93,15 @@
     .back a {
       display: inline-block;
       padding: 14px 32px;
-      background: rgba(138,168,154,0.3);
-      color: white;
+      background: rgba(74,140,107,0.2);
+      color: #111;
       text-decoration: none;
       border-radius: 12px;
       font-weight: 500;
       transition: background 0.2s;
     }
     .back a:hover {
-      background: rgba(138,168,154,0.5);
+      background: rgba(74,140,107,0.4);
     }
   </style>
 </head>
@@ -127,20 +135,17 @@
         <iframe src="https://www.youtube.com/embed/UNz66BP-IZM" title="Vidéo Parc Trinchant final" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
 
-      <!-- NOUVELLE Vidéo 3 (LinkedIn) -->
+      <!-- Vidéo 3 (LinkedIn) avec miniature -->
       <div class="video-card">
-        <h2 class="video-title">Vidéo 3 – Promotion SEM 47 (LinkedIn)</h2>
+        <h2 class="video-title">Vidéo 3 – Promotion SEM 47</h2>
         <p class="video-description">Vidéo de la publication LinkedIn sur les initiatives de la SEM 47.</p>
         <div class="tags">
           <span class="tag">Vidéo</span>
           <span class="tag">SEM 47</span>
           <span class="tag">LinkedIn</span>
         </div>
-        <!-- Embed LinkedIn : LinkedIn ne fournit pas d'iframe public simple. Solution : -->
-        <!-- 1. Télécharge la vidéo depuis LinkedIn et upload sur YouTube (recommandé) -->
-        <!-- 2. Ou utilise ce placeholder avec lien direct vers la publication LinkedIn -->
-        <a href="https://www.linkedin.com/posts/sem-47_%F0%9D%97%94-%F0%9D%97%B9%F0%9D%97%AE-%F0%9D%97%BF%F0%9D%97%B2%F0%9D%97%BB%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%BB%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%97%B1%F0%9D%97%B2-%F0%9D%97%BB%F0%9D%97%BC%F0%9D%98%80-activity-7422649821947224064-R06q?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEAOeHQBaJOaqZoQpdNedD9u1SbJeUEgHbc" target="_blank" style="display:block; text-align:center; padding:20px; background:rgba(0,0,0,0.4); color:white; text-decoration:none; font-size:1.2rem;">
-          Voir la vidéo sur LinkedIn (clique ici)
+        <a href="https://www.linkedin.com/posts/sem-47_%F0%9D%97%94-%F0%9D%97%B9%F0%9D%97%AE-%F0%9D%97%BF%F0%9D%97%B2%F0%9D%97%BB%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%BB%F0%9D%98%81%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%97%B1%F0%9D%97%B2-%F0%9D%97%BB%F0%9D%97%BC%F0%9D%98%80-activity-7422649821947224064-R06q?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEAOeHQBaJOaqZoQpdNedD9u1SbJeUEgHbc" target="_blank">
+          <img src="Miniature-vidéo-SEM.png" alt="Miniature Vidéo LinkedIn SEM 47" style="width:100%; height:auto; display:block;">
         </a>
       </div>
     </div>
