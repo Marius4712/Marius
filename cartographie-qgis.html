@@ -53,6 +53,7 @@
       width: 100%;
       height: auto;
       display: block;
+      cursor: pointer; /* pour indiquer que c'est cliquable */
     }
     .card-title {
       padding: 20px 24px 12px;
@@ -78,6 +79,28 @@
     .back a:hover {
       background: rgba(138,168,154,0.5);
     }
+
+    /* Lightbox CSS (pour agrandir les images au clic) */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+    }
+    .lightbox img {
+      max-width: 95%;
+      max-height: 95vh;
+      object-fit: contain;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+      border-radius: 8px;
+    }
+    .lightbox.active {
+      display: flex;
+    }
   </style>
 </head>
 <body>
@@ -90,22 +113,22 @@
     <div class="grid">
       <div class="card">
         <h2 class="card-title">Niveau de vie des ménages et accessibilité des soins autour du club de rugby</h2>
-        <img src="Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png" alt="Niveau de vie et soins">
+        <img src="Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png" alt="Niveau de vie et soins" onclick="openLightbox(this.src)">
       </div>
 
       <div class="card">
         <h2 class="card-title">Localisation des itinéraires de déplacement des clubs de la poule de Marmande (échelle nationale)</h2>
-        <img src="Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png" alt="Itinéraires clubs Marmande">
+        <img src="Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png" alt="Itinéraires clubs Marmande" onclick="openLightbox(this.src)">
       </div>
 
       <div class="card">
         <h2 class="card-title">Plan de situation de la commune de Marmande à différentes échelles territoriales</h2>
-        <img src="Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png" alt="Plan de situation Marmande">
+        <img src="Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png" alt="Plan de situation Marmande" onclick="openLightbox(this.src)">
       </div>
 
       <div class="card">
         <h2 class="card-title">Cartographie des équipements sportifs – approche du territoire au site (VGA – Marmande – Stade de rugby)</h2>
-        <img src="Cartographie des équipements sportifs approche du territoire au site (VGA – Marmande – Stade de rugby(2).png" alt="Équipements sportifs VGA Marmande">
+        <img src="Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png" alt="Équipements sportifs VGA Marmande" onclick="openLightbox(this.src)">
       </div>
     </div>
 
@@ -113,5 +136,29 @@
       <a href="index.html#projets">Retour aux projets</a>
     </div>
   </div>
+
+  <!-- Lightbox pour agrandir les images au clic -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Image agrandie">
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+    }
+
+    // Fermer avec Échap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </body>
 </html>
