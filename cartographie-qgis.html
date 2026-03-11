@@ -49,11 +49,39 @@
       overflow: hidden;
       box-shadow: 0 12px 38px rgba(0,0,0,0.4);
     }
-    .card img {
+    .media {
+      position: relative;
+      height: 300px; /* hauteur fixe pour uniformité */
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .media img {
       width: 100%;
-      height: auto;
-      display: block;
-      cursor: pointer; /* pour indiquer que c'est cliquable */
+      height: 100%;
+      object-fit: cover; /* ← FORCE l'image à remplir toute la zone (plus de noir) */
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      pointer-events: none;
+    }
+    .media:hover img {
+      transform: scale(1.08);
+      filter: brightness(0.85) blur(1px);
+    }
+    .media:hover .overlay {
+      opacity: 1;
     }
     .card-title {
       padding: 20px 24px 12px;
@@ -80,7 +108,7 @@
       background: rgba(138,168,154,0.5);
     }
 
-    /* Lightbox CSS (pour agrandir les images au clic) */
+    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -113,22 +141,34 @@
     <div class="grid">
       <div class="card">
         <h2 class="card-title">Niveau de vie des ménages et accessibilité des soins autour du club de rugby</h2>
-        <img src="Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png" alt="Niveau de vie et soins" onclick="openLightbox(this.src)">
+        <div class="media" onclick="openLightbox('Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png')">
+          <img src="Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png" alt="Niveau de vie et soins">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
       </div>
 
       <div class="card">
         <h2 class="card-title">Localisation des itinéraires de déplacement des clubs de la poule de Marmande (échelle nationale)</h2>
-        <img src="Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png" alt="Itinéraires clubs Marmande" onclick="openLightbox(this.src)">
+        <div class="media" onclick="openLightbox('Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png')">
+          <img src="Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png" alt="Itinéraires clubs Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
       </div>
 
       <div class="card">
         <h2 class="card-title">Plan de situation de la commune de Marmande à différentes échelles territoriales</h2>
-        <img src="Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png" alt="Plan de situation Marmande" onclick="openLightbox(this.src)">
+        <div class="media" onclick="openLightbox('Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png')">
+          <img src="Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png" alt="Plan de situation Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
       </div>
 
       <div class="card">
         <h2 class="card-title">Cartographie des équipements sportifs – approche du territoire au site (VGA – Marmande – Stade de rugby)</h2>
-        <img src="Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png" alt="Équipements sportifs VGA Marmande" onclick="openLightbox(this.src)">
+        <div class="media" onclick="openLightbox('Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png')">
+          <img src="Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png" alt="Équipements sportifs VGA Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
       </div>
     </div>
 
@@ -137,7 +177,7 @@
     </div>
   </div>
 
-  <!-- Lightbox pour agrandir les images au clic -->
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <img id="lightbox-img" src="" alt="Image agrandie">
   </div>
@@ -155,7 +195,6 @@
       lightbox.classList.remove('active');
     }
 
-    // Fermer avec Échap
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
     });
