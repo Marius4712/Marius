@@ -31,7 +31,7 @@
       font-family: "Manrope", system-ui, sans-serif;
       color: var(--text);
       min-height: 100vh;
-      background: #ffffff; /* fond blanc pur partout */
+      background: #ffffff; /* fond blanc pur */
     }
     #contact {
       background: #ffffff !important;
@@ -123,7 +123,7 @@
       height: clamp(680px, 100vh, 1100px);
       min-height: 680px;
       overflow: hidden;
-      background: #ffffff; /* blanc ici aussi */
+      background: #ffffff;
     }
     .hero-video {
       position: absolute;
@@ -423,6 +423,7 @@
         </div>
         <nav class="nav" id="nav">
           <a href="#apropos" data-target="apropos">À propos</a>
+          <a href="#parcours" data-target="parcours">Mon parcours</a>
           <a href="#projets" data-target="projets">Projets</a>
           <a href="#vie-associative" data-target="vie-associative">Vie associative</a>
           <a href="#contact" data-target="contact">Contact</a>
@@ -493,13 +494,13 @@
   <script>
     const COMPONENTS = [
       { id: "apropos", file: "components/apropos.html" },
+      { id: "parcours", file: "components/parcours.html" },
       { id: "projets", file: "components/projet.html" },
       { id: "vie-associative", file: "components/vie-associative.html" },
       { id: "contact", file: "components/contact.html" }
     ];
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
-    const search = document.getElementById("search");
     function setActiveLink(id) {
       nav.querySelectorAll("a").forEach(a => {
         a.classList.toggle("active", a.dataset.target === id);
@@ -527,16 +528,6 @@
       }, { threshold: [0.2, 0.4, 0.6] });
       document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
     }
-    function initSearchFilter() {
-      if (!search) return;
-      search.addEventListener("input", () => {
-        const term = search.value.trim().toLowerCase();
-        document.querySelectorAll("[data-filter-card]").forEach(card => {
-          const keys = (card.dataset.filter || "").toLowerCase();
-          card.style.display = (!term || keys.includes(term)) ? "" : "none";
-        });
-      });
-    }
     async function loadSections() {
       const fragments = await Promise.all(
         COMPONENTS.map(async ({id, file}) => {
@@ -558,10 +549,6 @@
       await loadSections();
       initNavigation();
       initScrollSpy();
-      initSearchFilter();
-      document.getElementById("toTop")?.addEventListener("click", () =>
-        window.scrollTo({ top: 0, behavior: "smooth" })
-      );
       const hash = location.hash.slice(1);
       if (hash && document.getElementById(hash)) {
         document.getElementById(hash).scrollIntoView({ behavior: "smooth" });
@@ -569,6 +556,9 @@
       } else {
         setActiveLink("apropos");
       }
+      document.getElementById("toTop")?.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
     })();
   </script>
 </body>
