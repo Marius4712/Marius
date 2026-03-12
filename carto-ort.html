@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Leaflet CSS + JS -->
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -46,17 +46,29 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       margin-top: 20px;
     }
+    .custom-marker {
+      background: #2e6f5c;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .leaflet-marker-icon:hover {
+      transform: scale(1.3);
+    }
     .leaflet-popup-content-wrapper {
       border-radius: 12px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     .leaflet-popup-content {
-      margin: 13px 19px;
+      margin: 12px 18px;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
     .leaflet-popup-content a {
-      color: #4a8c6b;
+      color: #2e6f5c;
       font-weight: 600;
       text-decoration: none;
     }
@@ -98,109 +110,74 @@
     // Carte centrée sur le Lot-et-Garonne
     const map = L.map('map', {
       zoomControl: true,
-      attributionControl: true,
       maxZoom: 15,
       minZoom: 8
     }).setView([44.40, 0.40], 9);
 
-    // Fond clair style QGIS-like (OpenStreetMap France + ajustement)
+    // Fond clair style QGIS / atlas territorial
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap France | © Contributeurs OpenStreetMap',
+      attribution: '© OpenStreetMap France',
       maxZoom: 20
     }).addTo(map);
 
-    // Limites du Lot-et-Garonne (empêche de sortir du département)
-    const lotBounds = L.latLngBounds(
-      [43.85, -0.60],   // sud-ouest
-      [44.80, 1.35]     // nord-est
-    );
-    map.setMaxBounds(lotBounds);
+    // Contour officiel du Lot-et-Garonne (GeoJSON public)
+    fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson')
+      .then(res => res.json())
+      .then(data => {
+        const lot47 = L.geoJSON(data, {
+          filter: feature => feature.properties.code === "47",
+          style: {
+            color: "#2e6f5c",
+            weight: 3,
+            opacity: 0.9,
+            fillColor: "#2e6f5c",
+            fillOpacity: 0.08
+          }
+        }).addTo(map);
 
-    // Icône personnalisée (point bleu stylisé QGIS)
-    const blueIcon = L.divIcon({
+        // Zoom automatique sur le département
+        map.fitBounds(lot47.getBounds(), { padding: [20, 20] });
+      })
+      .catch(err => console.error("Erreur chargement GeoJSON département:", err));
+
+    // Données exactes des communes (tes coordonnées GPS)
+    const villes = {
+      "Sainte-Livrade-sur-Lot": { lat: 44.398, lng: 0.590, projets: ["Ilot-Soussial.pdf", "Berges-du-Lot.pdf"] },
+      "Miramont-de-Guyenne": { lat: 44.602, lng: 0.360, projets: ["friche-Pimtou.pdf", "Parc-de-la-Dourdene.pdf", "Parc-des-équipements.pdf"] },
+      "La Sauvetat-du-Dropt": { lat: 44.636, lng: 0.274, projets: ["Habitat-La-Sauvetat.pdf"] },
+      "Lauzun": { lat: 44.629, lng: 0.461, projets: ["pole-loisir-Lauzun.pdf"] },
+      "Nérac": { lat: 44.136, lng: 0.339, projets: ["Place-du-Floiral.pdf", "Réaménagement-Lafayette-Mondenard.pdf"] },
+      "Aiguillon": { lat: 44.299, lng: 0.341, projets: ["Maison-Santé-Aiguillon.pdf", "Plage-sur-le-Lot.pdf"] },
+      "Casteljaloux": { lat: 44.317, lng: -0.091, projets: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] },
+      "Duras": { lat: 44.676, lng: 0.183, projets: ["Espace-culturel-Duras.pdf", "Recyclerie-pays-de-Duras.pdf"] },
+      "Villeréal": { lat: 44.635, lng: 0.742, projets: ["Bastide-de-Villeréal.pdf"] },
+      "Port-Sainte-Marie": { lat: 44.252, lng: 0.389, projets: ["Vacance-logements-centre-bourg.pdf"] },
+      "Castelmoron-sur-Lot": { lat: 44.400, lng: 0.493, projets: ["Liaison-douce-Castelmoron.pdf"] },
+      "Tombeboeuf": { lat: 44.561, lng: 0.530, projets: ["Maison-santé-Castelmoron-Tombeboeuf.pdf"] },
+      "Montflanquin": { lat: 44.530, lng: 0.768, projets: ["Ecole-maternelle-requalification.pdf"] },
+      "Castillonnès": { lat: 44.652, lng: 0.593, projets: ["Maison-de-la-Bastide.pdf", "Boutique-à-l'essai.pdf"] },
+      "Cancon": { lat: 44.536, lng: 0.624, projets: ["Foirail-jardin-public-Cancon.pdf", "Immeuble-Hicks-logement-saisonniers.pdf"] },
+      "Bastides en Haut-Agenais Périgord": { lat: 44.62, lng: 0.68, projets: ["Tiers-lieu-4Cantons.pdf"] }
+    };
+
+    // Marqueur vert stylisé (effet hover)
+    const iconProjet = L.divIcon({
       className: 'custom-marker',
-      html: '<div style="background:#4a8c6b; width:16px; height:16px; border-radius:50%; border:3px solid white; box-shadow:0 0 6px rgba(0,0,0,0.4);"></div>',
-      iconSize: [16, 16],
-      iconAnchor: [8, 8]
+      html: '<div style="background:#2e6f5c; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow:0 0 8px rgba(0,0,0,0.3); transition:transform 0.2s;"></div>',
+      iconSize: [18, 18],
+      iconAnchor: [9, 9]
     });
 
-    // Données des projets (coordonnées approximatives – tu peux affiner)
-    const projets = [
-      { lat: 44.398, lng: 0.589, commune: "Sainte-Livrade-sur-Lot", fiches: [
-        {nom: "Ilot-Soussial.pdf", lien: "Ilot-Soussial.pdf"},
-        {nom: "Berges-du-Lot.pdf", lien: "Berges-du-Lot.pdf"}
-      ]},
-      { lat: 44.522, lng: 0.355, commune: "Miramont-de-Guyenne", fiches: [
-        {nom: "friche-Pimtou.pdf", lien: "friche-Pimtou.pdf"},
-        {nom: "Parc-de-la-Dourdene.pdf", lien: "Parc-de-la-Dourdene.pdf"},
-        {nom: "Parc-des-équipements.pdf", lien: "Parc-des-équipements.pdf"}
-      ]},
-      { lat: 44.652, lng: 0.652, commune: "La Sauvetat-du-Dropt", fiches: [
-        {nom: "Habitat-La-Sauvetat.pdf", lien: "Habitat-La-Sauvetat.pdf"}
-      ]},
-      { lat: 44.702, lng: 0.147, commune: "Lauzun", fiches: [
-        {nom: "pole-loisir-Lauzun.pdf", lien: "pole-loisir-Lauzun.pdf"}
-      ]},
-      { lat: 44.136, lng: 0.340, commune: "Nérac", fiches: [
-        {nom: "Place-du-Floiral.pdf", lien: "Place-du-Floiral.pdf"},
-        {nom: "Réaménagement-Lafayette-Mondenard.pdf", lien: "Réaménagement-Lafayette-Mondenard.pdf"}
-      ]},
-      { lat: 44.299, lng: 0.340, commune: "Aiguillon", fiches: [
-        {nom: "Maison-Santé-Aiguillon.pdf", lien: "Maison-Santé-Aiguillon.pdf"},
-        {nom: "Plage-sur-le-Lot.pdf", lien: "Plage-sur-le-Lot.pdf"}
-      ]},
-      { lat: 44.273, lng: 0.092, commune: "Casteljaloux", fiches: [
-        {nom: "Réhabilitation-ancien-hopital-Casteljaloux.pdf", lien: "Réhabilitation-ancien-hopital-Casteljaloux.pdf"}
-      ]},
-      { lat: 44.678, lng: 0.183, commune: "Duras", fiches: [
-        {nom: "Espace-culturel-Duras.pdf", lien: "Espace-culturel-Duras.pdf"},
-        {nom: "Recyclerie-pays-de-Duras.pdf", lien: "Recyclerie-pays-de-Duras.pdf"}
-      ]},
-      { lat: 44.552, lng: 0.740, commune: "Villeréal", fiches: [
-        {nom: "Bastide-de-Villeréal.pdf", lien: "Bastide-de-Villeréal.pdf"}
-      ]},
-      { lat: 44.252, lng: 0.398, commune: "Port-Sainte-Marie", fiches: [
-        {nom: "Vacance-logements-centre-bourg.pdf", lien: "Vacance-logements-centre-bourg.pdf"}
-      ]},
-      { lat: 44.398, lng: 0.552, commune: "Castelmoron-sur-Lot", fiches: [
-        {nom: "Liaison-douce-Castelmoron.pdf", lien: "Liaison-douce-Castelmoron.pdf"}
-      ]},
-      { lat: 44.400, lng: 0.450, commune: "Castelmoron-sur-Lot / Tombebœuf", fiches: [
-        {nom: "Maison-santé-Castelmoron-Tombeboeuf.pdf", lien: "Maison-santé-Castelmoron-Tombeboeuf.pdf"}
-      ]},
-      { lat: 44.533, lng: 0.772, commune: "Montflanquin", fiches: [
-        {nom: "Ecole-maternelle-requalification.pdf", lien: "Ecole-maternelle-requalification.pdf"}
-      ]},
-      { lat: 44.583, lng: 0.652, commune: "Castillonnès", fiches: [
-        {nom: "Maison-de-la-Bastide.pdf", lien: "Maison-de-la-Bastide.pdf"},
-        {nom: "Boutique-à-l'essai.pdf", lien: "Boutique-à-l'essai.pdf"}
-      ]},
-      { lat: 44.533, lng: 0.623, commune: "Cancon", fiches: [
-        {nom: "Foirail-jardin-public-Cancon.pdf", lien: "Foirail-jardin-public-Cancon.pdf"},
-        {nom: "Immeuble-Hicks-logement-saisonniers.pdf", lien: "Immeuble-Hicks-logement-saisonniers.pdf"}
-      ]},
-      { lat: 44.55, lng: 0.70, commune: "Bastides en Haut-Agenais Périgord", fiches: [
-        {nom: "Tiers-lieu-4Cantons.pdf", lien: "Tiers-lieu-4Cantons.pdf"}
-      ]}
-    ];
+    // Ajout des marqueurs + popups
+    Object.entries(villes).forEach(([commune, data]) => {
+      const marker = L.marker([data.lat, data.lng], { icon: iconProjet }).addTo(map);
 
-    // Ajout des marqueurs
-    projets.forEach(p => {
-      const marker = L.marker([p.lat, p.lng], {
-        icon: L.divIcon({
-          className: 'custom-marker',
-          html: '<div style="background:#4a8c6b; width:16px; height:16px; border-radius:50%; border:3px solid white; box-shadow:0 0 6px rgba(0,0,0,0.4);"></div>',
-          iconSize: [16, 16],
-          iconAnchor: [8, 8]
-        })
-      }).addTo(map);
-
-      let popup = `<b>${p.commune}</b><br><br>`;
-      p.fiches.forEach(f => {
-        popup += `<a href="${f.lien}" target="_blank" style="display:block; margin:6px 0; color:#4a8c6b;">→ ${f.nom}</a>`;
+      let popupHTML = `<strong>${commune}</strong><br><br>`;
+      data.projets.forEach(pdf => {
+        popupHTML += `<a href="${pdf}" target="_blank" style="display:block; margin:5px 0; color:#2e6f5c;">→ ${pdf}</a>`;
       });
 
-      marker.bindPopup(popup, {
+      marker.bindPopup(popupHTML, {
         maxWidth: 320,
         className: 'custom-popup'
       });
