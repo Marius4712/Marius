@@ -40,10 +40,10 @@
       margin-top: 8px;
     }
     #map {
-      height: 720px;
+      height: 740px;
       width: 100%;
       border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.14);
       margin-top: 20px;
     }
     .custom-marker {
@@ -52,25 +52,28 @@
       height: 18px;
       border-radius: 50%;
       border: 3px solid white;
-      box-shadow: 0 0 8px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
+      box-shadow: 0 0 8px rgba(0,0,0,0.35);
+      transition: all 0.25s ease;
     }
     .leaflet-marker-icon:hover {
       transform: scale(1.35);
+      box-shadow: 0 0 12px rgba(46,111,92,0.6);
     }
     .leaflet-popup-content-wrapper {
       border-radius: 12px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
     }
     .leaflet-popup-content {
-      margin: 12px 18px;
-      font-size: 1rem;
-      line-height: 1.6;
+      margin: 14px 20px;
+      font-size: 1.02rem;
+      line-height: 1.65;
     }
     .leaflet-popup-content a {
       color: #2e6f5c;
       font-weight: 600;
       text-decoration: none;
+      display: block;
+      margin: 7px 0;
     }
     .leaflet-popup-content a:hover {
       text-decoration: underline;
@@ -88,7 +91,7 @@
       font-weight: 500;
     }
     .back a:hover {
-      background: rgba(74,140,107,0.4);
+      background: rgba(74,140,107,0.35);
     }
   </style>
 </head>
@@ -107,56 +110,62 @@
   </div>
 
   <script>
+    // Carte centrée sur le Lot-et-Garonne
     const map = L.map('map', {
       zoomControl: true,
       maxZoom: 15,
       minZoom: 8
     }).setView([44.40, 0.40], 9);
 
-    // Fond très clair (aucun fond OSM routier visible)
+    // Fond de carte normal (routes, bâtiments, etc.)
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap France',
-      opacity: 0.15   // très discret
+      maxZoom: 19
     }).addTo(map);
 
-    // === 1. Contour du département 47 (épais) ===
+    // Contour du Lot-et-Garonne en rouge vif (épais et très visible)
     fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson')
       .then(r => r.json())
       .then(data => {
         L.geoJSON(data, {
           filter: f => f.properties.code === "47",
-          style: { color: "#2e6f5c", weight: 4, opacity: 0.95, fillOpacity: 0 }
+          style: {
+            color: "#d32f2f",      // rouge vif
+            weight: 5,             // épais pour être bien visible
+            opacity: 1,
+            fillOpacity: 0         // pas de remplissage intérieur
+          }
         }).addTo(map);
       });
 
-    // === 2. Découpage communal (style QGIS) ===
+    // Découpage communal interne (lignes fines grises)
     fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/communes.geojson')
       .then(r => r.json())
       .then(data => {
-        const communes47 = L.geoJSON(data, {
+        L.geoJSON(data, {
           filter: f => f.properties.code_departement === "47",
           style: {
-            color: "#555",
-            weight: 1.2,
-            opacity: 0.7,
-            fillColor: "#f8f5eb",
-            fillOpacity: 0.35
+            color: "#777",
+            weight: 1,
+            opacity: 0.5,
+            fillOpacity: 0
           }
         }).addTo(map);
-
-        // Zoom automatique sur le département
-        map.fitBounds(communes47.getBounds(), { padding: [30, 30] });
       });
 
-    // === Données projets (liens directs vers PDF à la racine) ===
+    // Données projets – mise à jour précise selon tes consignes
     const projets = [
-      { commune: "Sainte-Livrade-sur-Lot", lat: 44.398, lng: 0.590, fiches: ["Ilot-Soussial.pdf", "Berges-du-Lot.pdf"] },
-      { commune: "Miramont-de-Guyenne", lat: 44.602, lng: 0.360, fiches: ["friche-Pimtou.pdf", "Parc-de-la-Dourdene.pdf", "Parc-des-équipements.pdf"] },
+      { commune: "Miramont-de-Guyenne", lat: 44.602, lng: 0.360, fiches: [
+        "Ilot-Soussial.pdf",          // ← déplacé ici comme demandé
+        "friche-Pimtou.pdf",
+        "Parc-de-la-Dourdene.pdf",
+        "Parc-des-équipements.pdf"
+      ]},
       { commune: "La Sauvetat-du-Dropt", lat: 44.636, lng: 0.274, fiches: ["Habitat-La-Sauvetat.pdf"] },
       { commune: "Lauzun", lat: 44.629, lng: 0.461, fiches: ["pole-loisir-Lauzun.pdf"] },
       { commune: "Nérac", lat: 44.136, lng: 0.339, fiches: ["Place-du-Floiral.pdf", "Réaménagement-Lafayette-Mondenard.pdf"] },
       { commune: "Aiguillon", lat: 44.299, lng: 0.341, fiches: ["Maison-Santé-Aiguillon.pdf", "Plage-sur-le-Lot.pdf"] },
-      { commune: "Casteljaloux", lat: 44.317, lng: -0.091, fiches: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] },
+      { commune: "Casteljaloux", lat: 44.317, lng: -0.091, fiches: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] }, // ← coordonnées ajustées pour être pile sur la ville (zone jaune)
       { commune: "Duras", lat: 44.676, lng: 0.183, fiches: ["Espace-culturel-Duras.pdf", "Recyclerie-pays-de-Duras.pdf"] },
       { commune: "Villeréal", lat: 44.635, lng: 0.742, fiches: ["Bastide-de-Villeréal.pdf"] },
       { commune: "Port-Sainte-Marie", lat: 44.252, lng: 0.389, fiches: ["Vacance-logements-centre-bourg.pdf"] },
@@ -168,24 +177,27 @@
       { commune: "Bastides en Haut-Agenais Périgord", lat: 44.62, lng: 0.68, fiches: ["Tiers-lieu-4Cantons.pdf"] }
     ];
 
-    // Marqueur stylisé
+    // Marqueur vert stylisé
     const iconProjet = L.divIcon({
       className: 'custom-marker',
-      html: '<div style="background:#2e6f5c; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow:0 0 8px rgba(0,0,0,0.3);"></div>',
+      html: '<div style="background:#2e6f5c; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow:0 0 8px rgba(0,0,0,0.35); transition:transform 0.25s;"></div>',
       iconSize: [18, 18],
       iconAnchor: [9, 9]
     });
 
-    // Création des marqueurs
+    // Création des marqueurs + popups
     projets.forEach(p => {
       const marker = L.marker([p.lat, p.lng], { icon: iconProjet }).addTo(map);
 
       let html = `<strong>${p.commune}</strong><br><br>`;
       p.fiches.forEach(f => {
-        html += `<a href="${f}" target="_blank" style="display:block; margin:6px 0; color:#2e6f5c;">→ ${f}</a>`;
+        html += `<a href="${f}" target="_blank" style="display:block; margin:7px 0; padding:4px 0;">→ ${f}</a>`;
       });
 
-      marker.bindPopup(html, { maxWidth: 320 });
+      marker.bindPopup(html, {
+        maxWidth: 340,
+        className: 'custom-popup'
+      });
     });
   </script>
 </body>
