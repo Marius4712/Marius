@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cartographie interactive des projets ORT — Marius Vacqué</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS + JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+  <style>
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      color: #111;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.8rem;
+      margin: 0;
+    }
+    #map {
+      height: 700px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin-top: 20px;
+    }
+    .back {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .back a {
+      padding: 14px 32px;
+      background: rgba(74,140,107,0.2);
+      color: #111;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .back a:hover {
+      background: rgba(74,140,107,0.4);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cartographie interactive des projets ORT</h1>
+    <p style="color:#666; margin-top:10px;">Cliquez sur un point pour voir la fiche projet associée</p>
+  </header>
+
+  <div class="container">
+    <div id="map"></div>
+
+    <div class="back">
+      <a href="index.html#projets">Retour aux projets</a>
+    </div>
+  </div>
+
+  <script>
+    // Création de la carte centrée sur le Lot-et-Garonne
+    const map = L.map('map').setView([44.35, 0.40], 9);
+
+    // Fond OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Limites du Lot-et-Garonne pour éviter de sortir du département
+    const bounds = L.latLngBounds(
+      [43.85, -0.55],  // sud-ouest
+      [44.75, 1.25]    // nord-est
+    );
+    map.setMaxBounds(bounds);
+
+    // === TES PROJETS (remplace par tes vraies données) ===
+    const projets = [
+      {
+        lat: 44.20,
+        lng: 0.62,
+        titre: "Projet 1 - Exemple Agen",
+        fiche: "fiches-projets.html#projet1"   // ← change par le vrai lien de ta fiche
+      },
+      {
+        lat: 44.50,
+        lng: 0.17,
+        titre: "Projet 2 - Exemple Marmande",
+        fiche: "fiches-projets.html#projet2"
+      },
+      {
+        lat: 44.40,
+        lng: 0.73,
+        titre: "Projet 3 - Exemple Villeneuve",
+        fiche: "fiches-projets.html#projet3"
+      },
+      {
+        lat: 44.13,
+        lng: 0.34,
+        titre: "Projet 4 - Exemple Nérac",
+        fiche: "fiches-projets.html#projet4"
+      }
+    ];
+
+    // Ajout des marqueurs
+    projets.forEach(p => {
+      const marker = L.marker([p.lat, p.lng]).addTo(map);
+      marker.bindPopup(`
+        <b>${p.titre}</b><br><br>
+        <a href="${p.fiche}" target="_blank" style="color:#4a8c6b; font-weight:600;">
+          → Voir la fiche projet
+        </a>
+      `);
+    });
+  </script>
+</body>
+</html>
