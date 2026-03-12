@@ -4,24 +4,29 @@
     <div class="kicker">cartes • paysages incrustés • lecture “projet”</div>
   </header>
   <div class="grid">
-    <article class="card" data-filter-card data-filter="cartographie qgis ort diagnostic territoire urbanisme">
-      <div class="media">
-        <img src="bakakaka.PNG" alt="Cartographie des projets ORT">
+    <!-- NOUVELLE CARTE INTERACTIVE ORT (remplace l'ancienne) -->
+    <article class="card" data-filter-card data-filter="cartographie qgis ort interactive">
+      <div class="media" style="background:#f8f8f8;">
+        <!-- Tu peux mettre une capture d'écran de la carte ou laisser comme ça -->
+        <img src="carto-ort-preview.jpg" alt="Carte interactive ORT" style="width:100%; height:100%; object-fit:cover;">
       </div>
       <div class="body">
-        <h3>Cartographie des projets (ORT)</h3>
+        <h3>Cartographie interactive des projets ORT</h3>
         <p>
-          Fond carto + couches thématiques + mise en page.
-          Objectif : une lecture immédiate des secteurs et priorités.
+          Carte du Lot-et-Garonne avec localisation de tous les projets ORT.
+          Cliquez sur un point pour ouvrir la fiche projet associée.
         </p>
         <div class="tags">
           <span class="tag nature">Carto</span>
-          <span class="tag urban">Diagnostic</span>
+          <span class="tag">Interactive</span>
           <span class="tag">QGIS</span>
+          <span class="tag urban">ORT</span>
         </div>
       </div>
+      <a href="carto-ort.html" class="card-link" target="_blank">Voir la carte interactive</a>
     </article>
 
+    <!-- Fiches projets (communication) -->
     <article class="card" data-filter-card data-filter="communication fiches projets synthese mise en page">
       <div class="media"></div>
       <div class="body">
@@ -41,6 +46,7 @@
       </a>
     </article>
 
+    <!-- Vidéos de promotions SEM 47 -->
     <article class="card" data-filter-card data-filter="video promotion sem47 montage">
       <div class="media">
         <img src="https://img.youtube.com/vi/ZgKdw8N1DJU/maxresdefault.jpg" alt="Vidéos de promotions SEM 47">
@@ -62,28 +68,7 @@
       </a>
     </article>
 
-    <!-- NOUVELLE CARTE : Cartographie QGIS (remplace Atelier terrain) -->
-    <article class="card" data-filter-card data-filter="cartographie qgis marmande rugby equipements">
-      <div class="media">
-        <!-- Une miniature représentative (tu peux changer l'image) -->
-        <img src="https://img.youtube.com/vi/ZgKdw8N1DJU/maxresdefault.jpg" alt="Cartographie QGIS Marmande"> <!-- ou mets une de tes cartes -->
-      </div>
-      <div class="body">
-        <h3>Cartographie QGIS</h3>
-        <p>
-          Cartographies détaillées réalisées avec QGIS : niveau de vie, accessibilité soins, itinéraires des clubs, équipements sportifs.
-        </p>
-        <div class="tags">
-          <span class="tag nature">Carto</span>
-          <span class="tag">QGIS</span>
-          <span class="tag urban">Marmande</span>
-        </div>
-      </div>
-      <a href="cartographie-qgis.html" class="card-link" target="_blank">
-        Voir les cartographies
-      </a>
-    </article>
-
+    <!-- Lecture mobilités (repérage) -->
     <article class="card" data-filter-card data-filter="mobilites cheminements accessibilite diagnostic">
       <div class="media"></div>
       <div class="body">
@@ -100,6 +85,7 @@
       </div>
     </article>
 
+    <!-- Parcours paysage (ambiance) -->
     <article class="card" data-filter-card data-filter="paysage ambiance nature transect">
       <div class="media"></div>
       <div class="body">
