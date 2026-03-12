@@ -56,7 +56,7 @@
       transition: transform 0.2s;
     }
     .leaflet-marker-icon:hover {
-      transform: scale(1.3);
+      transform: scale(1.35);
     }
     .leaflet-popup-content-wrapper {
       border-radius: 12px;
@@ -107,80 +107,85 @@
   </div>
 
   <script>
-    // Carte centrée sur le Lot-et-Garonne
     const map = L.map('map', {
       zoomControl: true,
       maxZoom: 15,
       minZoom: 8
     }).setView([44.40, 0.40], 9);
 
-    // Fond clair style QGIS / atlas territorial
+    // Fond très clair (aucun fond OSM routier visible)
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap France',
-      maxZoom: 20
+      opacity: 0.15   // très discret
     }).addTo(map);
 
-    // Contour officiel du Lot-et-Garonne (GeoJSON public)
+    // === 1. Contour du département 47 (épais) ===
     fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson')
-      .then(res => res.json())
+      .then(r => r.json())
       .then(data => {
-        const lot47 = L.geoJSON(data, {
-          filter: feature => feature.properties.code === "47",
+        L.geoJSON(data, {
+          filter: f => f.properties.code === "47",
+          style: { color: "#2e6f5c", weight: 4, opacity: 0.95, fillOpacity: 0 }
+        }).addTo(map);
+      });
+
+    // === 2. Découpage communal (style QGIS) ===
+    fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/communes.geojson')
+      .then(r => r.json())
+      .then(data => {
+        const communes47 = L.geoJSON(data, {
+          filter: f => f.properties.code_departement === "47",
           style: {
-            color: "#2e6f5c",
-            weight: 3,
-            opacity: 0.9,
-            fillColor: "#2e6f5c",
-            fillOpacity: 0.08
+            color: "#555",
+            weight: 1.2,
+            opacity: 0.7,
+            fillColor: "#f8f5eb",
+            fillOpacity: 0.35
           }
         }).addTo(map);
 
         // Zoom automatique sur le département
-        map.fitBounds(lot47.getBounds(), { padding: [20, 20] });
-      })
-      .catch(err => console.error("Erreur chargement GeoJSON département:", err));
+        map.fitBounds(communes47.getBounds(), { padding: [30, 30] });
+      });
 
-    // Données exactes des communes (tes coordonnées GPS)
-    const villes = {
-      "Sainte-Livrade-sur-Lot": { lat: 44.398, lng: 0.590, projets: ["Ilot-Soussial.pdf", "Berges-du-Lot.pdf"] },
-      "Miramont-de-Guyenne": { lat: 44.602, lng: 0.360, projets: ["friche-Pimtou.pdf", "Parc-de-la-Dourdene.pdf", "Parc-des-équipements.pdf"] },
-      "La Sauvetat-du-Dropt": { lat: 44.636, lng: 0.274, projets: ["Habitat-La-Sauvetat.pdf"] },
-      "Lauzun": { lat: 44.629, lng: 0.461, projets: ["pole-loisir-Lauzun.pdf"] },
-      "Nérac": { lat: 44.136, lng: 0.339, projets: ["Place-du-Floiral.pdf", "Réaménagement-Lafayette-Mondenard.pdf"] },
-      "Aiguillon": { lat: 44.299, lng: 0.341, projets: ["Maison-Santé-Aiguillon.pdf", "Plage-sur-le-Lot.pdf"] },
-      "Casteljaloux": { lat: 44.317, lng: -0.091, projets: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] },
-      "Duras": { lat: 44.676, lng: 0.183, projets: ["Espace-culturel-Duras.pdf", "Recyclerie-pays-de-Duras.pdf"] },
-      "Villeréal": { lat: 44.635, lng: 0.742, projets: ["Bastide-de-Villeréal.pdf"] },
-      "Port-Sainte-Marie": { lat: 44.252, lng: 0.389, projets: ["Vacance-logements-centre-bourg.pdf"] },
-      "Castelmoron-sur-Lot": { lat: 44.400, lng: 0.493, projets: ["Liaison-douce-Castelmoron.pdf"] },
-      "Tombeboeuf": { lat: 44.561, lng: 0.530, projets: ["Maison-santé-Castelmoron-Tombeboeuf.pdf"] },
-      "Montflanquin": { lat: 44.530, lng: 0.768, projets: ["Ecole-maternelle-requalification.pdf"] },
-      "Castillonnès": { lat: 44.652, lng: 0.593, projets: ["Maison-de-la-Bastide.pdf", "Boutique-à-l'essai.pdf"] },
-      "Cancon": { lat: 44.536, lng: 0.624, projets: ["Foirail-jardin-public-Cancon.pdf", "Immeuble-Hicks-logement-saisonniers.pdf"] },
-      "Bastides en Haut-Agenais Périgord": { lat: 44.62, lng: 0.68, projets: ["Tiers-lieu-4Cantons.pdf"] }
-    };
+    // === Données projets (liens directs vers PDF à la racine) ===
+    const projets = [
+      { commune: "Sainte-Livrade-sur-Lot", lat: 44.398, lng: 0.590, fiches: ["Ilot-Soussial.pdf", "Berges-du-Lot.pdf"] },
+      { commune: "Miramont-de-Guyenne", lat: 44.602, lng: 0.360, fiches: ["friche-Pimtou.pdf", "Parc-de-la-Dourdene.pdf", "Parc-des-équipements.pdf"] },
+      { commune: "La Sauvetat-du-Dropt", lat: 44.636, lng: 0.274, fiches: ["Habitat-La-Sauvetat.pdf"] },
+      { commune: "Lauzun", lat: 44.629, lng: 0.461, fiches: ["pole-loisir-Lauzun.pdf"] },
+      { commune: "Nérac", lat: 44.136, lng: 0.339, fiches: ["Place-du-Floiral.pdf", "Réaménagement-Lafayette-Mondenard.pdf"] },
+      { commune: "Aiguillon", lat: 44.299, lng: 0.341, fiches: ["Maison-Santé-Aiguillon.pdf", "Plage-sur-le-Lot.pdf"] },
+      { commune: "Casteljaloux", lat: 44.317, lng: -0.091, fiches: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] },
+      { commune: "Duras", lat: 44.676, lng: 0.183, fiches: ["Espace-culturel-Duras.pdf", "Recyclerie-pays-de-Duras.pdf"] },
+      { commune: "Villeréal", lat: 44.635, lng: 0.742, fiches: ["Bastide-de-Villeréal.pdf"] },
+      { commune: "Port-Sainte-Marie", lat: 44.252, lng: 0.389, fiches: ["Vacance-logements-centre-bourg.pdf"] },
+      { commune: "Castelmoron-sur-Lot", lat: 44.400, lng: 0.493, fiches: ["Liaison-douce-Castelmoron.pdf"] },
+      { commune: "Tombeboeuf", lat: 44.561, lng: 0.530, fiches: ["Maison-santé-Castelmoron-Tombeboeuf.pdf"] },
+      { commune: "Montflanquin", lat: 44.530, lng: 0.768, fiches: ["Ecole-maternelle-requalification.pdf"] },
+      { commune: "Castillonnès", lat: 44.652, lng: 0.593, fiches: ["Maison-de-la-Bastide.pdf", "Boutique-à-l'essai.pdf"] },
+      { commune: "Cancon", lat: 44.536, lng: 0.624, fiches: ["Foirail-jardin-public-Cancon.pdf", "Immeuble-Hicks-logement-saisonniers.pdf"] },
+      { commune: "Bastides en Haut-Agenais Périgord", lat: 44.62, lng: 0.68, fiches: ["Tiers-lieu-4Cantons.pdf"] }
+    ];
 
-    // Marqueur vert stylisé (effet hover)
+    // Marqueur stylisé
     const iconProjet = L.divIcon({
       className: 'custom-marker',
-      html: '<div style="background:#2e6f5c; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow:0 0 8px rgba(0,0,0,0.3); transition:transform 0.2s;"></div>',
+      html: '<div style="background:#2e6f5c; width:18px; height:18px; border-radius:50%; border:3px solid white; box-shadow:0 0 8px rgba(0,0,0,0.3);"></div>',
       iconSize: [18, 18],
       iconAnchor: [9, 9]
     });
 
-    // Ajout des marqueurs + popups
-    Object.entries(villes).forEach(([commune, data]) => {
-      const marker = L.marker([data.lat, data.lng], { icon: iconProjet }).addTo(map);
+    // Création des marqueurs
+    projets.forEach(p => {
+      const marker = L.marker([p.lat, p.lng], { icon: iconProjet }).addTo(map);
 
-      let popupHTML = `<strong>${commune}</strong><br><br>`;
-      data.projets.forEach(pdf => {
-        popupHTML += `<a href="${pdf}" target="_blank" style="display:block; margin:5px 0; color:#2e6f5c;">→ ${pdf}</a>`;
+      let html = `<strong>${p.commune}</strong><br><br>`;
+      p.fiches.forEach(f => {
+        html += `<a href="${f}" target="_blank" style="display:block; margin:6px 0; color:#2e6f5c;">→ ${f}</a>`;
       });
 
-      marker.bindPopup(popupHTML, {
-        maxWidth: 320,
-        className: 'custom-popup'
-      });
+      marker.bindPopup(html, { maxWidth: 320 });
     });
   </script>
 </body>
