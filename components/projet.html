@@ -4,7 +4,7 @@
     <div class="kicker">cartes • paysages incrustés • lecture “projet”</div>
   </header>
 
-  <div class="grid">
+  <div class="grid" style="padding: 28px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; justify-content: center;">
     <!-- 1. Cartographie QGIS Marmande -->
     <article class="card" data-filter-card data-filter="cartographie qgis marmande rugby equipements">
       <div class="media">
@@ -159,3 +159,19 @@
     <a class="btn" href="#vie-associative" style="text-decoration:none;">Continuer →</a>
   </div>
 </section>
+
+<style>
+  /* Force le centrage de la dernière carte quand elle est seule ou en petit nombre */
+  .grid {
+    justify-content: center;
+  }
+
+  .grid .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
+
+  .card-link:hover {
+    background: rgba(74,140,107,0.3);
+  }
+</style>
