@@ -14,9 +14,12 @@
     .kicker { text-align:center; color:#666; font-size:1.2rem; margin-bottom:40px; }
     .content { font-size:1.05rem; }
     .content p { margin:1.4em 0; }
-    .back { text-align:center; margin-top:60px; }
-    .back a { padding:14px 32px; background:rgba(74,140,107,0.2); color:#111; text-decoration:none; border-radius:12px; font-weight:500; }
-    .back a:hover { background:rgba(74,140,107,0.4); }
+    .buttons { text-align:center; margin-top:60px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+    .btn { padding:14px 32px; border-radius:12px; font-weight:500; text-decoration:none; transition: all 0.2s; }
+    .btn-back { background:rgba(74,140,107,0.2); color:#111; }
+    .btn-back:hover { background:rgba(74,140,107,0.4); }
+    .btn-appreciation { background:#2e6f5c; color:white; }
+    .btn-appreciation:hover { background:#1f4a3f; }
   </style>
 </head>
 <body>
@@ -36,8 +39,9 @@
       <p>Cette expérience constitue aujourd’hui une étape importante dans mon parcours, car elle me permet de passer de l’analyse des politiques territoriales à la participation à leur mise en œuvre concrète, en étant au contact direct des projets et des acteurs qui les portent.</p>
     </div>
 
-    <div class="back">
-      <a href="index.html#parcours">Retour à Mon parcours</a>
+    <div class="buttons">
+      <a href="index.html#parcours" class="btn btn-back">Retour à Mon parcours</a>
+      <a href="appreciation-sem47.pdf" target="_blank" class="btn btn-appreciation">Appréciation d’alternance</a>
     </div>
   </div>
 </body>
