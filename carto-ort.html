@@ -39,6 +39,16 @@
       font-size: 1.1rem;
       margin-top: 8px;
     }
+    .intro-text {
+      max-width: 980px;
+      margin: 0 auto 30px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #222;
+    }
+    .intro-text p {
+      margin: 0 0 18px;
+    }
     #map {
       height: 740px;
       width: 100%;
@@ -102,6 +112,12 @@
   </header>
 
   <div class="container">
+    <div class="intro-text">
+      <p>Dans le cadre de mon stage au sein de la Direction Départementale des Territoires du Lot-et-Garonne, j’ai également réalisé une carte interactive des projets ORT permettant de localiser les différentes opérations sur le territoire.</p>
+
+      <p>Cette carte permet, en cliquant sur un point géolocalisé, d’accéder directement à la fiche projet correspondante. L’objectif était de proposer un outil simple et interactif de consultation, facilitant la visualisation et le suivi des projets inscrits dans le dispositif Opération de Revitalisation de Territoire (ORT).</p>
+    </div>
+
     <div id="map"></div>
 
     <div class="back">
@@ -156,7 +172,7 @@
     // Données projets – mise à jour précise selon tes consignes
     const projets = [
       { commune: "Miramont-de-Guyenne", lat: 44.602, lng: 0.360, fiches: [
-        "Ilot-Soussial.pdf",          // ← déplacé ici comme demandé
+        "Ilot-Soussial.pdf",
         "friche-Pimtou.pdf",
         "Parc-de-la-Dourdene.pdf",
         "Parc-des-équipements.pdf"
@@ -165,7 +181,7 @@
       { commune: "Lauzun", lat: 44.629, lng: 0.461, fiches: ["pole-loisir-Lauzun.pdf"] },
       { commune: "Nérac", lat: 44.136, lng: 0.339, fiches: ["Place-du-Floiral.pdf", "Réaménagement-Lafayette-Mondenard.pdf"] },
       { commune: "Aiguillon", lat: 44.299, lng: 0.341, fiches: ["Maison-Santé-Aiguillon.pdf", "Plage-sur-le-Lot.pdf"] },
-      { commune: "Casteljaloux", lat: 44.317, lng: -0.091, fiches: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] }, // ← coordonnées ajustées pour être pile sur la ville (zone jaune)
+      { commune: "Casteljaloux", lat: 44.317, lng: -0.091, fiches: ["Réhabilitation-ancien-hopital-Casteljaloux.pdf"] },
       { commune: "Duras", lat: 44.676, lng: 0.183, fiches: ["Espace-culturel-Duras.pdf", "Recyclerie-pays-de-Duras.pdf"] },
       { commune: "Villeréal", lat: 44.635, lng: 0.742, fiches: ["Bastide-de-Villeréal.pdf"] },
       { commune: "Port-Sainte-Marie", lat: 44.252, lng: 0.389, fiches: ["Vacance-logements-centre-bourg.pdf"] },
