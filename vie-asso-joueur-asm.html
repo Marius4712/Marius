@@ -14,7 +14,29 @@
     .kicker { text-align:center; color:#666; font-size:1.2rem; margin-bottom:40px; }
     .content { font-size:1.05rem; }
     .content p { margin:1.4em 0; }
-    .content img { max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:1.5em auto; }
+    
+    /* Images seules : centrées pleine largeur */
+    .content img { 
+      max-width:100%; 
+      height:auto; 
+      border-radius:8px; 
+      box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+      display:block; 
+      margin:1.5em auto; 
+    }
+    
+    /* Deux images qui se suivent : côte à côte */
+    .content img + img { 
+      display:inline-block; 
+      width:48%; 
+      margin:1.5em 1% 1.5em 1%; 
+      vertical-align:top; 
+    }
+    
+    .content img + img + * { 
+      clear:both; 
+    }
+    
     .back { text-align:center; margin-top:60px; }
     .back a { padding:14px 32px; background:rgba(74,140,107,0.2); color:#111; text-decoration:none; border-radius:12px; font-weight:500; }
     .back a:hover { background:rgba(74,140,107,0.4); }
@@ -30,6 +52,7 @@
 
       <p>Le rugby à Miramont n’est pas seulement une activité sportive : c’est un véritable pilier de la vie locale. Le club rassemble joueurs, bénévoles, supporters et habitants autour d’une passion commune et participe activement à l’animation du territoire. En évoluant dans ce club depuis mon plus jeune âge, j’ai pu vivre et comprendre cette dimension sociale et collective du sport.</p>
 
+      <!-- Deux images côte à côte -->
       <img src="photo-enfant.JPG" alt="Photo enfant rugby">
       <img src="Grok Image 2026-03-14 at 1.14.18 PM.png" alt="Photo joueur enfant">
 
@@ -43,6 +66,7 @@
 
       <p>Au fil des saisons, j’ai également eu l’occasion de vivre des moments sportifs marquants, notamment des phases finales et des victoires importantes pour le club.</p>
 
+      <!-- Deux images côte à côte -->
       <img src="chamions-vrai.jpg" alt="Champions vrai">
       <img src="champions.jpg" alt="Champions">
 
