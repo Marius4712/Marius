@@ -1,78 +1,104 @@
-<section id="contact" data-section>
-  <header>
-    <h2>Contact</h2>
-    <div class="kicker">message • coordonnées • disponibilité</div>
-  </header>
-
-  <div class="grid">
-    <article class="card" data-filter-card data-filter="contact email linkedin localisation">
-      <div class="media"></div>
-      <div class="body">
-        <h3>Coordonnées</h3>
-        <p>
-          Email : prenom.nom@mail.com<br>
-          LinkedIn : linkedin.com/in/prenomnom<br>
-          Zone : Bordeaux / Lot-et-Garonne
-        </p>
-        <div class="tags">
-          <span class="tag">Email</span>
-          <span class="tag">LinkedIn</span>
-          <span class="tag urban">Réseau</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" data-filter-card data-filter="formulaire message">
-      <div class="body">
-        <h3>Envoyer un message</h3>
-        <p style="margin-bottom:10px;">
-          Démo : le formulaire n’envoie pas encore. (Tu pourras brancher Formspree / Netlify Forms / backend.)
-        </p>
-
-        <form onsubmit="event.preventDefault(); alert('Démo : message non envoyé 🙂');">
-          <div style="display:grid; gap:10px;">
-            <input required placeholder="Ton nom"
-              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;">
-            <input type="email" required placeholder="Ton email"
-              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;">
-            <textarea required rows="4" placeholder="Ton message…"
-              style="padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.22);color:rgba(255,255,255,.9);outline:none;resize:vertical;"></textarea>
-
-            <button type="submit" class="btn primary" style="width:fit-content;">
-              Envoyer (démo)
-            </button>
-          </div>
-        </form>
-
-        <div class="tags" style="margin-top:12px;">
-          <span class="tag sun">Rapide</span>
-          <span class="tag urban">Pro</span>
-          <span class="tag">Simple</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" data-filter-card data-filter="disponibilite stage alternance mission">
-      <div class="media"></div>
-      <div class="body">
-        <h3>Disponibilité</h3>
-        <p>
-          Ouvert aux échanges : missions terrain, diagnostic, carto, appui projet,
-          communication et suivi d’opérations.
-        </p>
-        <div class="tags">
-          <span class="tag urban">Urbanisme</span>
-          <span class="tag">Projet</span>
-          <span class="tag nature">Territoire</span>
-        </div>
-      </div>
-    </article>
+<!-- Section Contact (exactement comme ton ancien portfolio) -->
+<section id="contact" role="region" aria-labelledby="contact-heading">
+  <div class="contact-video-background">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="https://videos.pexels.com/video-files/2292093/2292093-uhd_3840_2160_30fps.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
   </div>
-
-  <div class="section-footer">
-    <div class="hint">
-      Si tu veux, je peux aussi te faire une version “une page par section” (sans scroll), toujours sans framework.
-    </div>
-    <button class="btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">Retour en haut</button>
+  <div class="contact-content">
+    <h2 id="contact-heading">Contact</h2>
+    <form action="send_email.php" method="post" id="contact-form" novalidate>
+      <label for="name">Votre nom</label>
+      <input type="text" id="name" name="name" placeholder="Votre nom" required aria-required="true" aria-label="Votre nom">
+      
+      <label for="email">Votre email</label>
+      <input type="email" id="email" name="email" placeholder="Votre email" required aria-required="true" aria-label="Votre email">
+      
+      <label for="message">Votre message</label>
+      <textarea id="message" name="message" placeholder="Votre message" required aria-required="true" aria-label="Votre message"></textarea>
+      
+      <button type="submit" role="button" aria-label="Envoyer le message">Envoyer</button>
+    </form>
   </div>
 </section>
+
+<!-- CSS spécifique Contact (à coller dans ton <style> ou fichier CSS) -->
+<style>
+  #contact {
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--text-light);
+    background: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+  }
+
+  .contact-video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+  .contact-video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .contact-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  form label {
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 5px;
+  }
+
+  form input,
+  form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.95);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+  }
+
+  form textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  form button {
+    background: #000000; /* Noir comme avant */
+    color: var(--text-light);
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    font-size: 1rem;
+  }
+
+  form button:hover {
+    background: #333333; /* Gris foncé */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  }
+</style>
