@@ -11,7 +11,7 @@
     body {
       font-family: "Manrope", system-ui, sans-serif;
       color: #111;
-      background: #ffffff;
+      background: #ffffff; /* blanc pur aussi ici */
       min-height: 100vh;
       margin: 0;
       padding: 0;
@@ -35,15 +35,16 @@
       color: #666;
       font-size: 1.2rem;
     }
-
-    .intro {
-      max-width: 900px;
-      margin: 40px auto 20px;
+    .intro-text {
+      max-width: 1000px;
+      margin: 0 auto 50px;
       font-size: 1.05rem;
-      line-height: 1.7;
-      color: #333;
+      line-height: 1.8;
+      color: #222;
     }
-
+    .intro-text p {
+      margin: 0 0 20px;
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -59,17 +60,17 @@
     }
     .media {
       position: relative;
-      height: 320px;
+      height: 320px; /* hauteur suffisante pour que l'image remplisse sans forcer le rognage */
       overflow: hidden;
-      background: #f8f8f8;
+      background: #f8f8f8; /* fond très clair si l'image ne remplit pas parfaitement */
       cursor: pointer;
     }
     .media img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: contain; /* garde toute l'image visible */
       object-position: center;
-      background: white;
+      background: white; /* fond blanc derrière l'image */
       transition: transform 0.3s ease;
     }
     .overlay {
@@ -119,6 +120,7 @@
       background: rgba(74,140,107,0.4);
     }
 
+    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -148,8 +150,7 @@
   </header>
 
   <div class="container">
-
-    <div class="intro">
+    <div class="intro-text">
       <p>Dans le cadre de mon travail de recherche, j’ai réalisé plusieurs cartographies à l’aide du logiciel QGIS. Cet outil de système d’information géographique (SIG) m’a permis d’analyser et de représenter spatialement différents éléments en lien avec mon sujet d’étude, portant sur le rôle du rugby dans la dynamique territoriale autour de la ville de Marmande et de son club, l’Union Sportive Marmandaise.</p>
 
       <p>Plusieurs productions cartographiques ont été réalisées afin d’éclairer différentes dimensions territoriales de l’étude.</p>
@@ -166,3 +167,65 @@
     </div>
 
     <div class="grid">
+      <div class="card">
+        <h2 class="card-title">Niveau de vie des ménages et accessibilité des soins autour du club de rugby</h2>
+        <div class="media" onclick="openLightbox('Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png')">
+          <img src="Marmande Niveau de vie des ménages et accessibilité des soins autour du club de rugby(2).png" alt="Niveau de vie et soins">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Localisation des itinéraires de déplacement des clubs de la poule de Marmande (échelle nationale)</h2>
+        <div class="media" onclick="openLightbox('Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png')">
+          <img src="Localisation des itinéraires de déplacement des clubs de la poule de Marmande (à l’échelle nationale)(2).png" alt="Itinéraires clubs Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Plan de situation de la commune de Marmande à différentes échelles territoriales</h2>
+        <div class="media" onclick="openLightbox('Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png')">
+          <img src="Plan de situation de la commune de Marmande à différentes échelles territoriales(2).png" alt="Plan de situation Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Cartographie des équipements sportifs – approche du territoire au site (VGA – Marmande – Stade de rugby)</h2>
+        <div class="media" onclick="openLightbox('Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png')">
+          <img src="Cartographie-des-équipements-sportifs-approche-du-territoire-au-site-(VGA–Marmande–Stade-de-rugby.png" alt="Équipements sportifs VGA Marmande">
+          <div class="overlay">Clique pour agrandir</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back">
+      <a href="index.html#projets">Retour aux projets</a>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Image agrandie">
+  </div>
+
+  <script>
+    function openLightbox(src) {
+      const lightbox = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
