@@ -33,9 +33,6 @@
       min-height: 100vh;
       background: #ffffff;
     }
-    #contact {
-      background: #ffffff !important;
-    }
     .container {
       width: min(var(--max-width), 100% - 40px);
       margin: 0 auto;
@@ -412,6 +409,76 @@
       #apropos .acc-panel { padding: 0 28px; font-size: 1rem; line-height: 1.78; }
       #apropos .acc-item.open .acc-panel { padding: 32px 28px 100px 28px !important; }
     }
+
+    /* Contact - Plein écran vidéo fond */
+    #contact {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+    #contact video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    #contact .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: -1;
+    }
+    #contact .content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      padding: 40px;
+    }
+    #contact h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(4rem, 10vw, 6rem);
+      margin-bottom: 40px;
+      text-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    }
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    #contact input, #contact textarea {
+      padding: 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.95);
+    }
+    #contact textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+    #contact button {
+      padding: 16px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    #contact button:hover {
+      background: #222;
+      transform: translateY(-3px);
+    }
   </style>
 </head>
 <body>
@@ -466,6 +533,24 @@
     </div>
   </main>
 
+  <!-- Section Contact - Vidéo fond immersive -->
+  <section id="contact">
+    <video autoplay muted loop playsinline>
+      <source src="https://videos.pexels.com/video-files/2292093/2292093-uhd_3840_2160_30fps.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>Contact</h2>
+      <form action="send_email.php" method="post" id="contact-form">
+        <input type="text" name="name" placeholder="Votre nom" required>
+        <input type="email" name="email" placeholder="Votre email" required>
+        <textarea name="message" placeholder="Votre message" required rows="6"></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </section>
+
   <!-- SCRIPT ACCORDÉON -->
   <script>
     function toggleAccordion(btn) {
@@ -496,8 +581,8 @@
       { id: "apropos", file: "components/apropos.html" },
       { id: "parcours", file: "components/parcours.html" },
       { id: "projets", file: "components/projet.html" },
-      { id: "vie-associative", file: "components/vie-associative.html" },
-      { id: "contact", file: "components/contact.html" }
+      { id: "vie-associative", file: "components/vie-associative.html" }
+      // Pas de contact ici, car intégré directement
     ];
     const content = document.getElementById("content");
     const nav = document.getElementById("nav");
@@ -526,7 +611,7 @@
           .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActiveLink(visible.target.id);
       }, { threshold: [0.2, 0.4, 0.6] });
-      document.querySelectorAll("section[data-section]").forEach(s => observer.observe(s));
+      document.querySelectorAll("section[data-section], #contact").forEach(s => observer.observe(s));
     }
     async function loadSections() {
       const fragments = await Promise.all(
